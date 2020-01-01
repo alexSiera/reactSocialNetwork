@@ -1,10 +1,17 @@
-.header {
-  grid-area: header;
-  background-color: green;
-  img {
-    width: 20px;
-  }
+.dialogs {
+  display: grid;
+  grid-template-rows: 60px 1fr;
+  grid-template-columns: 2fr 10fr;
 }
 .dialogs_items {
+
+}
+.dialog {
+
+}
+.messages {
+
+}
+.message {
 
 }
