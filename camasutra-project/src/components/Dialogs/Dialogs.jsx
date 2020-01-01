@@ -3,7 +3,11 @@ import s from './Dialogs.module.scss';
 const Dialogs = (props) => {
     return (
         <div >
-            Dialogs
+            <div className={s.dialogs_items}>
+                <div>
+
+                </div>
+            </div>
         </div>
     )
 }
