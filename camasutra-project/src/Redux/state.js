@@ -68,18 +68,18 @@ const state = {
     }]
 }
 
-// export const addPost = (postMessage) => {
-//     const newPost = {
-//         id: 5,
-//         message: postMessage,
-//         likesCount: 12
-//     }
-//     const {posts} = state.profilePage;
-//     posts.push(newPost);
-//     rerenderEntireTree(state)
-//
-// }
 export const addPost = (postMessage) => {
+    const newPost = {
+        id: 5,
+        message: postMessage,
+        likesCount: 12
+    }
+    const {posts} = state.profilePage;
+    posts.push(newPost);
+    rerenderEntireTree(state)
+
+}
+export const onChange = (postMessage) => {
     state.profilePage.textAreaValue = postMessage;
     rerenderEntireTree(state)
 
