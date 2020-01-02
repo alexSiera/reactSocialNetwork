@@ -1,8 +1,9 @@
 import React from 'react';
 import s from'./Navbar.module.scss';
 import {NavLink} from "react-router-dom";
+import Sidebar from "./Sidebar/Sidebar";
 
-const Navbar = () => {
+const Navbar = ({sidebarData}) => {
   console.log(s)
     return (
         <nav className={s.nav}>
@@ -21,6 +22,10 @@ const Navbar = () => {
         <div className={s.item}>
           <NavLink to="/settings" activeClassName={s.active}>Settings</NavLink>
         </div>
+
+            <div className={s.item}>
+                <Sidebar sidebarData={sidebarData} />
+            </div>
       </nav>
     )
 }

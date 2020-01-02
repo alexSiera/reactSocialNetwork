@@ -9,29 +9,21 @@ import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 
-const App = ({posts,dialogsData,messagesData}) => {
-    const WrappedDialogs = function(props) {
-        // Конструкция "{...props}" нужна, чтобы не потерять
-        // параметры, переданные от компонента Route
-        return (<Dialogs {...props} dialogsDatas={dialogsData} messagesDatas={messagesData}  />);
-    };
-    const WrappedProfile = function(props) {
-        // Конструкция "{...props}" нужна, чтобы не потерять
-        // параметры, переданные от компонента Route
-        return (<Profile {...props} postsData={posts}  />);
-    };
+const App = ({state}) => {
+    const {posts } = state.profilePage;
+    const {dialogsData,messagesData } = state.dialogsPage;
+    const {sidebarData} = state;
     return (
         <BrowserRouter>
             <div className="app-wrapper">
                 <Header/>
-                <Navbar/>
+                <Navbar sidebarData={sidebarData}/>
                 <div className="app-wrapper-content">
-                    <Route path="/dialogs" component={WrappedDialogs}/>
-                    <Route path="/profile" component={WrappedProfile}/>
+                    <Route path="/dialogs" render={ () => <Dialogs dialogsDatas={dialogsData} messagesDatas={messagesData}/>}/>
+                    <Route path="/profile" render={() => <Profile postsData={posts}/>} />
                     <Route path="/music" component={Music} />
                     <Route path="/news" component={News} />
                     <Route path="/settings" component={Settings} />
-                    {/*<Profile />*/}
                 </div>
             </div>
         </BrowserRouter>
