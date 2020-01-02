@@ -4,7 +4,6 @@ import {NavLink} from "react-router-dom";
 import Sidebar from "./Sidebar/Sidebar";
 
 const Navbar = ({sidebarData}) => {
-  console.log(s)
     return (
         <nav className={s.nav}>
         <div className={s.item}>

@@ -67,11 +67,11 @@ const state = {
         name: 'Milka'
     }]
 }
-
-export const addPost = (postMessage) => {
+window.state = state;
+export const addPost = () => {
     const newPost = {
         id: 5,
-        message: postMessage,
+        message: state.profilePage.textAreaValue,
         likesCount: 12
     }
     const {posts} = state.profilePage;
