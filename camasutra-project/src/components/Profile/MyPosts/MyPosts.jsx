@@ -3,7 +3,6 @@ import s from './MyPosts.module.scss';
 import Post from './Post/Post';
 
 const MyPosts = (props) => {
-    console.log("--==============", props)
     let postsElements = props.postsData.map((p => <Post id={p.id} message={p.message} likesCount={p.likesCount} />))
     return (
         <div className={s.postsBlock}>
