@@ -8,7 +8,6 @@ import {Route} from "react-router-dom";
 import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
-import {onDialogChange, onDialogTextAreaSubmit} from "./Redux/state";
 
 const App = ({state, addPost,onChange,onDialogChange,onDialogTextAreaSubmit}) => {
     const {posts, textAreaValue } = state.profilePage;

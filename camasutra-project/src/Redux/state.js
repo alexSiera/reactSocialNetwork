@@ -1,6 +1,8 @@
-import {rerenderEntireTree} from "../render";
+let rerenderEntireTree = () => {
+    console.log("rerender")
+}
 
-const state = {
+let state = {
     profilePage: {
         posts: [{
             id: 1,
@@ -102,4 +104,10 @@ export const onDialogChange = (newMessage) => {
     rerenderEntireTree(state)
 
 }
+
+export const subscribe = (observer) => {
+    rerenderEntireTree = observer; //Observer наблюдатель
+}
 export default state;
+
+// store - OOP
