@@ -52,6 +52,7 @@ const state = {
             id: 4,
             name: "Killer"
         }],
+        dialogTextAreaValue: "",
     },
     sidebarData: [{
         id: 1,
@@ -69,18 +70,35 @@ const state = {
 }
 window.state = state;
 export const addPost = () => {
+    let {textAreaValue, posts} = state.profilePage;
     const newPost = {
-        id: 5,
-        message: state.profilePage.textAreaValue,
-        likesCount: 12
+        id: 1,
+        message: textAreaValue,
+        likesCount: 14,
     }
-    const {posts} = state.profilePage;
     posts.push(newPost);
+    textAreaValue = "";
     rerenderEntireTree(state)
 
 }
 export const onChange = (postMessage) => {
     state.profilePage.textAreaValue = postMessage;
+    rerenderEntireTree(state)
+
+}
+export const onDialogTextAreaSubmit = () => {
+    const newMessage = {
+        id: 5,
+        message: state.dialogsPage.dialogTextAreaValue,
+        likesCount: 12
+    }
+    const {messagesData} = state.dialogsPage;
+    messagesData.push(newMessage);
+    state.dialogsPage.dialogTextAreaValue = "";
+    rerenderEntireTree(state);
+}
+export const onDialogChange = (newMessage) => {
+    state.dialogsPage.dialogTextAreaValue = newMessage;
     rerenderEntireTree(state)
 
 }

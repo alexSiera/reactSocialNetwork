@@ -8,17 +8,18 @@ import {Route} from "react-router-dom";
 import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
+import {onDialogChange, onDialogTextAreaSubmit} from "./Redux/state";
 
-const App = ({state, addPost,onChange}) => {
+const App = ({state, addPost,onChange,onDialogChange,onDialogTextAreaSubmit}) => {
     const {posts, textAreaValue } = state.profilePage;
-    const {dialogsData,messagesData } = state.dialogsPage;
+    const {dialogsData,messagesData,dialogTextAreaValue } = state.dialogsPage;
     const {sidebarData} = state;
     return (
             <div className="app-wrapper">
                 <Header/>
                 <Navbar sidebarData={sidebarData}/>
                 <div className="app-wrapper-content">
-                    <Route path="/dialogs" render={ () => <Dialogs dialogsDatas={dialogsData} messagesDatas={messagesData}/>}/>
+                    <Route path="/dialogs" render={ () => <Dialogs dialogsDatas={dialogsData} messagesDatas={messagesData} onDialogChange={onDialogChange} onDialogTextAreaSubmit={onDialogTextAreaSubmit} dialogTextAreaValue={dialogTextAreaValue}/>}/>
                     <Route path="/profile" render={() => <Profile postsData={posts} addPost={addPost} textAreaValue={textAreaValue} onChange={onChange}/>} />
                     <Route path="/music" component={Music} />
                     <Route path="/news" component={News} />
