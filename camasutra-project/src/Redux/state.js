@@ -19,6 +19,7 @@ const state = {
             message: "Dada",
             likesCount: 15
         }],
+        textAreaValue: "it-kamasytra"
     },
     dialogsPage: {
         messagesData: [{
@@ -67,14 +68,19 @@ const state = {
     }]
 }
 
+// export const addPost = (postMessage) => {
+//     const newPost = {
+//         id: 5,
+//         message: postMessage,
+//         likesCount: 12
+//     }
+//     const {posts} = state.profilePage;
+//     posts.push(newPost);
+//     rerenderEntireTree(state)
+//
+// }
 export const addPost = (postMessage) => {
-    const newPost = {
-        id: 5,
-        message: postMessage,
-        likesCount: 12
-    }
-    const {posts} = state.profilePage;
-    posts.push(newPost);
+    state.profilePage.textAreaValue = postMessage;
     rerenderEntireTree(state)
 
 }

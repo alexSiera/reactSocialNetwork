@@ -5,7 +5,11 @@ import Post from './Post/Post';
 const MyPosts = (props) => {
     const postsElements = props.postsData.map((p => <Post id={p.id} message={p.message} likesCount={p.likesCount} />))
     const newPostElement = React.createRef();
+    // const addPost = (e) => {
+    //     props.addPost(e.target.value)
+    // }
     const addPost = (e) => {
+        //props.addPost(e.target.value)
         props.addPost(e.target.value)
     }
     return (
@@ -13,7 +17,7 @@ const MyPosts = (props) => {
             <h3>My post</h3>
             <div className={s.postsBlockText}>
                 <div>
-                    <textarea onInput={addPost}>
+                    <textarea onChange={addPost} value={props.textAreaValue}>
 
                     </textarea>
                 </div>

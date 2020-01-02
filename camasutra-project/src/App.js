@@ -10,7 +10,7 @@ import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 
 const App = ({state, addPost}) => {
-    const {posts } = state.profilePage;
+    const {posts, textAreaValue } = state.profilePage;
     const {dialogsData,messagesData } = state.dialogsPage;
     const {sidebarData} = state;
     return (
@@ -19,7 +19,7 @@ const App = ({state, addPost}) => {
                 <Navbar sidebarData={sidebarData}/>
                 <div className="app-wrapper-content">
                     <Route path="/dialogs" render={ () => <Dialogs dialogsDatas={dialogsData} messagesDatas={messagesData}/>}/>
-                    <Route path="/profile" render={() => <Profile postsData={posts} addPost={addPost}/>} />
+                    <Route path="/profile" render={() => <Profile postsData={posts} addPost={addPost} textAreaValue={textAreaValue}/>} />
                     <Route path="/music" component={Music} />
                     <Route path="/news" component={News} />
                     <Route path="/settings" component={Settings} />
