@@ -5,15 +5,16 @@ import Post from './Post/Post';
 const MyPosts = (props) => {
     const postsElements = props.postsData.map((p => <Post id={p.id} message={p.message} likesCount={p.likesCount} />))
     const newPostElement = React.createRef();
-    // const addPost = (e) => {
-    //     props.addPost(e.target.value)
-    // }
     const addPost = () => {
-        props.addPost(newPostElement.current.value);
-
+        props.dispatch({
+            type: 'ADD-POST',
+        });
     }
     const changePostValue = (e) => {
-        props.onChange(e.target.value);
+        props.dispatch({
+            type: 'SET-POST-VALUE',
+            newValue: e.target.value,
+        });
     }
     return (
         <div className={s.postsBlock}>

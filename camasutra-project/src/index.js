@@ -9,13 +9,14 @@ import {BrowserRouter} from "react-router-dom";
  // let {getState} = store;
  // let state = getState();
 const rerenderEntireTree = (state) => {
-    ReactDOM.render(<BrowserRouter><App state={state} addPost={store.addPost.bind(store)} onChange={store.setPostValue.bind(store)} onDialogChange={store.onDialogChange.bind(store)} onDialogTextAreaSubmit={store.onDialogTextAreaSubmit.bind(store)}/>
+    ReactDOM.render(<BrowserRouter><App state={state} dispatch={store.dispatch.bind(store)}/>
     </BrowserRouter>, document.getElementById('root'));
 }
 let rerender = () => {
     let state = store.getState();
     rerenderEntireTree(state)
 }
+store.dispatch({type:'ADD-POST'});
 rerenderEntireTree(store.getState());
 store.subscribe(rerender);
 serviceWorker.unregister();

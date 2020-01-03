@@ -9,18 +9,17 @@ import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 
-const App = ({state, addPost,onChange,onDialogChange,onDialogTextAreaSubmit}) => {
+const App = ({state, dispatch}) => {
 
     const {posts, textAreaValue } = state.profilePage;
-    const {dialogsData,messagesData,dialogTextAreaValue } = state.dialogsPage;
     const {sidebarData} = state;
     return (
             <div className="app-wrapper">
                 <Header/>
                 <Navbar sidebarData={sidebarData}/>
                 <div className="app-wrapper-content">
-                    <Route path="/dialogs" render={ () => <Dialogs dialogsDatas={dialogsData} messagesDatas={messagesData} onDialogChange={onDialogChange} onDialogTextAreaSubmit={onDialogTextAreaSubmit} dialogTextAreaValue={dialogTextAreaValue}/>}/>
-                    <Route path="/profile" render={() => <Profile postsData={posts} addPost={addPost} textAreaValue={textAreaValue} onChange={onChange}/>} />
+                    <Route path="/dialogs" render={ () => <Dialogs messagesDatas={state.dialogsPage.messagesData} dialogsDatas={state.dialogsPage.dialogsData} dispatch={dispatch}/>}/>
+                    <Route path="/profile" render={() => <Profile postsData={posts} textAreaValue={textAreaValue} dispatch={dispatch}/>} />
                     <Route path="/music" component={Music} />
                     <Route path="/news" component={News} />
                     <Route path="/settings" component={Settings} />

@@ -1,4 +1,3 @@
-
 let store = {
     _subscriber() {
         console.log("no subscriber");
@@ -74,44 +73,56 @@ let store = {
     subscribe(observer) {
         this._subscriber = observer;
     },
-    getState () {
+    getState() {
         return this._state;
     },
-    addPost () {
-        const id = Math.floor(Math.random() * 100);
-        const likesCount = Math.floor(Math.random() * 300);
-        const newPost = {
-            id,
-            message: this._state.profilePage.textAreaValue,
-            likesCount,
-        };
-        this._state.profilePage.posts.push(newPost);
-        this._state.profilePage.textAreaValue = "";
-        this._subscriber();
 
+    dispatch(action) { // { type: 'ADD-POST'  }
+        switch (action.type) {
+            case 'ADD-POST': {
+                console.log('DISPATCH', action.type);
+                const id = Math.floor(Math.random() * 100);
+                const likesCount = Math.floor(Math.random() * 300);
+                const newPost = {
+                    id,
+                    message: this._state.profilePage.textAreaValue,
+                    likesCount,
+                };
+                this._state.profilePage.posts.push(newPost);
+                this._state.profilePage.textAreaValue = "";
+                this._subscriber();
+            }
+                break;
+            case 'SET-POST-VALUE': {
+                this._state.profilePage.textAreaValue = action.newValue;
+                this._subscriber();
+            }
+                break;
+            case 'ADD-DIALOG': {
+                let {dialogTextAreaValue: message} = this._state.dialogsPage;
+                const id = Math.floor(Math.random() * 100);
+                const likesCount = Math.floor(Math.random() * 300);
+                const newMessage = {
+                    id,
+                    message,
+                    likesCount,
+                };
+                const {messagesData} = this._state.dialogsPage;
+                messagesData.push(newMessage);
+                this._subscriber();
+                message = "";
+            }
+                break;
+            case 'SET-DIALOG-VALUE': {
+                let newMessage = action.newValue;
+                this._state.dialogsPage.dialogTextAreaValue = newMessage;
+                this._subscriber();
+            }
+                break;
+            default:
+                break;
+        }
     },
-    setPostValue (postMessage) {
-        this._state.profilePage.textAreaValue = postMessage;
-        this._subscriber();
-    },
-    onDialogTextAreaSubmit () {
-        let {dialogTextAreaValue: message} = this._state.dialogsPage;
-        const id = Math.floor(Math.random() * 100);
-        const likesCount = Math.floor(Math.random() * 300);
-        const newMessage = {
-            id,
-            message,
-            likesCount,
-        };
-        const {messagesData} = this._state.dialogsPage;
-        messagesData.push(newMessage);
-        this._subscriber();
-        message = "";
-    },
-    onDialogChange (newMessage) {
-        this._state.dialogsPage.dialogTextAreaValue = newMessage;
-        this._subscriber();
-    }
 }
 export default store;
 window.store = store;

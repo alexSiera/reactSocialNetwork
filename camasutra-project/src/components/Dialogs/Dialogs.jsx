@@ -6,10 +6,15 @@ const textAreaElement = React.createRef();
 
 const Dialogs = (props) => {
     const onDialogTextAreaSubmit = () => {
-        props.onDialogTextAreaSubmit();
+        props.dispatch({
+            type: 'ADD-DIALOG',
+        });
     }
     const onDialogChange = (e) => {
-        props.onDialogChange(e.target.value);
+        props.dispatch({
+            type: 'SET-DIALOG-VALUE',
+            newValue: e.target.value
+        });
     }
 
     return (
