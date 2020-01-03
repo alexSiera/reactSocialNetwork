@@ -10,6 +10,7 @@ import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 
 const App = ({state, addPost,onChange,onDialogChange,onDialogTextAreaSubmit}) => {
+
     const {posts, textAreaValue } = state.profilePage;
     const {dialogsData,messagesData,dialogTextAreaValue } = state.dialogsPage;
     const {sidebarData} = state;

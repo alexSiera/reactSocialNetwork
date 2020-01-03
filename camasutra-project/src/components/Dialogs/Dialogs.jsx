@@ -5,6 +5,7 @@ import Message from "./Message/Message";
 const textAreaElement = React.createRef();
 
 const Dialogs = (props) => {
+    console.log(props)
     const onDialogTextAreaSubmit = () => {
         props.onDialogTextAreaSubmit();
     }

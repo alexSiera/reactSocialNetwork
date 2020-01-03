@@ -5,13 +5,17 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import store from "./Redux/state";
 import {BrowserRouter} from "react-router-dom";
-const {getState,addPost, setPostValue,onDialogTextAreaSubmit,onDialogChange, subscribe} = store;
-const state = getState();
-
+ //,addPost, setPostValue,onDialogTextAreaSubmit,onDialogChange, subscribe
+ // let {getState} = store;
+ // let state = getState();
 const rerenderEntireTree = (state) => {
-    ReactDOM.render(<BrowserRouter><App state={state} addPost={addPost} onChange={setPostValue} onDialogChange={onDialogChange} onDialogTextAreaSubmit={onDialogTextAreaSubmit}/>
+    ReactDOM.render(<BrowserRouter><App state={state} addPost={store.addPost.bind(store)} onChange={store.setPostValue.bind(store)} onDialogChange={store.onDialogChange.bind(store)} onDialogTextAreaSubmit={store.onDialogTextAreaSubmit.bind(store)}/>
     </BrowserRouter>, document.getElementById('root'));
 }
-rerenderEntireTree(state);
-subscribe(rerenderEntireTree);
+let rerender = () => {
+    let state = store.getState();
+    rerenderEntireTree(state)
+}
+rerenderEntireTree(store.getState());
+store.subscribe(rerender);
 serviceWorker.unregister();
