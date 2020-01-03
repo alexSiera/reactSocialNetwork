@@ -1,20 +1,17 @@
 import React from 'react';
 import s from './MyPosts.module.scss';
 import Post from './Post/Post';
-
 const MyPosts = (props) => {
     const postsElements = props.postsData.map((p => <Post id={p.id} message={p.message} likesCount={p.likesCount} />))
     const newPostElement = React.createRef();
     const addPost = () => {
-        props.dispatch({
-            type: 'ADD-POST',
-        });
+        // props.dispatch({
+        //     type: 'ADD-POST',
+        // });
+        props.dispatch(props.addPostActionCreator());
     }
     const changePostValue = (e) => {
-        props.dispatch({
-            type: 'SET-POST-VALUE',
-            newValue: e.target.value,
-        });
+        props.dispatch(props.updatePostActionCreator(e.target.value));
     }
     return (
         <div className={s.postsBlock}>

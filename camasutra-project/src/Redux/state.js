@@ -1,3 +1,7 @@
+const SET_POST_VALUE = 'SET-POST-VALUE';
+const ADD_POST = 'ADD-POST';
+const SET_DIALOG_VALUE = 'SET-DIALOG-VALUE';
+const ADD_DIALOG = 'ADD-DIALOG';
 let store = {
     _subscriber() {
         console.log("no subscriber");
@@ -122,6 +126,30 @@ let store = {
                 break;
         }
     },
+    addPostActionCreator () {
+            return {
+                type: ADD_POST,
+            }
+    },
+    updatePostActionCreator (newValue) {
+            return {
+                type: SET_POST_VALUE,
+                newValue: newValue
+            }
+    },
+    addDialogActionCreator () {
+        return {
+            type: ADD_DIALOG,
+        }
+    },
+    updateDialogActionCreator (newValue) {
+        return {
+            type: SET_DIALOG_VALUE,
+            newValue: newValue
+        }
+    }
+
+
 }
 export default store;
 window.store = store;
