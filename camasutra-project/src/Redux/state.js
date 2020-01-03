@@ -91,9 +91,7 @@ let store = {
 
     },
     setPostValue (postMessage) {
-        console.log(this);
         this._state.profilePage.textAreaValue = postMessage;
-        console.log(this._subscriber());
         this._subscriber();
     },
     onDialogTextAreaSubmit () {
