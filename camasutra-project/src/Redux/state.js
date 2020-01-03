@@ -80,7 +80,6 @@ let store = {
     dispatch(action) { // { type: 'ADD-POST'  }
         switch (action.type) {
             case 'ADD-POST': {
-                console.log('DISPATCH', action.type);
                 const id = Math.floor(Math.random() * 100);
                 const likesCount = Math.floor(Math.random() * 300);
                 const newPost = {
