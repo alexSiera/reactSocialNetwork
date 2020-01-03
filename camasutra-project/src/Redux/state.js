@@ -111,13 +111,12 @@ let store = {
         message = "";
     },
     onDialogChange (newMessage) {
-        let {dialogTextAreaValue} = this._state.dialogsPage;
-        dialogTextAreaValue = newMessage;
+        this._state.dialogsPage.dialogTextAreaValue = newMessage;
         this._subscriber();
     }
 }
 export default store;
-
+window.store = store;
 // store - OOP
 //
 // let store = {
