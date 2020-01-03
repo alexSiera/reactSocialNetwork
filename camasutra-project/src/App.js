@@ -9,7 +9,7 @@ import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 
-const App = ({state, dispatch, addPostActionCreator, updatePostActionCreator, addDialogActionCreator,updateDialogActionCreator}) => {
+const App = ({state, dispatch, actionCreatorFunctions}) => {
 
     const {posts, textAreaValue } = state.profilePage;
     const {sidebarData} = state;
@@ -18,10 +18,10 @@ const App = ({state, dispatch, addPostActionCreator, updatePostActionCreator, ad
                 <Header/>
                 <Navbar sidebarData={sidebarData}/>
                 <div className="app-wrapper-content">
-                    <Route path="/dialogs" render={ () => <Dialogs messagesDatas={state.dialogsPage.messagesData} dialogsDatas={state.dialogsPage.dialogsData} dispatch={dispatch} addDialogActionCreator={addDialogActionCreator} updateDialogActionCreator={updateDialogActionCreator} />}/>
-                    <Route path="/profile" render={() => <Profile postsData={posts} textAreaValue={textAreaValue} dispatch={dispatch} addPostActionCreator={addPostActionCreator} updatePostActionCreator={updatePostActionCreator}/>} />
+                    <Route path="/dialogs" render={ () => <Dialogs messagesDatas={state.dialogsPage.messagesData} dialogsDatas={state.dialogsPage.dialogsData} dispatch={dispatch} addDialogActionCreator={actionCreatorFunctions.addDialogActionCreator} updateDialogActionCreator={actionCreatorFunctions.updateDialogActionCreator} />}/>
+                    <Route path="/profile" render={() => <Profile postsData={posts} textAreaValue={textAreaValue} dispatch={dispatch} addPostActionCreator={actionCreatorFunctions.addPostActionCreator} updatePostActionCreator={actionCreatorFunctions.updatePostActionCreator}/>} />
                     <Route path="/music" component={Music} />
-                    <Route path="/news" component={News} />
+                    <Route path="/news" render={() => <News newsPage={state.newsPage} dispatch={dispatch} addNewsActionCreator={actionCreatorFunctions.addNewsActionCreator} updateNewsActionCreator={actionCreatorFunctions.updateNewsActionCreator}/>} />
                     <Route path="/settings" component={Settings} />
                 </div>
             </div>

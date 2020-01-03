@@ -11,10 +11,8 @@ import {BrowserRouter} from "react-router-dom";
 const rerenderEntireTree = (state) => {
     ReactDOM.render(<BrowserRouter>
         <App state={state} dispatch={store.dispatch.bind(store)}
-             addPostActionCreator={store.addPostActionCreator.bind(store)}
-             updatePostActionCreator={store.updatePostActionCreator.bind(store)}
-             addDialogActionCreator={store.addDialogActionCreator.bind(store)} updateDialogActionCreator={store.updateDialogActionCreator.bind(store)}
-             />
+             actionCreatorFunctions={store.actionCreatorFunctions}
+        />
     </BrowserRouter>, document.getElementById('root'));
 }
 let rerender = () => {
