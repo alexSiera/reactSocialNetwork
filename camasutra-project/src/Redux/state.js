@@ -1,10 +1,14 @@
-const SET_POST_VALUE = 'SET-POST-VALUE';
+import dialogsReducer from "./dialogsReducer";
+import profileReducer from "./profileReducer";
+import newsReducer from "./newsReducer";
+import sidebarReducer from "./sidebarReducer";
+
 const ADD_POST = 'ADD-POST';
+const SET_POST_VALUE = 'SET-POST-VALUE';
 const SET_DIALOG_VALUE = 'SET-DIALOG-VALUE';
 const ADD_DIALOG = 'ADD-DIALOG';
 const SET_NEWS_VALUE = 'SET-NEWS-VALUE';
 const ADD_NEWS = 'ADD-NEWS';
-
 let store = {
     _subscriber() {
         console.log("no subscriber");
@@ -105,72 +109,11 @@ let store = {
     },
 
     dispatch(action) { // { type: 'ADD-POST'  }
-        switch (action.type) {
-            case 'ADD-POST': {
-                const id = Math.floor(Math.random() * 100);
-                const likesCount = Math.floor(Math.random() * 300);
-                const newPost = {
-                    id,
-                    message: this._state.profilePage.textAreaValue,
-                    likesCount,
-                };
-                this._state.profilePage.posts.push(newPost);
-                this._state.profilePage.textAreaValue = "";
-                this._subscriber();
-            }
-                break;
-            case 'SET-POST-VALUE': {
-                this._state.profilePage.textAreaValue = action.newValue;
-                this._subscriber();
-            }
-                break;
-            case 'ADD-DIALOG': {
-                let {dialogTextAreaValue: message} = this._state.dialogsPage;
-                const id = Math.floor(Math.random() * 100);
-                const likesCount = Math.floor(Math.random() * 300);
-                const newMessage = {
-                    id,
-                    message,
-                    likesCount,
-                };
-                const {messagesData} = this._state.dialogsPage;
-                messagesData.push(newMessage);
-                this._subscriber();
-                message = "";
-            }
-                break;
-            case 'SET-DIALOG-VALUE': {
-                let newMessage = action.newValue;
-                this._state.dialogsPage.dialogTextAreaValue = newMessage;
-                this._subscriber();
-            }
-                break;
-            case 'ADD-NEWS': {
-                let message = this._state.newsPage.newsPageInput;
-                const id = Math.floor(Math.random() * 100);
-                const autor = "SOMEONE";
-                const img = "http://ldfl.ru/wp-content/uploads/2017/09/news.jpg"
-                const newMessage = {
-                    id,
-                    img,
-                    autor,
-                    message,
-                };
-                let {newsData} = this._state.newsPage;
-                newsData.push(newMessage);
-                this._subscriber();
-                message = "";
-            }
-                break;
-            case 'SET-NEWS-VALUE': {
-                let newNews = action.newValue;
-                this._state.newsPage.newsPageInput = newNews;
-                this._subscriber();
-            }
-                break;
-            default:
-                break;
-        }
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage,action );
+        this._state.newsPage = newsReducer(this._state.newsPage,action);
+        this._state.profilePage = profileReducer(this._state.profilePage,action);
+        this._state.sidebarData = sidebarReducer(this._state.sidebarData,action);
+        this._subscriber(this._state);
     },
     actionCreatorFunctions: {
         addPostActionCreator () {

@@ -14,12 +14,12 @@ const Dialogs = (props) => {
 
     return (
         <div className={s.dialogs}>
-            <div className={s.dialogs_items}>
+            <div>
                 {props.dialogsDatas.map((el) => {
                     return <DialogItem id={el.id} linkText={el.name} />
                 })}
             </div>
-            <div className={s.messages}>
+            <div>
                 {props.messagesDatas.map((el) => {
                     return <Message id={el.id} message={el.message} likesCount={el.likesCount}/>
                 })}
