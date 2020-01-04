@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import store from "./Redux/state";
+import store from "./Redux/reduxStore";
 import {BrowserRouter} from "react-router-dom";
  //,addPost, setPostValue,onDialogTextAreaSubmit,onDialogChange, subscribe
  // let {getState} = store;
@@ -11,7 +11,7 @@ import {BrowserRouter} from "react-router-dom";
 const rerenderEntireTree = (state) => {
     ReactDOM.render(<BrowserRouter>
         <App state={state} dispatch={store.dispatch.bind(store)}
-             actionCreatorFunctions={store.actionCreatorFunctions}
+
         />
     </BrowserRouter>, document.getElementById('root'));
 }
@@ -21,7 +21,9 @@ let rerender = () => {
 }
 store.dispatch({type:'ADD-POST'});
 rerenderEntireTree(store.getState());
-store.subscribe(rerender);
+store.subscribe(() => {
+    rerenderEntireTree(store.getState())
+});
 serviceWorker.unregister();
 
 

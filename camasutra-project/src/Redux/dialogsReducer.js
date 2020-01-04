@@ -1,6 +1,39 @@
 const SET_DIALOG_VALUE = 'SET-DIALOG-VALUE';
 const ADD_DIALOG = 'ADD-DIALOG';
-const dialogsReducer = (state, action) => {
+let initialState = {
+        messagesData: [{
+            id: 1,
+            message: "Ok!",
+            likesCount: 12,
+        }, {
+            id: 2,
+            message: "Sure!",
+            likesCount: 12,
+        }, {
+            id: 3,
+            message: "Hi dos",
+            likesCount: 12,
+        }, {
+            id: 4,
+            message: "Killer",
+            likesCount: 12,
+        }],
+        dialogsData: [{
+            id: 1,
+            name: "Dimych"
+        }, {
+            id: 2,
+            name: "Alex"
+        }, {
+            id: 3,
+            name: "Anya"
+        }, {
+            id: 4,
+            name: "Killer"
+        }],
+        dialogTextAreaValue: "",
+    }
+const dialogsReducer = (state = initialState, action) => {
     if(!action) return state;
     switch (action.type) {
         case ADD_DIALOG: {

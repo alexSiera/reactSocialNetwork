@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import {addPost,onDialogChange,onChange,onDialogTextAreaSubmit} from "./Redux/state";
+import {addPost,onDialogChange,onChange,onDialogTextAreaSubmit} from "./Redux/store";
 import {BrowserRouter} from "react-router-dom";
 
 
