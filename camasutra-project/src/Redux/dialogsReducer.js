@@ -1,7 +1,6 @@
-
+const SET_DIALOG_VALUE = 'SET-DIALOG-VALUE';
+const ADD_DIALOG = 'ADD-DIALOG';
 const dialogsReducer = (state, action) => {
-    const SET_DIALOG_VALUE = 'SET-DIALOG-VALUE';
-    const ADD_DIALOG = 'ADD-DIALOG';
     if(!action) return state;
     switch (action.type) {
         case ADD_DIALOG: {
@@ -27,4 +26,16 @@ const dialogsReducer = (state, action) => {
     }
     return state;
 }
+export const addDialogActionCreator = () => {
+    return {
+        type: ADD_DIALOG,
+    }
+}
+export const updateDialogActionCreator = (newValue) => {
+    return {
+        type: SET_DIALOG_VALUE,
+        newValue: newValue
+    }
+}
+
 export default dialogsReducer;

@@ -1,16 +1,16 @@
 import React from 'react';
 import s from './News.scss';
 import OneNew from "./One new/OneNew";
+import {updateNewsActionCreator,addNewsActionCreator } from "../../Redux/newsReducer";
 const News = (props) => {
     //const newsData = props.newsData;
     const textAreaNews = React.createRef();
     const addNews = () => {
-        props.dispatch(props.addNewsActionCreator(textAreaNews.current.value))
+        props.dispatch(addNewsActionCreator(textAreaNews.current.value))
     }
     const updateNews = (e) => {
-        props.dispatch(props.updateNewsActionCreator(e.target.value));
+        props.dispatch(updateNewsActionCreator(e.target.value));
     }
-    const addNewsActionCreator = props.addNewsActionCreator;
     return (
         <div>
             <ul>

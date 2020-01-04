@@ -1,8 +1,7 @@
+const ADD_POST = 'ADD-POST';
+const SET_POST_VALUE = 'SET-POST-VALUE';
 
 const profileReducer = (state, action) =>{
-    const ADD_POST = 'ADD-POST';
-    const SET_POST_VALUE = 'SET-POST-VALUE';
-
     if(!action) return state;
     switch (action.type) {
         case ADD_POST: {
@@ -27,4 +26,17 @@ const profileReducer = (state, action) =>{
     return state;
 
 }
+
+export const addPostActionCreator = () => {
+    return {
+        type: ADD_POST,
+    }
+}
+export const updatePostActionCreator = (newValue) => {
+    return {
+        type: SET_POST_VALUE,
+        newValue: newValue
+    }
+}
+
 export default profileReducer;

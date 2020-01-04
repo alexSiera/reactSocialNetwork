@@ -1,6 +1,6 @@
+const SET_NEWS_VALUE = 'SET-NEWS-VALUE';
+const ADD_NEWS = 'ADD-NEWS';
 const newsReducer = (state, action) => {
-    const SET_NEWS_VALUE = 'SET-NEWS-VALUE';
-    const ADD_NEWS = 'ADD-NEWS';
     if(!action) return state;
     switch(action.type) {
         case ADD_NEWS: {
@@ -27,5 +27,17 @@ const newsReducer = (state, action) => {
             break;
     }
     return state;
+}
+
+export const addNewsActionCreator = () => {
+    return {
+        type: ADD_NEWS,
+    }
+}
+export const updateNewsActionCreator  = (newValue) => {
+    return {
+        type: SET_NEWS_VALUE,
+        newValue: newValue
+    }
 }
 export default newsReducer;

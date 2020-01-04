@@ -2,14 +2,15 @@ import React from 'react';
 import s from './Dialogs.module.scss';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
+import {addDialogActionCreator, updateDialogActionCreator} from "../../Redux/dialogsReducer";
 const textAreaElement = React.createRef();
 
 const Dialogs = (props) => {
     const onDialogTextAreaSubmit = () => {
-        props.dispatch(props.addDialogActionCreator());
+        props.dispatch(addDialogActionCreator());
     }
     const onDialogChange = (e) => {
-        props.dispatch(props.updateDialogActionCreator(e.target.value));
+        props.dispatch(updateDialogActionCreator(e.target.value));
     }
 
     return (

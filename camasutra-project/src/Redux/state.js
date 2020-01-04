@@ -2,13 +2,6 @@ import dialogsReducer from "./dialogsReducer";
 import profileReducer from "./profileReducer";
 import newsReducer from "./newsReducer";
 import sidebarReducer from "./sidebarReducer";
-
-const ADD_POST = 'ADD-POST';
-const SET_POST_VALUE = 'SET-POST-VALUE';
-const SET_DIALOG_VALUE = 'SET-DIALOG-VALUE';
-const ADD_DIALOG = 'ADD-DIALOG';
-const SET_NEWS_VALUE = 'SET-NEWS-VALUE';
-const ADD_NEWS = 'ADD-NEWS';
 let store = {
     _subscriber() {
         console.log("no subscriber");
@@ -107,7 +100,6 @@ let store = {
     getState() {
         return this._state;
     },
-
     dispatch(action) { // { type: 'ADD-POST'  }
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage,action );
         this._state.newsPage = newsReducer(this._state.newsPage,action);
@@ -115,42 +107,6 @@ let store = {
         this._state.sidebarData = sidebarReducer(this._state.sidebarData,action);
         this._subscriber(this._state);
     },
-    actionCreatorFunctions: {
-        addPostActionCreator () {
-            return {
-                type: ADD_POST,
-            }
-        },
-        updatePostActionCreator (newValue) {
-            return {
-                type: SET_POST_VALUE,
-                newValue: newValue
-            }
-        },
-        addDialogActionCreator () {
-            return {
-                type: ADD_DIALOG,
-            }
-        },
-        updateDialogActionCreator (newValue) {
-            return {
-                type: SET_DIALOG_VALUE,
-                newValue: newValue
-            }
-        },
-        addNewsActionCreator () {
-            return {
-                type: ADD_NEWS,
-            }
-        },
-        updateNewsActionCreator (newValue) {
-            return {
-                type: SET_NEWS_VALUE,
-                newValue: newValue
-            }
-        }
-    }
-
 }
 export default store;
 window.store = store;
