@@ -3,13 +3,13 @@ import {addDialogActionCreator, updateDialogActionCreator} from "../../Redux/red
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 
-let mapStateToProps = (state) => {
+const mapStateToProps = (state) => {
     return {
         dialogsPage: state.dialogsPage
     }
 }
 
-let mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch) => {
     return {
         dialogTextAreaSubmit: () => {
             dispatch(addDialogActionCreator());

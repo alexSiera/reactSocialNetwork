@@ -1,6 +1,6 @@
 const SET_DIALOG_VALUE = 'SET-DIALOG-VALUE';
 const ADD_DIALOG = 'ADD-DIALOG';
-let initialState = {
+const initialState = {
         messagesData: [{
             id: 1,
             message: "Ok!",
@@ -51,7 +51,7 @@ const dialogsReducer = (state = initialState, action) => {
         }
             break;
         case SET_DIALOG_VALUE: {
-            let newMessage = action.newValue;
+            const newMessage = action.newValue;
             state.dialogTextAreaValue = newMessage;
         }
         default:

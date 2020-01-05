@@ -1,6 +1,6 @@
 const SET_NEWS_VALUE = 'SET-NEWS-VALUE';
 const ADD_NEWS = 'ADD-NEWS';
-let initialState = {
+const initialState = {
         newsData: [{
             id: 1,
             img: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
@@ -39,7 +39,7 @@ const newsReducer = (state = initialState, action) => {
         }
             break;
         case SET_NEWS_VALUE: {
-            let newNews = action.newValue;
+            const newNews = action.newValue;
             state.newsPageInput = newNews;
         }
         default:
