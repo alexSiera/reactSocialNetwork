@@ -1,6 +1,4 @@
 import React from 'react';
-import s from './News.scss';
-import OneNew from "./One new/OneNew";
 import {updateNewsActionCreator,addNewsActionCreator } from "../../Redux/reducers/newsReducer";
 import News from "./News";
 const NewsContainer = (props) => {
