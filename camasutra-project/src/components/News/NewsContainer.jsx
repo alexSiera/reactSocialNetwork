@@ -1,19 +1,25 @@
 import React from 'react';
 import {updateNewsActionCreator,addNewsActionCreator } from "../../Redux/reducers/newsReducer";
 import News from "./News";
-const NewsContainer = (props) => {
-    const state = props.store.getState();
-    const {newsPage} = state;
-    const dispatch = props.store.dispatch;
-    const addNews = () => {
-        dispatch(addNewsActionCreator())
-    }
-    const updateNews = (newValue) => {
-        dispatch(updateNewsActionCreator(newValue));
-    }
+import StoreContext from "../../StoreContext";
+const NewsContainer = () => {
     return (
         <div>
-            <News updateNews={updateNews} addNews={addNews} newsData={newsPage.newsData} newsPageInput={newsPage.newsPageInput}/>
+            <StoreContext.Consumer>{
+                (store) => {
+                    const state = store.getState();
+                    const {newsPage} = state;
+                    const dispatch = store.dispatch;
+                    const addNews = () => {
+                        dispatch(addNewsActionCreator())
+                    }
+                    const updateNews = (newValue) => {
+                        dispatch(updateNewsActionCreator(newValue));
+                    }
+                    return <News updateNews={updateNews} addNews={addNews} newsData={newsPage.newsData} newsPageInput={newsPage.newsPageInput}/>
+                }
+            }
+            </StoreContext.Consumer>
         </div>
     )
 }
