@@ -15,10 +15,6 @@ const rerenderEntireTree = (state) => {
         />
     </BrowserRouter>, document.getElementById('root'));
 }
-let rerender = () => {
-    let state = store.getState();
-    rerenderEntireTree(state)
-}
 store.dispatch({type:'ADD-POST'});
 rerenderEntireTree(store.getState());
 store.subscribe(() => {
