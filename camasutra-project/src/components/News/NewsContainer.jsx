@@ -5,7 +5,8 @@ import StoreContext from "../../StoreContext";
 const NewsContainer = () => {
     return (
         <div>
-            <StoreContext.Consumer>{
+            <StoreContext.Consumer>
+                {
                 (store) => {
                     const state = store.getState();
                     const {newsPage} = state;
