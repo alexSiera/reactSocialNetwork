@@ -2,20 +2,21 @@ import React from 'react';
 import s from './MyPosts.module.scss';
 import Post from './Post/Post';
 
-const MyPosts = (props) => {
-    const postsElements = props.postsData.map((p => <Post id={p.id} message={p.message} likesCount={p.likesCount} />))
+
+const MyPosts = ({posts,textAreaValue,addPost,updateNewPostText }) => {
+    const postsElements = posts.map((p => <Post id={p.id} message={p.message} likesCount={p.likesCount} />))
     const onAddPost = () => {
-        props.addPost();
+        addPost();
     }
     const onUpdatePostValue = (e) => {
-        props.updateNewPostText(e.target.value)
+        updateNewPostText(e.target.value)
     }
     return (
         <div className={s.postsBlock}>
             <h3>My post</h3>
             <div className={s.postsBlockText}>
                 <div>
-                    <textarea onChange={onUpdatePostValue} value={props.textAreaValue}>
+                    <textarea onChange={onUpdatePostValue} value={textAreaValue}>
 
                     </textarea>
                 </div>

@@ -1,21 +1,21 @@
 import React from 'react';
 import s from './News.scss';
 import OneNew from "./One new/OneNew";
-const News = (props) => {
-    const newsData = props.newsData;
+const News = ({newsPage,addNews, updateNews}) => {
+    const {newsData} = newsPage;
     const onAddNews = () => {
-        props.addNews()
+        addNews()
     }
     const onUpdateNews = (e) => {
-        props.updateNews(e.target.value);
+        updateNews(e.target.value);
     }
     return (
         <div>
             <ul>
                 {newsData.map(({id,img,autor, message }) => {
-                    return <OneNew id={id} img={img} autor={autor} newsData={props.newsData} message={message}/>
+                    return <OneNew id={id} img={img} autor={autor} newsData={newsData} message={message}/>
                 })}
-                <textarea className={s.textArea} onChange={onUpdateNews} value={props.newsPageInput}></textarea>
+                <textarea className={s.textArea} onChange={onUpdateNews} value={newsPage.newsPageInput}></textarea>
                 <button onClick={onAddNews}>Add news</button>
             </ul>
         </div>

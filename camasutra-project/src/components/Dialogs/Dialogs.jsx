@@ -15,18 +15,18 @@ const Dialogs = (props) => {
     return (
         <div className={s.dialogs}>
             <div>
-                {props.dialogsData.map((el) => {
+                {props.dialogsPage.dialogsData.map((el) => {
                     return <DialogItem id={el.id} linkText={el.name} />
                 })}
             </div>
             <div>
-                {props.messagesData.map((el) => {
+                {props.dialogsPage.messagesData.map((el) => {
                     return <Message id={el.id} message={el.message} likesCount={el.likesCount}/>
                 })}
             </div>
             <div className={s.textAreaInput}>
                 <h4>Please Write Your Message</h4>
-                <textarea onChange={onDialogChange} value={props.dialogTextAreaValue}></textarea>
+                <textarea onChange={onDialogChange} value={props.dialogsPage.dialogTextAreaValue}></textarea>
                 <button onClick={onDialogTextAreaSubmit}>Submit Message</button>
             </div>
         </div>

@@ -1,18 +1,15 @@
 import React from 'react';
 import Navbar from "./Navbar";
-import StoreContext from "../../StoreContext";
-import {addDialogActionCreator, updateDialogActionCreator} from "../../Redux/reducers/dialogsReducer";
+import {connect} from "react-redux";
 
-const NavbarContainer = () => {
-    return <StoreContext.Consumer>
-        {
-            (store) => {
-                const state = store.getState();
-                return <Navbar sidebarData={state.sidebarData}/>
 
-            }
-        }
-    </StoreContext.Consumer>
-
-};
+let mapStateToProps = (state) => {
+    return {
+        sidebarData: state.navbarData
+    }
+}
+// let mapDispatchToProps = (dispatch) => {
+//     return;
+// }
+const NavbarContainer = connect(mapStateToProps, () => {})(Navbar)
 export default NavbarContainer;

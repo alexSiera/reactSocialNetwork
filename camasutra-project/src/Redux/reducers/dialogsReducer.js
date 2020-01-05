@@ -67,7 +67,7 @@ export const addDialogActionCreator = () => {
 export const updateDialogActionCreator = (newValue) => {
     return {
         type: SET_DIALOG_VALUE,
-        newValue: newValue
+        newValue
     }
 }
 
