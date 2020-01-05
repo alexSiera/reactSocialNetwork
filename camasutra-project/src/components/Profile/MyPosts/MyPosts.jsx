@@ -4,10 +4,10 @@ import Post from './Post/Post';
 
 const MyPosts = (props) => {
     const postsElements = props.postsData.map((p => <Post id={p.id} message={p.message} likesCount={p.likesCount} />))
-    const addPost = () => {
+    const onAddPost = () => {
         props.addPost();
     }
-    const changePostValue = (e) => {
+    const onUpdatePostValue = (e) => {
         props.updateNewPostText(e.target.value)
     }
     return (
@@ -15,12 +15,12 @@ const MyPosts = (props) => {
             <h3>My post</h3>
             <div className={s.postsBlockText}>
                 <div>
-                    <textarea onChange={changePostValue} value={props.textAreaValue}>
+                    <textarea onChange={onUpdatePostValue} value={props.textAreaValue}>
 
                     </textarea>
                 </div>
                 <div>
-                    <button onClick={addPost}>Add post</button>
+                    <button onClick={onAddPost}>Add post</button>
                 </div>
             </div>
             <div className={s.posts}>

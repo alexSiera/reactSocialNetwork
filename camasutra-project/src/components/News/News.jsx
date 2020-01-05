@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './News.scss';
 import OneNew from "./One new/OneNew";
-import {updateNewsActionCreator,addNewsActionCreator } from "../../Redux/newsReducer";
+import {updateNewsActionCreator,addNewsActionCreator } from "../../Redux/reducers/newsReducer";
 const News = (props) => {
     //const newsData = props.newsData;
     const textAreaNews = React.createRef();

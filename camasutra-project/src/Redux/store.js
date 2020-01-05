@@ -1,7 +1,7 @@
-import dialogsReducer from "./dialogsReducer";
-import profileReducer from "./profileReducer";
-import newsReducer from "./newsReducer";
-import sidebarReducer from "./sidebarReducer";
+import dialogsReducer from "./reducers/dialogsReducer";
+import profileReducer from "./reducers/profileReducer";
+import newsReducer from "./reducers/newsReducer";
+import sidebarReducer from "./reducers/sidebarReducer";
 let store = {
     _subscriber() {
         console.log("no subscriber");

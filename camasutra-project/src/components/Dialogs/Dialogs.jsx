@@ -2,7 +2,7 @@ import React from 'react';
 import s from './Dialogs.module.scss';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {addDialogActionCreator, updateDialogActionCreator} from "../../Redux/dialogsReducer";
+import {addDialogActionCreator, updateDialogActionCreator} from "../../Redux/reducers/dialogsReducer";
 const textAreaElement = React.createRef();
 
 const Dialogs = (props) => {
