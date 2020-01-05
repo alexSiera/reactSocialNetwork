@@ -3,7 +3,7 @@ import {addPostActionCreator, updatePostActionCreator} from "../../../Redux/redu
 import MyPosts from "./MyPosts";
 
 const MyPostsContainer = (props) => {
-    let state = props.store.getState();
+    const state = props.store.getState();
     const dispatch = props.store.dispatch;
     const {posts, textAreaValue} = state.profilePage;
     const addPost = () => {

@@ -1,24 +1,22 @@
 import React from 'react';
 import s from './News.scss';
 import OneNew from "./One new/OneNew";
-import {updateNewsActionCreator,addNewsActionCreator } from "../../Redux/reducers/newsReducer";
 const News = (props) => {
-    //const newsData = props.newsData;
-    const textAreaNews = React.createRef();
-    const addNews = () => {
-        props.dispatch(addNewsActionCreator(textAreaNews.current.value))
+    const newsData = props.newsData;
+    const onAddNews = () => {
+        props.addNews()
     }
-    const updateNews = (e) => {
-        props.dispatch(updateNewsActionCreator(e.target.value));
+    const onUpdateNews = (e) => {
+        props.updateNews(e.target.value);
     }
     return (
         <div>
             <ul>
-                {props.newsPage.newsData.map(({id,img,autor, message }) => {
+                {newsData.map(({id,img,autor, message }) => {
                     return <OneNew id={id} img={img} autor={autor} newsData={props.newsData} message={message}/>
                 })}
-                <textarea className={s.textArea} onChange={updateNews} value={props.newsPageInput} ref={textAreaNews}></textarea>
-                <button onClick={addNews}>Add news</button>
+                <textarea className={s.textArea} onChange={onUpdateNews} value={props.newsPageInput}></textarea>
+                <button onClick={onAddNews}>Add news</button>
             </ul>
         </div>
     )
