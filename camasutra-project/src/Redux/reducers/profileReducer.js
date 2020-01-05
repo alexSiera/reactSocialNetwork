@@ -22,22 +22,26 @@ const initialState = {
 }
 
 const profileReducer = (state = initialState, action) =>{
-    if(!action) return state;
     switch (action.type) {
         case ADD_POST: {
             const id = Math.floor(Math.random() * 100);
             const likesCount = Math.floor(Math.random() * 300);
+            const stateCopy = {...state};
+            stateCopy.posts = [...state.posts];
             const newPost = {
                 id,
                 message: state.textAreaValue,
                 likesCount,
             };
-            state.posts.push(newPost);
-            state.textAreaValue = "";
+            stateCopy.posts.push(newPost);
+            stateCopy.textAreaValue = "";
+            return stateCopy;
         }
         break;
         case SET_POST_VALUE: {
-            state.textAreaValue = action.newValue;
+            const stateCopy = {...state};
+            stateCopy.textAreaValue = action.newValue;
+            return stateCopy;
         }
             break;
         default:

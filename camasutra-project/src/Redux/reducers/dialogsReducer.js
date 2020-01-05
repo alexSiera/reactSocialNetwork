@@ -1,6 +1,6 @@
 const SET_DIALOG_VALUE = 'SET-DIALOG-VALUE';
 const ADD_DIALOG = 'ADD-DIALOG';
-const initialState = {
+let initialState = {
         messagesData: [{
             id: 1,
             message: "Ok!",
@@ -34,10 +34,12 @@ const initialState = {
         dialogTextAreaValue: "",
     }
 const dialogsReducer = (state = initialState, action) => {
-    if(!action) return state;
     switch (action.type) {
         case ADD_DIALOG: {
-            let {dialogTextAreaValue: message} = state;
+
+            let stateCopy = {...state};
+
+            let {dialogTextAreaValue: message} = stateCopy;
             const id = Math.floor(Math.random() * 100);
             const likesCount = Math.floor(Math.random() * 300);
             const newMessage = {
@@ -45,19 +47,21 @@ const dialogsReducer = (state = initialState, action) => {
                 message,
                 likesCount,
             };
-            const {messagesData} = state;
-            messagesData.push(newMessage);
+            stateCopy.messagesData = [...state.messagesData];
+            stateCopy.messagesData.push(newMessage);
             message = "";
+            return stateCopy;
         }
             break;
         case SET_DIALOG_VALUE: {
-            const newMessage = action.newValue;
-            state.dialogTextAreaValue = newMessage;
+            let stateCopy = {...state};
+            stateCopy.dialogTextAreaValue = action.newValue;
+            return stateCopy;
+
         }
-        default:
+        default: return state
             break;
     }
-    return state;
 }
 export const addDialogActionCreator = () => {
     return {

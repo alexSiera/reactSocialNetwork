@@ -20,10 +20,10 @@ const initialState = {
         newsPageInput: ''
     }
 const newsReducer = (state = initialState, action) => {
-    if(!action) return state;
     switch(action.type) {
         case ADD_NEWS: {
-            let message = state.newsPageInput;
+            const stateCopy = {...state};
+            let message = stateCopy.newsPageInput;
             const id = Math.floor(Math.random() * 100);
             const autor = "SOMEONE";
             const img = "http://ldfl.ru/wp-content/uploads/2017/09/news.jpg"
@@ -33,14 +33,17 @@ const newsReducer = (state = initialState, action) => {
                 autor,
                 message,
             };
-            let {newsData} = state;
-            newsData.push(newMessage);
+            stateCopy.newsData = [...state.newsData];
+            stateCopy.newsData.push(newMessage);
             message = "";
+            return stateCopy;
         }
             break;
         case SET_NEWS_VALUE: {
+            const stateCopy = {...state};
             const newNews = action.newValue;
-            state.newsPageInput = newNews;
+            stateCopy.newsPageInput = newNews;
+            return stateCopy;
         }
         default:
             break;
