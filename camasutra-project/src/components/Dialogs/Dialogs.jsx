@@ -16,12 +16,12 @@ const Dialogs = (props) => {
         <div className={s.dialogs}>
             <div>
                 {props.dialogsPage.dialogsData.map((el) => {
-                    return <DialogItem id={el.id} linkText={el.name} />
+                    return <DialogItem key={el.id} linkText={el.name} />
                 })}
             </div>
             <div>
                 {props.dialogsPage.messagesData.map((el) => {
-                    return <Message id={el.id} message={el.message} likesCount={el.likesCount}/>
+                    return <Message key={el.id} message={el.message} likesCount={el.likesCount}/>
                 })}
             </div>
             <div className={s.textAreaInput}>

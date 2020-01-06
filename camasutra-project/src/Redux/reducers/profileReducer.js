@@ -2,49 +2,43 @@ const ADD_POST = 'ADD-POST';
 const SET_POST_VALUE = 'SET-POST-VALUE';
 const initialState = {
     posts: [{
-        id: 1,
+        id: 113,
         message: "Hi how are you ?",
         likesCount: 12
     }, {
-        id: 2,
+        id: 2123,
         message: "It's my first post",
         likesCount: 11
     }, {
-        id: 3,
+        id: 3221,
         message: "Blabla",
         likesCount: 13
     }, {
-        id: 4,
+        id: 4332,
         message: "Dada",
         likesCount: 15
     }],
-        textAreaValue: "it-kamasytra"
+    textAreaValue: "it-kamasytra"
 }
 
-const profileReducer = (state = initialState, action) =>{
+const profileReducer = (state = initialState, action) => {
     switch (action.type) {
-        case ADD_POST: {
-            const id = Math.floor(Math.random() * 100);
-            const likesCount = Math.floor(Math.random() * 300);
-            const stateCopy = {
+        case ADD_POST:
+            return {
                 ...state,
-                posts: [...state.posts]
-            };
-            const newPost = {
-                id,
-                message: state.textAreaValue,
-                likesCount,
-            };
-            stateCopy.posts.push(newPost);
-            stateCopy.textAreaValue = "";
-            return stateCopy;
-        }
-        break;
-        case SET_POST_VALUE: {
-            const stateCopy = {...state};
-            stateCopy.textAreaValue = action.newValue;
-            return stateCopy;
-        }
+                posts: [...state.posts, {
+                    id: Math.floor(Math.random() * 100),
+                    message: state.textAreaValue,
+                    likesCount: Math.floor(Math.random() * 100),
+                }],
+                textAreaValue: ''
+            }
+            break;
+        case SET_POST_VALUE:
+            return {
+                ...state,
+                textAreaValue: action.newValue
+            }
             break;
         default:
             break;

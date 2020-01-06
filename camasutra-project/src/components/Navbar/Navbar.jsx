@@ -1,30 +1,31 @@
 import React from 'react';
-import s from'./Navbar.module.scss';
+import s from './Navbar.module.scss';
 import {NavLink} from "react-router-dom";
 import SidebarContainer from "./Sidebar/SidebarContainer";
+
 const Navbar = () => {
     return (
-         <nav className={s.nav}>
-        <div className={s.item}>
-         <NavLink to="/profile" activeClassName={s.active}>Profile</NavLink>
-        </div>
-        <div className={s.item}>
-        <NavLink to="/dialogs" activeClassName={s.active}>Messages</NavLink>
-        </div>
-        <div className={s.item}>
-          <NavLink to="/news" activeClassName={s.active}>News </NavLink>
-        </div>
-        <div className={s.item}>
-          <NavLink to="/music" activeClassName={s.active}>Music</NavLink>
-        </div>
-         <div className={s.item}>
-           <NavLink to="/settings" activeClassName={s.active}>Settings</NavLink>
-         </div>
-
-             <div className={s.item}>
-                <SidebarContainer />
+        <nav className={s.nav}>
+            <div className={s.item}>
+                <NavLink to="/profile" activeClassName={s.active}>Profile</NavLink>
             </div>
-      </nav>
+            <div className={s.item}>
+                <NavLink to="/dialogs" activeClassName={s.active}>Messages</NavLink>
+            </div>
+            <div className={s.item}>
+                <NavLink to="/news" activeClassName={s.active}>News </NavLink>
+            </div>
+            <div className={s.item}>
+                <NavLink to="/music" activeClassName={s.active}>Music</NavLink>
+            </div>
+            <div className={s.item}>
+                <NavLink to="/settings" activeClassName={s.active}>Settings</NavLink>
+            </div>
+
+            <div className={s.item}>
+                <SidebarContainer/>
+            </div>
+        </nav>
     )
 }
 export default Navbar;

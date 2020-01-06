@@ -13,7 +13,7 @@ const News = ({newsPage,addNews, updateNews}) => {
         <div>
             <ul>
                 {newsData.map(({id,img,autor, message }) => {
-                    return <OneNew id={id} img={img} autor={autor} newsData={newsData} message={message}/>
+                    return <OneNew key={id} img={img} autor={autor} newsData={newsData} message={message}/>
                 })}
                 <textarea className={s.textArea} onChange={onUpdateNews} value={newsPage.newsPageInput}></textarea>
                 <button onClick={onAddNews}>Add news</button>
