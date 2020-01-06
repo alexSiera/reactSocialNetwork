@@ -22,14 +22,15 @@ const initialState = {
 const newsReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_NEWS:
+            const newNews = {
+                id: Math.floor(Math.random() * 100),
+                img: 'http://ldfl.ru/wp-content/uploads/2017/09/news.jpg',
+                autor: "Someone",
+                message: state.newsPageInput
+            }
             return {
                 ...state,
-                newsData: [...state.newsData, {
-                    id: Math.floor(Math.random() * 100),
-                    img: 'http://ldfl.ru/wp-content/uploads/2017/09/news.jpg',
-                    autor: "Someone",
-                    message: state.newsPageInput
-                }],
+                newsData: [...state.newsData, newNews],
                 newsPageInput: ''
             }
             break;

@@ -24,13 +24,14 @@ const initialState = {
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_POST:
+            const newProfile = {
+                id: Math.floor(Math.random() * 100),
+                message: state.textAreaValue,
+                likesCount: Math.floor(Math.random() * 100),
+            }
             return {
                 ...state,
-                posts: [...state.posts, {
-                    id: Math.floor(Math.random() * 100),
-                    message: state.textAreaValue,
-                    likesCount: Math.floor(Math.random() * 100),
-                }],
+                posts: [...state.posts, newProfile],
                 textAreaValue: ''
             }
             break;

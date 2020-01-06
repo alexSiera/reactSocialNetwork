@@ -36,10 +36,15 @@ let initialState = {
 const dialogsReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_DIALOG:
+            const newDialog = {
+                id:Math.floor(Math.random() * 100),
+                message: state.dialogTextAreaValue,
+                likesCount: Math.floor(Math.random() * 300)
+            }
             return {
                 ...state,
                 dialogTextAreaValue: '',
-                messagesData: [...state.messagesData, {message: state.dialogTextAreaValue, id:Math.floor(Math.random() * 100), likesCount: Math.floor(Math.random() * 300) }],
+                messagesData: [...state.messagesData,newDialog],
             }
             break;
         case SET_DIALOG_VALUE:
