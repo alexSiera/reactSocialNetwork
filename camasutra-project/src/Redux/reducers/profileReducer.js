@@ -26,8 +26,10 @@ const profileReducer = (state = initialState, action) =>{
         case ADD_POST: {
             const id = Math.floor(Math.random() * 100);
             const likesCount = Math.floor(Math.random() * 300);
-            const stateCopy = {...state};
-            stateCopy.posts = [...state.posts];
+            const stateCopy = {
+                ...state,
+                posts: [...state.posts]
+            };
             const newPost = {
                 id,
                 message: state.textAreaValue,

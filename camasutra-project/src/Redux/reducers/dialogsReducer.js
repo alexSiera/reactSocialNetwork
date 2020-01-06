@@ -36,9 +36,7 @@ let initialState = {
 const dialogsReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_DIALOG: {
-
-            let stateCopy = {...state};
-
+            let stateCopy = {...state, messagesData: [...state.messagesData]};
             let {dialogTextAreaValue: message} = stateCopy;
             const id = Math.floor(Math.random() * 100);
             const likesCount = Math.floor(Math.random() * 300);
@@ -47,7 +45,6 @@ const dialogsReducer = (state = initialState, action) => {
                 message,
                 likesCount,
             };
-            stateCopy.messagesData = [...state.messagesData];
             stateCopy.messagesData.push(newMessage);
             message = "";
             return stateCopy;

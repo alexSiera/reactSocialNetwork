@@ -22,7 +22,10 @@ const initialState = {
 const newsReducer = (state = initialState, action) => {
     switch(action.type) {
         case ADD_NEWS: {
-            const stateCopy = {...state};
+            const stateCopy = {
+                ...state,
+                newsData: [...state.newsData]
+            };
             let message = stateCopy.newsPageInput;
             const id = Math.floor(Math.random() * 100);
             const autor = "SOMEONE";
@@ -33,7 +36,6 @@ const newsReducer = (state = initialState, action) => {
                 autor,
                 message,
             };
-            stateCopy.newsData = [...state.newsData];
             stateCopy.newsData.push(newMessage);
             message = "";
             return stateCopy;
