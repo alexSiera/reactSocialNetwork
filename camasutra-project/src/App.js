@@ -8,6 +8,7 @@ import Settings from "./components/Settings/Settings";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import NewsContainer from "./components/News/NewsContainer";
 import NavbarContainer from "./components/Navbar/NavbarContainer";
+import UsersContainer from "./components/Users/UsersContainer";
 
 const App = () => {
     return (
@@ -18,6 +19,7 @@ const App = () => {
                 <div className="app-wrapper-content">
                     <Route path="/dialogs" render={ () => <DialogsContainer />}/>
                     <Route path="/profile" render={() => <Profile />} />
+                    <Route path="/users" render={() => <UsersContainer/>} />
                     <Route path="/music" component={Music} />
                     <Route path="/news" render={() => <NewsContainer />} />
                     <Route path="/settings" component={Settings} />
