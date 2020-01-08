@@ -7,3 +7,16 @@
 .usersAvatarImg {
   max-width: 100px;
 }
+.paginationBlock {
+  margin: 20px 0px;
+}
+.pageNum {
+  margin-right: 5px;
+  &:hover {
+    cursor: pointer;
+
+  }
+}
+.selectedPage {
+  font-weight: bold;
+}

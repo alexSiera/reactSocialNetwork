@@ -1,28 +1,49 @@
-import React,{Component} from 'react';
+import React, {Component} from 'react';
 import * as axios from 'axios';
 import userPhoto from '../../assets/images/maleAvatar.jpg';
 import s from "./Users.module.scss";
-class Users extends Component {
-    constructor(props) {
-        super(props);
-        alert('ddwd')
-            axios.get('https://social-network.samuraijs.com/api/1.0/users?page=3').then(res => {
-                this.props.setUsers(res.data.items);
-            })
-    }
-    // getUsers = async () => {
-    //     if (this.props.users.length === 0) {
-    //         const users = await axios.get('https://social-network.samuraijs.com/api/1.0/users?page=3');
-    //         this.props.setUsers(users.data.items);
-    //     }
-    // }
-    // componentDidMount() {
-    //     this.getUsers();
-    // }
 
-    render () {
+class Users extends Component {
+    getUsers = async () => {
+        if (this.props.users.length === 0) {
+            const baseUrl = 'https://social-network.samuraijs.com/api/1.0/users';
+            const users = await axios.get(`${baseUrl}?page=${this.props.currentSelectedPage}&count=${this.props.pageSize}`);
+            this.props.setUsers(users.data.items);
+        }
+    }
+
+    componentDidMount() {
+        this.getUsers();
+    }
+    render() {
+        const {totalUsersCount, pageSize} = this.props;
+        const pagesCount  = Math.ceil(totalUsersCount / pageSize);
+        const pages = [];
+        for (let i = 1; i <= pagesCount; i++) {
+            pages.push(i)
+        }
         return (
             <div>
+                <div className={s.paginationBlock}>
+                    {
+                        pages.map((el) => {
+                            return (
+                                // <span id={el} onClick={this.selectPage}
+                                //       className={el === this.props.currentSelectedPage ?
+                                //           `${s.selectedPage} ${s.pageNum}` : s.pageNum}>
+                                // {el}
+                                // </span>
+                                <span id={el} onClick={() => {this.props.selectPage(el)}}
+                            className={el === this.props.currentSelectedPage ?
+                                           `${s.selectedPage} ${s.pageNum}` : s.pageNum}>
+                            {el}
+                        </span>
+                            )
+
+
+                        })
+                    }
+                </div>
                 {/*<button onClick={this.getUsers}>getUsers</button>*/}
                 {
                     this.props.users.map((user) => {
@@ -78,4 +99,5 @@ class Users extends Component {
         )
     }
 }
+
 export default Users;
