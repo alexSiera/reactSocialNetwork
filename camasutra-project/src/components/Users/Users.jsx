@@ -2,16 +2,19 @@ import React from 'react';
 import s from './Users.module.scss'
 import userPhoto from '../../assets/images/maleAvatar.jpg'
 
-const Users = ({users, unfollow, follow,totalUsersCount,pageSize,onPageChanged,currentSelectedPage  }) => {
-const pagesCount  = Math.ceil(totalUsersCount / pageSize);
+const Users = ({users, unfollow, follow,totalUsersCount,pageSize,onPageChanged,currentSelectedPage,isFetching  }) => {
+debugger
+    const pagesCount  = Math.ceil(totalUsersCount / pageSize);
 const pages = [];
 for (let i = 1; i <= pagesCount; i++) {
     pages.push(i)
 }
     return (
         <div>
+            <span>{isFetching}</span>
             <div className={s.paginationBlock}>
                 {
+
                     pages.map((el) => {
                         return (
                             // <span id={el} onClick={this.selectPage}
@@ -19,7 +22,7 @@ for (let i = 1; i <= pagesCount; i++) {
                             //           `${s.selectedPage} ${s.pageNum}` : s.pageNum}>
                             // {el}
                             // </span>
-                            <span id={el} onClick={() => onPageChanged(el)}
+                            <span key={el} id={el} onClick={() => onPageChanged(el)}
                                   className={el === currentSelectedPage ?
                                       `${s.selectedPage} ${s.pageNum}` : s.pageNum}>
                             {el}

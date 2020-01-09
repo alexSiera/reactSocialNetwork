@@ -1,5 +1,12 @@
 import React, {Component} from 'react';
-import {followAC, selectPageAC, setTotalUsersCountAC, setUsersAC, unfollowAC} from "../../Redux/reducers/usersReducer";
+import {
+    followAC,
+    selectPageAC,
+    setFetchingOffAC, setFetchingOnAC,
+    setTotalUsersCountAC,
+    setUsersAC,
+    unfollowAC
+} from "../../Redux/reducers/usersReducer";
 import {connect} from "react-redux";
 import Users from "./Users";
 import * as axios from 'axios';
@@ -32,7 +39,11 @@ class UsersContainer extends Component {
             users={this.props.users}
             pageSize={this.props.pageSize}
             totalUsersCount={this.props.totalUsersCount}
-            currentSelectedPage={this.props.currentSelectedPage}/>
+            currentSelectedPage={this.props.currentSelectedPage}
+            setFetchingOff={this.props.setFetchingOff}
+            setFetchingOn={this.props.setFetchingOn}
+            isFetching={this.props.isFetching}
+        />
     }
 }
 const mapStateToProps = state => {
@@ -49,7 +60,9 @@ const mapDispatchToProps = dispatch => {
         unfollow: userId => dispatch(unfollowAC(userId)),
         setUsers: users => dispatch(setUsersAC(users)),
         selectPage: pageNum => dispatch(selectPageAC(pageNum)),
-        setTotalUsersCount: usersCount => dispatch(setTotalUsersCountAC(usersCount))
+        setTotalUsersCount: usersCount => dispatch(setTotalUsersCountAC(usersCount)),
+        setFetchingOff: () => dispatch(setFetchingOffAC()),
+        setFetchingOn: () => dispatch(setFetchingOnAC())
     }
 }
 const usersContainers = connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
