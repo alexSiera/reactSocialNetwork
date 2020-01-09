@@ -4,17 +4,21 @@ import userPhoto from '../../assets/images/maleAvatar.jpg';
 import s from "./Users.module.scss";
 
 class Users extends Component {
-    getUsers = async () => {
-        if (this.props.users.length === 0) {
+    getUsers = async (pageNumber) => {
             const baseUrl = 'https://social-network.samuraijs.com/api/1.0/users';
-            const users = await axios.get(`${baseUrl}?page=${this.props.currentSelectedPage}&count=${this.props.pageSize}`);
+            const users = await axios.get(`${baseUrl}?page=${pageNumber}&count=${this.props.pageSize}`);
             this.props.setUsers(users.data.items);
-        }
-    }
+            this.props.setTotalUsersCount(users.data.totalCount);
 
+    }
+    onPageChanged = (pageNumber) => {
+        this.props.selectPage(pageNumber);
+        this.getUsers(pageNumber);
+    }
     componentDidMount() {
         this.getUsers();
     }
+
     render() {
         const {totalUsersCount, pageSize} = this.props;
         const pagesCount  = Math.ceil(totalUsersCount / pageSize);
@@ -33,7 +37,7 @@ class Users extends Component {
                                 //           `${s.selectedPage} ${s.pageNum}` : s.pageNum}>
                                 // {el}
                                 // </span>
-                                <span id={el} onClick={() => {this.props.selectPage(el)}}
+                                <span id={el} onClick={() => this.onPageChanged(el)}
                             className={el === this.props.currentSelectedPage ?
                                            `${s.selectedPage} ${s.pageNum}` : s.pageNum}>
                             {el}
