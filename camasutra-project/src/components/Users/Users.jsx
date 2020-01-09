@@ -1,58 +1,40 @@
-import React, {Component} from 'react';
-import * as axios from 'axios';
-import userPhoto from '../../assets/images/maleAvatar.jpg';
-import s from "./Users.module.scss";
+import React from 'react';
+import s from './Users.module.scss'
+import userPhoto from '../../assets/images/maleAvatar.jpg'
 
-class Users extends Component {
-    getUsers = async (pageNumber) => {
-            const baseUrl = 'https://social-network.samuraijs.com/api/1.0/users';
-            const users = await axios.get(`${baseUrl}?page=${pageNumber}&count=${this.props.pageSize}`);
-            this.props.setUsers(users.data.items);
-            this.props.setTotalUsersCount(users.data.totalCount);
-
-    }
-    onPageChanged = (pageNumber) => {
-        this.props.selectPage(pageNumber);
-        this.getUsers(pageNumber);
-    }
-    componentDidMount() {
-        this.getUsers();
-    }
-
-    render() {
-        const {totalUsersCount, pageSize} = this.props;
-        const pagesCount  = Math.ceil(totalUsersCount / pageSize);
-        const pages = [];
-        for (let i = 1; i <= pagesCount; i++) {
-            pages.push(i)
-        }
-        return (
-            <div>
-                <div className={s.paginationBlock}>
-                    {
-                        pages.map((el) => {
-                            return (
-                                // <span id={el} onClick={this.selectPage}
-                                //       className={el === this.props.currentSelectedPage ?
-                                //           `${s.selectedPage} ${s.pageNum}` : s.pageNum}>
-                                // {el}
-                                // </span>
-                                <span id={el} onClick={() => this.onPageChanged(el)}
-                            className={el === this.props.currentSelectedPage ?
-                                           `${s.selectedPage} ${s.pageNum}` : s.pageNum}>
+const Users = ({users, unfollow, follow,totalUsersCount,pageSize,onPageChanged,currentSelectedPage  }) => {
+const pagesCount  = Math.ceil(totalUsersCount / pageSize);
+const pages = [];
+for (let i = 1; i <= pagesCount; i++) {
+    pages.push(i)
+}
+    return (
+        <div>
+            <div className={s.paginationBlock}>
+                {
+                    pages.map((el) => {
+                        return (
+                            // <span id={el} onClick={this.selectPage}
+                            //       className={el === this.props.currentSelectedPage ?
+                            //           `${s.selectedPage} ${s.pageNum}` : s.pageNum}>
+                            // {el}
+                            // </span>
+                            <span id={el} onClick={() => onPageChanged(el)}
+                                  className={el === currentSelectedPage ?
+                                      `${s.selectedPage} ${s.pageNum}` : s.pageNum}>
                             {el}
                         </span>
-                            )
+                        )
 
 
-                        })
-                    }
-                </div>
-                {/*<button onClick={this.getUsers}>getUsers</button>*/}
-                {
-                    this.props.users.map((user) => {
-                        return (
-                            <div key={user.id}>
+                    })
+                }
+            </div>
+            {/*<button onClick={this.getUsers}>getUsers</button>*/}
+            {
+                users.map((user) => {
+                    return (
+                        <div key={user.id}>
                             <span className={s.usersContainer}>
                                 <span>
                                     <div>
@@ -78,7 +60,7 @@ class Users extends Component {
                                     </div>
                                 </span>
                             </span>
-                                <span className={s.usersContainerItemLeft}>
+                            <span className={s.usersContainerItemLeft}>
                                 <div>
                                     <img className={s.usersAvatarImg}
                                          src={user.photos.small ? user.photos.small : userPhoto}/>
@@ -86,22 +68,20 @@ class Users extends Component {
                                 <div>
                                     {
                                         user.followed ?
-                                            <button onClick={() => this.props.unfollow(user.id)}>
+                                            <button onClick={() => unfollow(user.id)}>
                                                 Followed
                                             </button> :
-                                            <button onClick={() => this.props.follow(user.id)}>
+                                            <button onClick={() => follow(user.id)}>
                                                 Unfollowed
                                             </button>
                                     }
                                 </div>
                             </span>
-                            </div>
-                        )
-                    })
-                }
-            </div>
-        )
-    }
+                        </div>
+                    )
+                })
+            }
+        </div>
+    )
 }
-
 export default Users;
