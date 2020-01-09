@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {
-    followAC,
-    selectPageAC,
-    setTotalUsersCountAC,
-    setUsersAC, toggleFetchingAC,
-    unfollowAC
+    followAC as follow,
+    selectPageAC as selectPage ,
+    setTotalUsersCountAC as setTotalUsersCount,
+    setUsersAC as setUsers, toggleFetchingAC as toggleFetching,
+    unfollowAC as unfollow
 } from "../../Redux/reducers/usersReducer";
 import {connect} from "react-redux";
 import Users from "./Users";
@@ -56,15 +56,22 @@ const mapStateToProps = state => {
         isFetching: state.usersPage.isFetching
     }
 }
-const mapDispatchToProps = dispatch => {
-    return {
-        follow: userId => dispatch(followAC(userId)),
-        unfollow: userId => dispatch(unfollowAC(userId)),
-        setUsers: users => dispatch(setUsersAC(users)),
-        selectPage: pageNum => dispatch(selectPageAC(pageNum)),
-        setTotalUsersCount: usersCount => dispatch(setTotalUsersCountAC(usersCount)),
-        toggleFetching: fetching => dispatch(toggleFetchingAC(fetching))
-    }
-}
-const usersContainers = connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
+// const mapDispatchToProps = dispatch => {
+//     return {
+//         follow: userId => dispatch(followAC(userId)),
+//         unfollow: userId => dispatch(unfollowAC(userId)),
+//         setUsers: users => dispatch(setUsersAC(users)),
+//         selectPage: pageNum => dispatch(selectPageAC(pageNum)),
+//         setTotalUsersCount: usersCount => dispatch(setTotalUsersCountAC(usersCount)),
+//         toggleFetching: fetching => dispatch(toggleFetchingAC(fetching))
+//     }
+// }
+const usersContainers = connect(mapStateToProps, {
+    follow,
+    unfollow,
+    setUsers,
+    selectPage,
+    setTotalUsersCount,
+    toggleFetching
+})(UsersContainer);
 export default usersContainers;
