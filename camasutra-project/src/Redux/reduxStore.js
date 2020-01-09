@@ -5,7 +5,7 @@ import profileReducer from "./reducers/profileReducer";
 import sidebarReducer from "./reducers/sidebarReducer";
 import usersReducer from "./reducers/usersReducer";
 
-let reducers = combineReducers({
+const reducers = combineReducers({
     dialogsPage: dialogsReducer,
     newsPage: newsReducer,
     profilePage: profileReducer,
@@ -13,5 +13,5 @@ let reducers = combineReducers({
     usersPage: usersReducer,
 })
 
-let store = createStore(reducers);
+const store = createStore(reducers);
 export default store;

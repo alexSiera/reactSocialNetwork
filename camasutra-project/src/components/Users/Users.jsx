@@ -2,8 +2,8 @@ import React from 'react';
 import s from './Users.module.scss'
 import userPhoto from '../../assets/images/maleAvatar.jpg'
 
-const Users = ({users, unfollow, follow,totalUsersCount,pageSize,onPageChanged,currentSelectedPage,isFetching  }) => {
-debugger
+const Users = ({users, unfollow, follow,totalUsersCount,pageSize,onPageChanged,currentSelectedPage  }) => {
+
     const pagesCount  = Math.ceil(totalUsersCount / pageSize);
 const pages = [];
 for (let i = 1; i <= pagesCount; i++) {
@@ -11,7 +11,6 @@ for (let i = 1; i <= pagesCount; i++) {
 }
     return (
         <div>
-            <span>{isFetching}</span>
             <div className={s.paginationBlock}>
                 {
 

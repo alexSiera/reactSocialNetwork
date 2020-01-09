@@ -5,8 +5,7 @@ const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET-USERS'
 const SELECT_PAGE = 'SELECT-PAGE';
 const SET_TOTAL_USERS_COUNT = 'SET-TOTAL-USERS-COUNT';
-const SET_FETCHING_ON = 'SET-FETCHING-ON';
-const SET_FETCHING_OFF = 'SET-FETCHING-OFF'
+const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING';
 // const initialState  = {
 //     users: [{
 //         id: 1,
@@ -134,17 +133,21 @@ const userReducer = (state = initialState, action) => {
 
 
         break;
-        case SET_FETCHING_ON:
-            return {
-                ...state,
-                isFetching: true
+        case TOGGLE_IS_FETCHING:
+            if(action.fetching === true) {
+                return {
+                    ...state,
+                    isFetching: true
+                }
             }
-            break
-        case SET_FETCHING_OFF:
-            return {
-                ...state,
-                isFetching: false
+            else {
+                return {
+                    ...state,
+                    isFetching: false
+                }
             }
+
+            break;
         default: return state;
     }
 }
@@ -153,7 +156,6 @@ export const unfollowAC = userId => ({type: UNFOLLOW, userId});
 export const setUsersAC = users => ({type: SET_USERS, users})
 export const selectPageAC = pageNumber => ({type: SELECT_PAGE, pageNum: pageNumber});
 export const setTotalUsersCountAC = usersCount => ({type:SET_TOTAL_USERS_COUNT, totalUsersCount: usersCount })
-export const setFetchingOnAC = () => ({type: SET_FETCHING_ON})
-export const setFetchingOffAC = () => ({type: SET_FETCHING_OFF})
+export const toggleFetchingAC = fetching => ({type: TOGGLE_IS_FETCHING, fetching})
 
 export default userReducer;

@@ -2,37 +2,41 @@ import React, {Component} from 'react';
 import {
     followAC,
     selectPageAC,
-    setFetchingOffAC, setFetchingOnAC,
     setTotalUsersCountAC,
-    setUsersAC,
+    setUsersAC, toggleFetchingAC,
     unfollowAC
 } from "../../Redux/reducers/usersReducer";
 import {connect} from "react-redux";
 import Users from "./Users";
 import * as axios from 'axios';
+import Preloader from "../Common/Preloader/Preloader";
 class UsersContainer extends Component {
     getUsers = async (pageNumber) => {
         try {
+            this.props.toggleFetching(true);
             const baseUrl = 'https://social-network.samuraijs.com/api/1.0/users';
             const users = await axios.get(`${baseUrl}?page=${pageNumber}&count=${this.props.pageSize}`);
+            this.props.toggleFetching(false);
             this.props.setUsers(users.data.items);
             this.props.setTotalUsersCount(users.data.totalCount);
         }
         catch (e) {
             console.log(e)
         }
-
     }
     onPageChanged = (pageNumber) => {
         this.props.selectPage(pageNumber);
         this.getUsers(pageNumber);
+
     }
     componentDidMount() {
         this.getUsers();
     }
 
     render() {
-        return <Users
+        return <>
+            {this.props.isFetching ? <Preloader/> : null }
+            <Users
             onPageChanged={this.onPageChanged}
             follow={this.props.follow}
             unfollow={this.props.unfollow}
@@ -40,10 +44,7 @@ class UsersContainer extends Component {
             pageSize={this.props.pageSize}
             totalUsersCount={this.props.totalUsersCount}
             currentSelectedPage={this.props.currentSelectedPage}
-            setFetchingOff={this.props.setFetchingOff}
-            setFetchingOn={this.props.setFetchingOn}
-            isFetching={this.props.isFetching}
-        />
+        /></>
     }
 }
 const mapStateToProps = state => {
@@ -51,7 +52,8 @@ const mapStateToProps = state => {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
-        currentSelectedPage: state.usersPage.currentSelectedPage
+        currentSelectedPage: state.usersPage.currentSelectedPage,
+        isFetching: state.usersPage.isFetching
     }
 }
 const mapDispatchToProps = dispatch => {
@@ -61,8 +63,7 @@ const mapDispatchToProps = dispatch => {
         setUsers: users => dispatch(setUsersAC(users)),
         selectPage: pageNum => dispatch(selectPageAC(pageNum)),
         setTotalUsersCount: usersCount => dispatch(setTotalUsersCountAC(usersCount)),
-        setFetchingOff: () => dispatch(setFetchingOffAC()),
-        setFetchingOn: () => dispatch(setFetchingOnAC())
+        toggleFetching: fetching => dispatch(toggleFetchingAC(fetching))
     }
 }
 const usersContainers = connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
