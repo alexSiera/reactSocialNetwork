@@ -6,7 +6,7 @@ const ProfileInfo = ({profileData}) => {
     if(!profileData) return <Preloader/>;
     return (
         <div>
-
+            <h2>Profile Info</h2>
             <div>
                 <img src={profileData.photos.large} className={s.imgMain} />
 
