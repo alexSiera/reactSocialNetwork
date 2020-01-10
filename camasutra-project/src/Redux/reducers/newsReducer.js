@@ -45,12 +45,12 @@ const newsReducer = (state = initialState, action) => {
     return state;
 }
 
-export const addNewsActionCreator = () => {
+export const addNewsAC = () => {
     return {
         type: ADD_NEWS,
     }
 }
-export const updateNewsActionCreator = (newValue) => {
+export const updateNewsAC = (newValue) => {
     return {
         type: SET_NEWS_VALUE,
         newValue: newValue

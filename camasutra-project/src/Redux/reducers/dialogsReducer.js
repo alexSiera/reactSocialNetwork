@@ -56,12 +56,12 @@ const dialogsReducer = (state = initialState, action) => {
             break;
     }
 }
-export const addDialogActionCreator = () => {
+export const addDialogAC = () => {
     return {
         type: ADD_DIALOG,
     }
 }
-export const updateDialogActionCreator = (newValue) => {
+export const updateDialogAC = (newValue) => {
     return {
         type: SET_DIALOG_VALUE,
         newValue

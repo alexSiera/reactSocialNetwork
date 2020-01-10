@@ -1,5 +1,6 @@
 const ADD_POST = 'ADD-POST';
 const SET_POST_VALUE = 'SET-POST-VALUE';
+const SET_USER_PROFILE = 'SET-USER-PROFILE';
 const initialState = {
     posts: [{
         id: 113,
@@ -18,7 +19,8 @@ const initialState = {
         message: "Dada",
         likesCount: 15
     }],
-    textAreaValue: "it-kamasytra"
+    textAreaValue: "it-kamasytra",
+    profileData: null
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -43,21 +45,17 @@ const profileReducer = (state = initialState, action) => {
             break;
         default:
             break;
+        case SET_USER_PROFILE:
+            return {
+                ...state,
+                profileData: action.profileData
+            }
     }
     return state;
 
 }
 
-export const addPostActionCreator = () => {
-    return {
-        type: ADD_POST,
-    }
-}
-export const updatePostActionCreator = (newValue) => {
-    return {
-        type: SET_POST_VALUE,
-        newValue: newValue
-    }
-}
-
+export const addPostAC = () => ({type: ADD_POST})
+export const updatePostAC = newValue => ({type: SET_POST_VALUE, newValue: newValue})
+export const setProfileAC = profileData => ({type: SET_USER_PROFILE, profileData})
 export default profileReducer;
