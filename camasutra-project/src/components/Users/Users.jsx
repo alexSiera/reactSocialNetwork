@@ -2,14 +2,15 @@ import React from 'react';
 import s from './Users.module.scss'
 import userPhoto from '../../assets/images/maleAvatar.jpg'
 import {NavLink} from "react-router-dom";
+import {subscribe, unSubscribe} from "../../api/api";
 
-const Users = ({users, unfollow, follow,totalUsersCount,pageSize,onPageChanged,currentSelectedPage  }) => {
+const Users = ({users, subscribe,unSubscribe, totalUsersCount, pageSize, onPageChanged, currentSelectedPage}) => {
 
-    const pagesCount  = Math.ceil(totalUsersCount / pageSize);
-const pages = [];
-for (let i = 1; i <= pagesCount; i++) {
-    pages.push(i)
-}
+    const pagesCount = Math.ceil(totalUsersCount / pageSize);
+    const pages = [];
+    for (let i = 1; i <= pagesCount; i++) {
+        pages.push(i)
+    }
     return (
         <div>
             <div className={s.paginationBlock}>
@@ -67,17 +68,22 @@ for (let i = 1; i <= pagesCount; i++) {
                                 <div>
                                     <NavLink to={`/profile/${user.id}`}>
                                         <img className={s.usersAvatarImg}
-                                         src={user.photos.small ? user.photos.small : userPhoto}/>
+                                             src={user.photos.small ? user.photos.small : userPhoto}/>
                                     </NavLink>
                                     </div>
                                 <div>
                                     {
-                                        user.followed ?
-                                            <button onClick={() => unfollow(user.id)}>
-                                                Followed
+                                        !user.followed ?
+
+                                            <button onClick={() => {
+                                                subscribe(user.id)
+                                            }}>
+                                                Follow
                                             </button> :
-                                            <button onClick={() => follow(user.id)}>
-                                                Unfollowed
+                                            <button onClick={() => {
+                                                unSubscribe(user.id)
+                                            }}>
+                                                Unfollow
                                             </button>
                                     }
                                 </div>
