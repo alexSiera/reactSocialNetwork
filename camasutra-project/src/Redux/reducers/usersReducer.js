@@ -1,17 +1,19 @@
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
-const SET_USERS = 'SET-USERS'
-const SELECT_PAGE = 'SELECT-PAGE';
-const SET_TOTAL_USERS_COUNT = 'SET-TOTAL-USERS-COUNT';
-const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING';
+const SET_USERS = 'SET_USERS'
+const SELECT_PAGE = 'SELECT_PAGE';
+const SET_TOTAL_USERS_COUNT = 'SET_TOTAL-USERS_COUNT';
+const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
+const TOGGLE_IS_FOLLOWING_IN_PROGRESS = 'TOGGLE_IS_FOLLOWING_IN_PROGRESS';
 
 const initialState = {
     users: [],
     pageSize: 5,
     totalUsersCount: 0,
     currentSelectedPage: 1,
-    isFetching: false
+    isFetching: false,
+    followingInProgress: false,
 }
 const userReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -76,6 +78,19 @@ const userReducer = (state = initialState, action) => {
             }
 
             break;
+        case TOGGLE_IS_FOLLOWING_IN_PROGRESS:
+            if(action.followingInProgress === true) {
+                return {
+                    ...state,
+                    followingInProgress: true
+                }
+            }
+            else {
+                return {
+                    ...state,
+                    followingInProgress: false
+                }
+            }
         default: return state;
     }
 }
@@ -83,8 +98,9 @@ export const followAC = userId => ({type: FOLLOW, userId });
 export const unfollowAC = userId => ({type: UNFOLLOW, userId});
 export const setUsersAC = users => ({type: SET_USERS, users})
 export const selectPageAC = pageNumber => ({type: SELECT_PAGE, pageNum: pageNumber});
-export const setTotalUsersCountAC = usersCount => ({type:SET_TOTAL_USERS_COUNT, totalUsersCount: usersCount })
-export const toggleFetchingAC = fetching => ({type: TOGGLE_IS_FETCHING, fetching})
+export const setTotalUsersCountAC = usersCount => ({type:SET_TOTAL_USERS_COUNT, totalUsersCount: usersCount });
+export const toggleFetchingAC = fetching => ({type: TOGGLE_IS_FETCHING, fetching});
+export const toggleFollowingProgressAC = followingInProgress => ({type: TOGGLE_IS_FOLLOWING_IN_PROGRESS, followingInProgress});
 
 export default userReducer;
 

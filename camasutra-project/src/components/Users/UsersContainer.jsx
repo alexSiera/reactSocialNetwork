@@ -3,13 +3,13 @@ import {
     followAC as follow,
     selectPageAC as selectPage,
     setTotalUsersCountAC as setTotalUsersCount,
-    setUsersAC as setUsers, toggleFetchingAC as toggleFetching,
+    setUsersAC as setUsers, toggleFetchingAC as toggleFetching, toggleFollowingProgressAC as toggleFollowingProgress,
     unfollowAC as unfollow
 } from "../../Redux/reducers/usersReducer";
 import {connect} from "react-redux";
 import Users from "./Users";
 import Preloader from "../Common/Preloader/Preloader";
-import {getUsers, subscribe, unSubscribe} from "../../api/api";
+import {usersAPI} from "../../api/api";
 
 class UsersContainer extends Component {
     // getUsers = async (pageNumber) => {
@@ -28,7 +28,7 @@ class UsersContainer extends Component {
     onPageChanged = (pageNumber) => {
         this.props.selectPage(pageNumber);
         this.props.toggleFetching(true);
-        getUsers(pageNumber, this.props.pageSize)
+        usersAPI.getUsers(pageNumber, this.props.pageSize)
             .then(users => {
                 this.props.toggleFetching(false);
                 this.props.setUsers(users.items);
@@ -36,20 +36,23 @@ class UsersContainer extends Component {
             }).catch(e => (console.log(e)));
     }
     onSubscribe = (userId) => {
-        subscribe(userId).then(statusCode => {
+        this.props.toggleFollowingProgress(true);
+        usersAPI.subscribe(userId).then(statusCode => {
             if (statusCode === 0) this.props.follow(userId);
+            this.props.toggleFollowingProgress(false);
         });
     }
     onUnSubscribe = (userId) => {
-        unSubscribe(userId).then(statusCode => {
-            this.props.toggleFetching(false);
+        this.props.toggleFollowingProgress(true);
+        usersAPI.unSubscribe(userId).then(statusCode => {
             if (statusCode === 0) this.props.unfollow(userId);
+            this.props.toggleFollowingProgress(false);
         })
     }
 
     componentDidMount() {
         this.props.toggleFetching(true);
-        getUsers(this.props.currentSelectedPage, this.props.pageSize)
+        usersAPI.getUsers(this.props.currentSelectedPage, this.props.pageSize)
             .then(users => {
                 this.props.toggleFetching(false);
                 this.props.setUsers(users.items);
@@ -68,6 +71,7 @@ class UsersContainer extends Component {
                 currentSelectedPage={this.props.currentSelectedPage}
                 subscribe={this.onSubscribe}
                 unSubscribe={this.onUnSubscribe}
+                followingInProgress={this.props.followingInProgress}
             /></>
     }
 }
@@ -78,7 +82,8 @@ const mapStateToProps = state => {
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentSelectedPage: state.usersPage.currentSelectedPage,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        followingInProgress: state.usersPage.followingInProgress
     }
 }
 // const mapDispatchToProps = dispatch => {
@@ -97,6 +102,7 @@ const usersContainers = connect(mapStateToProps, {
     setUsers,
     selectPage,
     setTotalUsersCount,
-    toggleFetching
+    toggleFetching,
+    toggleFollowingProgress
 })(UsersContainer);
 export default usersContainers;

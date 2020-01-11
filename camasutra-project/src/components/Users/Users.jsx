@@ -4,7 +4,7 @@ import userPhoto from '../../assets/images/maleAvatar.jpg'
 import {NavLink} from "react-router-dom";
 import {subscribe, unSubscribe} from "../../api/api";
 
-const Users = ({users, subscribe,unSubscribe, totalUsersCount, pageSize, onPageChanged, currentSelectedPage}) => {
+const Users = ({users, subscribe,unSubscribe, totalUsersCount, pageSize, onPageChanged, currentSelectedPage,followingInProgress}) => {
 
     const pagesCount = Math.ceil(totalUsersCount / pageSize);
     const pages = [];
@@ -75,12 +75,12 @@ const Users = ({users, subscribe,unSubscribe, totalUsersCount, pageSize, onPageC
                                     {
                                         !user.followed ?
 
-                                            <button onClick={() => {
+                                            <button disabled={followingInProgress} onClick={() => {
                                                 subscribe(user.id)
                                             }}>
                                                 Follow
                                             </button> :
-                                            <button onClick={() => {
+                                            <button disabled={followingInProgress} onClick={() => {
                                                 unSubscribe(user.id)
                                             }}>
                                                 Unfollow
