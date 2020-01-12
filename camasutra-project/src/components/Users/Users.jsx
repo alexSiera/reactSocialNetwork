@@ -5,7 +5,6 @@ import {NavLink} from "react-router-dom";
 import {subscribe, unSubscribe} from "../../api/api";
 
 const Users = ({users, subscribe,unSubscribe, totalUsersCount, pageSize, onPageChanged, currentSelectedPage,followingInProgress}) => {
-
     const pagesCount = Math.ceil(totalUsersCount / pageSize);
     const pages = [];
     for (let i = 1; i <= pagesCount; i++) {
@@ -75,12 +74,12 @@ const Users = ({users, subscribe,unSubscribe, totalUsersCount, pageSize, onPageC
                                     {
                                         !user.followed ?
 
-                                            <button disabled={followingInProgress} onClick={() => {
+                                            <button disabled={followingInProgress.some(id => id === user.id)} onClick={() => {
                                                 subscribe(user.id)
                                             }}>
                                                 Follow
                                             </button> :
-                                            <button disabled={followingInProgress} onClick={() => {
+                                            <button disabled={followingInProgress.some(id => id === user.id)} onClick={() => {
                                                 unSubscribe(user.id)
                                             }}>
                                                 Unfollow
