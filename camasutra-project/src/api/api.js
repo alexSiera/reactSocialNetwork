@@ -43,23 +43,17 @@ export const usersAPI = {
         }
     }
 }
-export const profileAPI = {
-
-}
-
-
-
-
-
-
-export const getAuthMe = async () => {
-    try {
-        const authData = await instance.get(`auth/me`)
-        if(authData.data.resultCode === 0) return authData.data.data;
-        return {};
-    }
-    catch (e) {
-        console.log(e)
+export const authAPI = {
+    getAuthMe: async () => {
+        try {
+            const authData = await instance.get(`auth/me`)
+            if(authData.data.resultCode === 0) return authData.data.data;
+            return {};
+        }
+        catch (e) {
+            console.log(e)
+        }
     }
 }
+
 

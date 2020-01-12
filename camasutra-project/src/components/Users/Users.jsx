@@ -2,7 +2,6 @@ import React from 'react';
 import s from './Users.module.scss'
 import userPhoto from '../../assets/images/maleAvatar.jpg'
 import {NavLink} from "react-router-dom";
-import {subscribe, unSubscribe} from "../../api/api";
 
 const Users = ({users, subscribe,unSubscribe, totalUsersCount, pageSize, onPageChanged, currentSelectedPage,followingInProgress}) => {
     const pagesCount = Math.ceil(totalUsersCount / pageSize);

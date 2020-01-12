@@ -1,11 +1,9 @@
-import React, {Component} from 'react';
+    import React, {Component} from 'react';
 import {
     followThunkCreator,
     unFollowThunkCreator,
     getUsersThunkCreator,
     selectPageAC as selectPage,
-    setTotalUsersCountAC as setTotalUsersCount,
-    toggleFollowingProgressAC as toggleFollowingProgress,
 } from "../../Redux/reducers/usersReducer";
 import {connect} from "react-redux";
 import Users from "./Users";
@@ -34,7 +32,6 @@ class UsersContainer extends Component {
 
     componentDidMount() {
         this.props.getUsers(this.props.currentSelectedPage, this.props.pageSize)
-
     }
 
     render() {
@@ -56,8 +53,6 @@ const mapStateToProps = state => {
 }
 const usersContainers = connect(mapStateToProps, {
     selectPage,
-    setTotalUsersCount,
-    toggleFollowingProgress,
     getUsers: getUsersThunkCreator,
     follow: followThunkCreator,
     unfollow: unFollowThunkCreator

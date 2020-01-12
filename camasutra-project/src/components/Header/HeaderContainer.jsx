@@ -21,7 +21,7 @@ class HeaderContainer extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return {authData: state.auth, isAuth: state.auth.isAuth, login: state.auth.login }
+    return {...state.auth}
 }
 export default connect(mapStateToProps, {
     setAuthUserData,
