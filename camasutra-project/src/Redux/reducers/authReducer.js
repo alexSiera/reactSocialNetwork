@@ -1,3 +1,5 @@
+import {getAuthMe} from "../../api/api";
+
 const SET_USER_DATA = 'SET-USER-DATA';
 
 
@@ -29,4 +31,14 @@ export const setAuthUserDataAC = (userId, email, login) => {
         }
     }
 }
+
+export const authMeThunkCreator = () => {
+    return (dispatch) => {
+        getAuthMe().then(authData => {
+            const {id, email, login} = authData;
+            dispatch(setAuthUserDataAC(id, email, login));
+        })
+    }
+}
+
 export default authReducer;

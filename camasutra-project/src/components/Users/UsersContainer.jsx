@@ -1,15 +1,15 @@
 import React, {Component} from 'react';
 import {
-    followAC as follow, followThunkCreator,unFollowThunkCreator, getUsersThunkCreator,
+    followThunkCreator,
+    unFollowThunkCreator,
+    getUsersThunkCreator,
     selectPageAC as selectPage,
     setTotalUsersCountAC as setTotalUsersCount,
-    setUsersAC as setUsers, toggleFetchingAC as toggleFetching, toggleFollowingProgressAC as toggleFollowingProgress,
-    unfollowAC as unfollow
+    toggleFollowingProgressAC as toggleFollowingProgress,
 } from "../../Redux/reducers/usersReducer";
 import {connect} from "react-redux";
 import Users from "./Users";
 import Preloader from "../Common/Preloader/Preloader";
-import {usersAPI} from "../../api/api";
 
 class UsersContainer extends Component {
     onPageChanged = (pageNumber) => {
@@ -51,24 +51,9 @@ class UsersContainer extends Component {
 
 const mapStateToProps = state => {
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentSelectedPage: state.usersPage.currentSelectedPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress,
+        ...state.usersPage,
     }
 }
-// const mapDispatchToProps = dispatch => {
-//     return {
-//         follow: userId => dispatch(followAC(userId)),
-//         unfollow: userId => dispatch(unfollowAC(userId)),
-//         setUsers: users => dispatch(setUsersAC(users)),
-//         selectPage: pageNum => dispatch(selectPageAC(pageNum)),
-//         setTotalUsersCount: usersCount => dispatch(setTotalUsersCountAC(usersCount)),
-//         toggleFetching: fetching => dispatch(toggleFetchingAC(fetching))
-//     }
-// }
 const usersContainers = connect(mapStateToProps, {
     selectPage,
     setTotalUsersCount,
