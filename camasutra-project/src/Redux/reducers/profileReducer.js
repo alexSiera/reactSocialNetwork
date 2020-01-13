@@ -21,13 +21,15 @@ const initialState = {
         message: "Dada",
         likesCount: 15
     }],
-    textAreaValue: "it-kamasytra",
+    textAreaValue: "",
+    textAreaPlaceholder: "Please enter a message",
     profileData: null
 }
 
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_POST:
+            if (!state.textAreaValue) return state;
             const newProfile = {
                 id: Math.floor(Math.random() * 100),
                 message: state.textAreaValue,

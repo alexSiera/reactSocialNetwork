@@ -7,7 +7,9 @@ import {
 } from "../../Redux/reducers/usersReducer";
 import {connect} from "react-redux";
 import Users from "./Users";
-import Preloader from "../Common/Preloader/Preloader";
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import {makeStyles} from '@material-ui/core/styles';
 
 class UsersContainer extends Component {
     onPageChanged = (pageNumber) => {
@@ -26,7 +28,7 @@ class UsersContainer extends Component {
 
     render() {
         return <>
-            {this.props.isFetching ? <Preloader/> : null}
+            {this.props.isFetching ? null : null}
             <Users
                 {...this.props}
                 onPageChanged={this.onPageChanged}

@@ -1,13 +1,27 @@
-//.usersContainer {
-//  display: flex;
-//}
+.userContainer {
+
+}
+.userName {
+  h4 {
+    color: white;
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+}
+.userStatus {
+  h5 {
+    margin-top: 5px;
+    color: white;
+    margin-bottom: 5px;
+  }
+}
+.userFollowUnfollowBtn {
+  margin-bottom: 15px;
+}
 .usersMainContainer {
   display: grid;
   grid-template-rows: repeat(2, 2fr);
   grid-template-columns: repeat(2,2fr);
-}
-.oneUserContainer {
-  margin-bottom: 5px;
 }
 .usersContainerItemRight {
   margin-left: auto;

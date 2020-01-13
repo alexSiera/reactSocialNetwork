@@ -16,6 +16,7 @@ const Dialogs = (props) => {
     return (
         <div className={s.dialogs}>
             <div>
+
                 {props.dialogsPage.dialogsData.map((el) => {
                     return <DialogItem key={el.id} linkText={el.name} />
                 })}

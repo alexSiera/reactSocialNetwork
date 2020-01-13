@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
         margin: theme.spacing(1),
     },
 }));
-const MyPosts = ({posts, textAreaValue, addPost, updateNewPostText}) => {
+const MyPosts = ({posts, textAreaValue, addPost, updateNewPostText, textAreaPlaceholder}) => {
     const classes = useStyles();
     const postsElements = posts.map((p => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>))
     const onAddPost = () => {
@@ -25,7 +25,7 @@ const MyPosts = ({posts, textAreaValue, addPost, updateNewPostText}) => {
             <div className={s.postsBlockText}>
                 <div>
                     <TextareaAutosize onChange={onUpdatePostValue} value={textAreaValue}
-                                      aria-label="empty textarea" rowsMin={3}
+                                      aria-label="empty textarea" rowsMin={3} placeholder={textAreaPlaceholder}
                     />
                 </div>
                 <div>
