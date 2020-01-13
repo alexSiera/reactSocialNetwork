@@ -2,6 +2,8 @@ import React from 'react';
 import s from './Dialogs.module.scss';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
+import Button from '@material-ui/core/Button';
+import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 
 const Dialogs = (props) => {
     const onDialogTextAreaSubmit = () => {
@@ -11,7 +13,6 @@ const Dialogs = (props) => {
         const newValue = e.target.value;
         props.dialogChange(newValue);
     }
-
     return (
         <div className={s.dialogs}>
             <div>
@@ -26,8 +27,8 @@ const Dialogs = (props) => {
             </div>
             <div className={s.textAreaInput}>
                 <h4>Please Write Your Message</h4>
-                <textarea onChange={onDialogChange} value={props.dialogsPage.dialogTextAreaValue}></textarea>
-                <button onClick={onDialogTextAreaSubmit}>Submit Message</button>
+                <TextareaAutosize aria-label="empty textarea" rowsMin={3} onChange={onDialogChange} value={props.dialogsPage.dialogTextAreaValue} />
+                <Button variant="contained" color="primary" onClick={onDialogTextAreaSubmit}>Submit Message</Button>
             </div>
         </div>
     )

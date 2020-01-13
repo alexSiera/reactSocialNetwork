@@ -2,8 +2,9 @@ import React from 'react';
 import s from './Users.module.scss'
 import userPhoto from '../../assets/images/maleAvatar.jpg'
 import {NavLink} from "react-router-dom";
+import Button from '@material-ui/core/Button';
 
-const Users = ({users, subscribe,unSubscribe, totalUsersCount, pageSize, onPageChanged, currentSelectedPage,followingInProgress}) => {
+const Users = ({users, subscribe, unSubscribe, totalUsersCount, pageSize, onPageChanged, currentSelectedPage, followingInProgress}) => {
     const pagesCount = Math.ceil(totalUsersCount / pageSize);
     const pages = [];
     for (let i = 1; i <= pagesCount; i++) {
@@ -13,26 +14,18 @@ const Users = ({users, subscribe,unSubscribe, totalUsersCount, pageSize, onPageC
         <div>
             <div className={s.paginationBlock}>
                 {
-
                     pages.map((el) => {
                         return (
-                            // <span id={el} onClick={this.selectPage}
-                            //       className={el === this.props.currentSelectedPage ?
-                            //           `${s.selectedPage} ${s.pageNum}` : s.pageNum}>
-                            // {el}
-                            // </span>
                             <span key={el} id={el} onClick={() => onPageChanged(el)}
                                   className={el === currentSelectedPage ?
                                       `${s.selectedPage} ${s.pageNum}` : s.pageNum}>
                             {el}
                         </span>
                         )
-
-
                     })
                 }
             </div>
-            {/*<button onClick={this.getUsers}>getUsers</button>*/}
+            <div className={s.usersMainContainer}>
             {
                 users.map((user) => {
                     return (
@@ -48,16 +41,9 @@ const Users = ({users, subscribe,unSubscribe, totalUsersCount, pageSize, onPageC
                                 </span>
                                 <span className={s.usersContainerItemRight}>
                                     <div>
-                                        {/*{user.location.country}*/}
                                         Russia
                                     </div>
                                     <div>
-                                        {/*{user.location.region ?*/}
-                                        {/*    user.location.region : null*/}
-                                        {/*}*/}
-                                        {/*{*/}
-                                        {/*    user.location.city*/}
-                                        {/*}*/}
                                         Rostov on
                                     </div>
                                 </span>
@@ -72,17 +58,22 @@ const Users = ({users, subscribe,unSubscribe, totalUsersCount, pageSize, onPageC
                                 <div>
                                     {
                                         !user.followed ?
-
-                                            <button disabled={followingInProgress.some(id => id === user.id)} onClick={() => {
-                                                subscribe(user.id)
-                                            }}>
+                                            <Button variant="contained"
+                                                    color="primary"
+                                                    disabled={followingInProgress.some(id => id === user.id)}
+                                                    onClick={() => {
+                                                        subscribe(user.id)
+                                                    }}>
                                                 Follow
-                                            </button> :
-                                            <button disabled={followingInProgress.some(id => id === user.id)} onClick={() => {
-                                                unSubscribe(user.id)
-                                            }}>
+                                            </Button> :
+                                            <Button variant="contained"
+                                                    color="primary"
+                                                    disabled={followingInProgress.some(id => id === user.id)}
+                                                    onClick={() => {
+                                                        unSubscribe(user.id)
+                                                    }}>
                                                 Unfollow
-                                            </button>
+                                            </Button>
                                     }
                                 </div>
                             </span>
@@ -90,6 +81,7 @@ const Users = ({users, subscribe,unSubscribe, totalUsersCount, pageSize, onPageC
                     )
                 })
             }
+            </div>
         </div>
     )
 }

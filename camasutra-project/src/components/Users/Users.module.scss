@@ -1,6 +1,11 @@
 .usersContainer {
   display: flex;
 }
+.usersMainContainer {
+  display: grid;
+  grid-template-rows: repeat(2, 2fr);
+  grid-template-columns: repeat(2,2fr);
+}
 .usersContainerItemRight {
   margin-left: auto;
 }
