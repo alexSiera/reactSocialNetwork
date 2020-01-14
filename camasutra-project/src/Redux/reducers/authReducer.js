@@ -35,9 +35,10 @@ export const setAuthUserDataAC = (userId, email, login) => {
 export const authMeThunkCreator = () => {
     return (dispatch) => {
         authAPI.getAuthMe().then(authData => {
+            if(!authData || Object.keys(authData).length === 0) throw new Error("You loggin is not pass");
             const {id, email, login} = authData;
             dispatch(setAuthUserDataAC(id, email, login));
-        })
+        }).catch(e => console.log(e))
     }
 }
 

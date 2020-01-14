@@ -9,6 +9,7 @@ import NavbarContainer from "./components/Navbar/NavbarContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import LoginPage from "./components/Login/Login";
 
 const App = () => {
     return (
@@ -23,6 +24,8 @@ const App = () => {
                     <Route path="/music" component={Music} />
                     <Route path="/news" render={() => <NewsContainer />} />
                     <Route path="/settings" component={Settings} />
+                    <Route path="/login" render={() => <LoginPage />} />
+
                 </div>
             </div>
     );
