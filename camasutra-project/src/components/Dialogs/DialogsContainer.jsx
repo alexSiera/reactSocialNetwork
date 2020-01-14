@@ -3,18 +3,17 @@ import {addDialogAC as dialogTextAreaSubmit , updateDialogAC as dialogChange} fr
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {withAuthRedirect} from "../../HOC/withAuthRedirect";
+import {compose} from "redux";
 
 const mapStateToProps = (state) => {
     return {
         dialogsPage: state.dialogsPage,
     }
 }
-let AuthContainerComponent = withAuthRedirect(Dialogs);
-const mapStateToRedirectProps = (state) => ({isAuth: state.auth.isAuth});
-AuthContainerComponent = connect(mapStateToRedirectProps)(AuthContainerComponent);
-const DialogsContainer = connect(mapStateToProps, {
-    dialogTextAreaSubmit,
-    dialogChange
-})(AuthContainerComponent);
-
-export default DialogsContainer;
+export default compose(
+    connect(mapStateToProps, {
+        dialogTextAreaSubmit,
+        dialogChange
+    }),
+    withAuthRedirect
+)(Dialogs);
