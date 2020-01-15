@@ -12,9 +12,10 @@ import {compose} from "redux";
 class ProfileContainer extends Component {
     componentDidMount() {
         let userId = parseInt(this.props.match.params.userId);
-        if(!userId) userId = 2;
+        if(!userId) userId = 5634;
         this.props.getUserProfile(userId);
         this.props.getUserStatus(userId);
+
     }
     render() {
         return (
