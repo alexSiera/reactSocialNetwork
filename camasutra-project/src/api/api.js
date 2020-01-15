@@ -15,15 +15,7 @@ export const usersAPI = {
             console.log(e)
         }
     },
-    getUserProfile: async (userId = 2) => {
-        try {
-            const profile = await instance.get(`profile/${userId}`)
-            return profile.data
-        }
-        catch (e) {
-            console.log(e)
-        }
-    },
+
     subscribe: async (userId) => {
         try {
             const subscribeStatus = await instance.post(`follow/${userId}`)
@@ -37,6 +29,46 @@ export const usersAPI = {
         try {
             const subscribeStatus = await instance.delete(`follow/${userId}`);
             return subscribeStatus.data.resultCode;
+        }
+        catch (e) {
+            console.log(e)
+        }
+    },
+    getUserProfile: async (userId = 2) => {
+        try {
+            console.warn('Obsolete method. Please use profileAPI object')
+            return profileAPI.getUserProfile(userId);
+        }
+        catch (e) {
+            console.log(e)
+        }
+    },
+}
+export const profileAPI = {
+    getUserProfile: async (userId = 2) => {
+        try {
+            const profile = await instance.get(`profile/${userId}`)
+            return profile.data
+        }
+        catch (e) {
+            console.log(e)
+        }
+    },
+    getStatus: async (userId = 2) => {
+        try {
+            const userStatus = await instance.get(`profile/status/${userId}`);
+            return userStatus.data
+        }
+        catch (e) {
+            console.log(e)
+        }
+    },
+    updateStatus: async (newStatus) => {
+        try {
+            const userStatus = await instance.put(`profile/status`, {
+                status: newStatus
+            });
+            return userStatus;
         }
         catch (e) {
             console.log(e)
