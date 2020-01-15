@@ -9,21 +9,22 @@ class ProfileContainer extends Component {
     componentDidMount() {
         let userId = parseInt(this.props.match.params.userId);
         if(!userId) userId = 2;
-        this.props.getUserProfile(userId)
+        this.props.getUserProfile(userId);
     }
     render() {
         return (
-            <Profile {...this.props} />
+            <Profile {...this.props} profileData={this.props.profileData}/>
         )
     }
 }
 const mapStateToProps = (state) => {
     return {
         dialogsPage: state.dialogsPage,
+        profileData: state.profilePage.profileData
     }
 }
 export default compose(
     connect(mapStateToProps, {getUserProfile: getUserProfileThunkCreator}),
     withRouter,
-    withAuthRedirect
+    //withAuthRedirect
 )(ProfileContainer);
