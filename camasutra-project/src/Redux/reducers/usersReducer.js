@@ -59,7 +59,7 @@ const userReducer = (state = initialState, action) => {
         case SET_TOTAL_USERS_COUNT:
             return {
                 ...state,
-                totalUsersCount: action.totalUsersCount
+                totalUsersCount: action.totalUsersCount - 1600
             }
 
 
