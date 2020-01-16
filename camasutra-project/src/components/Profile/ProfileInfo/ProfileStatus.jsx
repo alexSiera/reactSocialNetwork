@@ -23,7 +23,15 @@ class ProfileStatus extends Component {
     onUpdateUserStatus = (e) => {
         this.setState({status: e.target.value});
     }
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.status !== this.props.status) this.setState({status: this.props.status})
+        let a = this.state;
+        let b = this.props;
+        console.log(prevProps,prevState )
+    }
+
     render() {
+        console.log("render!!!")
         return (
             <div>
                 {!this.state.editMode &&
