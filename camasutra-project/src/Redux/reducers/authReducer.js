@@ -56,17 +56,21 @@ export const authMeThunkCreator = () => {
 };
 export const loginMeThunkCreator = (email, password, rememberMe= false) => {
     return (dispatch) => {
-        authAPI.login(email, password, rememberMe).then(res => {
-            if(res.data.resultCode === 0) {
-                dispatch(authMeThunkCreator());
+        authAPI.login(email, password, rememberMe).then(resCode => {
+            debugger
+            if(resCode === 0) {
+                dispatch(authMeThunkCreator())
+            }
+            else {
+                throw new Error()
             }
         }).catch(e => console.log(e));
     }
 }
 export const logoutMeThunkCreator = () => {
     return (dispatch) => {
-        authAPI.logOut().then(res => {
-            if(res.data.resultCode === 0) dispatch(clearLoginDataAC());
+        authAPI.logOut().then(resCode => {
+            if(resCode === 0) dispatch(clearLoginDataAC());
         }).catch(e => console.log(e));
     }
 };
