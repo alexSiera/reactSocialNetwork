@@ -7,6 +7,7 @@ dependencies:
   react-router-dom: 5.1.2_react@16.12.0
   react-scripts: 3.2.0
   redux: 4.0.5
+  redux-form: 8.2.6_6de8434a3cc9ad0c0218021e393b1b77
   redux-thunk: 2.3.0
 lockfileVersion: 5.1
 packages:
@@ -1562,6 +1563,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-uCnC2JEVAu8AKB5do1WRIsvrdJ0flYx/A/9f/6chdacnEZ7LmavjdsDXr5ksYBegxtuTPR5Va9/+13QF/kFkCA==
+  /@babel/runtime/7.8.3:
+    dependencies:
+      regenerator-runtime: 0.13.3
+    dev: false
+    resolution:
+      integrity: sha512-fVHx1rzEmwB130VTkLnxR+HmxcTjGzH12LYQcFFoBwakMd3aOMD4OsRN7tGG/UOYE2ektgFrS8uACAoRk1CY0w==
   /@babel/template/7.7.4:
     dependencies:
       '@babel/code-frame': 7.5.5
@@ -4389,6 +4396,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-Xs2Stw6NiNHWypzRTY1MtaG/uJlwCk8kH81920ma8mvN8Xq1gsfhZvpkImLQArw8AHnv8MT2I45J3c0R8slE+Q==
+  /es6-error/4.1.1:
+    dev: false
+    resolution:
+      integrity: sha512-Um/+FxMr9CISWh0bi5Zv0iOD+4cFh5qLeks1qhAopKVAJw3drgKbKySikp7wGhDL0HPeaja0P5ULZrxLkniUVg==
   /es6-iterator/2.0.3:
     dependencies:
       d: 1.0.1
@@ -5779,6 +5790,11 @@ packages:
     dev: false
     resolution:
       integrity: sha512-O3sR1/opvCDGLEVcvrGTMtLac8GJ5IwZC4puPrLuRj3l7ICKvkmA0vGuU9OW8mV9WIBRnaxp5GJh9IEAaNOoYg==
+  /immutable/4.0.0-rc.12:
+    dev: false
+    optional: true
+    resolution:
+      integrity: sha512-0M2XxkZLx/mi3t8NVwIm1g8nHoEmM9p9UBl/G9k4+hm0kBgOVdMV/B3CY5dQ8qG8qc80NN4gDV4HQv6FTJ5q7A==
   /import-cwd/2.1.0:
     dependencies:
       import-from: 2.1.0
@@ -7133,6 +7149,10 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-7AO748wWnIhNqAuaty2ZWHkQHRSNfPVIsPIfwEOWO22AmaoVrWavlOcMR5nzTLNYvp36X220/maaRsrec1G65A==
+  /lodash-es/4.17.15:
+    dev: false
+    resolution:
+      integrity: sha512-rlrc3yU3+JNOpZ9zj5pQtxnx2THmvRykwL4Xlxoa8I9lHBlVbbyPhgyPMioxVZ4NqyxaVVtaJnzsyOidQIhyyQ==
   /lodash._reinterpolate/3.0.0:
     dev: false
     resolution:
@@ -9432,6 +9452,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-rPCkf/mWBtKc97aLL9/txD8DZdemK0vkA3JMLShjlJB3Pj3s+lpf1KaBzMfQrAmhMQB0n1cU/SUGgKKBCe837Q==
+  /react-lifecycles-compat/3.0.4:
+    dev: false
+    resolution:
+      integrity: sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
   /react-redux/7.1.3_cbb074364ace735d13d38692c50e064b:
     dependencies:
       '@babel/runtime': 7.7.7
@@ -9676,6 +9700,30 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-z5Fqsf1fHxbfsggi3W7H9zDCr94=
+  /redux-form/8.2.6_6de8434a3cc9ad0c0218021e393b1b77:
+    dependencies:
+      '@babel/runtime': 7.8.3
+      es6-error: 4.1.1
+      hoist-non-react-statics: 3.3.1
+      invariant: 2.2.4
+      is-promise: 2.1.0
+      lodash: 4.17.15
+      lodash-es: 4.17.15
+      prop-types: 15.7.2
+      react: 16.12.0
+      react-is: 16.12.0
+      react-lifecycles-compat: 3.0.4
+      react-redux: 7.1.3_cbb074364ace735d13d38692c50e064b
+      redux: 4.0.5
+    dev: false
+    optionalDependencies:
+      immutable: 4.0.0-rc.12
+    peerDependencies:
+      react: ^16.4.0
+      react-redux: ^6.0.0 || ^7.0.0
+      redux: ^3.0.0 || ^4.0.0
+    resolution:
+      integrity: sha512-krmF7wl1C753BYpEpWIVJ5NM4lUJZFZc5GFUVgblT+jprB99VVBDyBcgrZM3gWWLOcncFyNsHcKNQQcFg8Uanw==
   /redux-thunk/2.3.0:
     dev: false
     resolution:
@@ -11907,4 +11955,5 @@ specifiers:
   react-router-dom: ^5.1.2
   react-scripts: 3.2.0
   redux: ^4.0.5
+  redux-form: ^8.2.6
   redux-thunk: ^2.3.0
