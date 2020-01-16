@@ -1,7 +1,7 @@
 import {authAPI} from "../../api/api";
 
 const SET_USER_DATA = 'SET-USER-DATA';
-
+const CLEAR_USER_DATA = 'CLEAR_USER_DATA';
 
 const initialState = {
     userId: null,
@@ -18,6 +18,14 @@ const authReducer = (state = initialState, action) => {
                 isAuth: true
             }
             break
+        case CLEAR_USER_DATA:
+            return {
+                ...state,
+                userId: null,
+                email: null,
+                login: null,
+                isAuth: false
+            }
     }
     return state;
 }
@@ -30,16 +38,36 @@ export const setAuthUserDataAC = (userId, email, login) => {
             login
         }
     }
-}
-
+};
+export const clearLoginDataAC = () => {
+    return {
+        type: CLEAR_USER_DATA
+    }
+};
 export const authMeThunkCreator = () => {
     return (dispatch) => {
         authAPI.getAuthMe().then(authData => {
             if(!authData || Object.keys(authData).length === 0) throw new Error("You loggin is not pass");
             const {id, email, login} = authData;
             dispatch(setAuthUserDataAC(id, email, login));
+            debugger
         }).catch(e => console.log(e))
     }
+};
+export const loginMeThunkCreator = (email, password, rememberMe= false) => {
+    return (dispatch) => {
+        authAPI.login(email, password, rememberMe).then(res => {
+            if(res.data.resultCode === 0) {
+                dispatch(authMeThunkCreator());
+            }
+        }).catch(e => console.log(e));
+    }
 }
-
+export const logoutMeThunkCreator = () => {
+    return (dispatch) => {
+        authAPI.logOut().then(res => {
+            if(res.data.resultCode === 0) dispatch(clearLoginDataAC());
+        }).catch(e => console.log(e));
+    }
+};
 export default authReducer;

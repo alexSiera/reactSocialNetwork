@@ -1,9 +1,9 @@
 import React from 'react';
 import s from './Login.module.scss';
 import { Field, reduxForm } from 'redux-form'
+import {loginMeThunkCreator} from "../../Redux/reducers/authReducer";
 
 const LoginForm = (props) => {
-    console.log("RERENDER")
     return (<form onSubmit={props.handleSubmit}>
         <div className={s.formContainer}>
             <div>
@@ -13,7 +13,7 @@ const LoginForm = (props) => {
                 <Field placeholder="Password" name={"password"} component={"input"}/>
             </div>
             <div>
-                <Field component={"input"} name={"rememberMe"} type="checkbox" placeholder="Login"/>
+                <Field component={"input"} name={"rememberMe"} type="checkbox"/>
                 remember me
             </div>
             <div>
@@ -25,9 +25,10 @@ const LoginForm = (props) => {
 const LoginReduxForm = reduxForm({
     form: 'login'
 })(LoginForm);
-const Login = () => {
+const Login = ({loginMe}) => {
     const onSubmit = (formData) => {
-        console.log(formData)
+        const {login: email, password, rememberMe} = formData;
+        loginMe(email, password, rememberMe);
     }
     return <div>
         <h1 className={s.formMainHeading}>Login</h1>

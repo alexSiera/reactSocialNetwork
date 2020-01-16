@@ -85,6 +85,26 @@ export const authAPI = {
         catch (e) {
             console.log(e)
         }
+    },
+    login: async (email, password, rememberMe = false) => {
+        try {
+            const response = await instance.post(`/auth/login`, {
+                email, password, rememberMe
+            })
+            return response.data.resultCode;
+        }
+        catch (e) {
+            console.log(e)
+        }
+    },
+    logOut: async () => {
+        try {
+            const response = await instance.delete(`/auth/login`);
+            return response.data.resultCode
+        }
+        catch (e) {
+            console.log(e);
+        }
     }
 }
 

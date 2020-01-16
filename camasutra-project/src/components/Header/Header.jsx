@@ -7,7 +7,7 @@ const Header = (props) => {
         <header className={s.header}>
             <img src="https://logomaster.ai/static/media/gallery002.936afb9d.png" />
             <div className={s.loginBlock}>
-                {!props.isAuth ? <Link to={'/login'}>Login</Link>: props.login }
+                {!props.isAuth ? <Link to={'/login'}>Login</Link>: <span>{props.login} <button onClick={props.logOut}>Logout</button></span> }
             </div>
         </header>
     )
