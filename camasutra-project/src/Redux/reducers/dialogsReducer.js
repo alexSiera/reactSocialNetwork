@@ -1,5 +1,4 @@
-const SET_DIALOG_VALUE = 'SET-DIALOG-VALUE';
-const ADD_DIALOG = 'ADD-DIALOG';
+const ADD_DIALOG = 'ADD_DIALOG';
 const initialState = {
         messagesData: [{
             id: 121,
@@ -31,40 +30,28 @@ const initialState = {
             id: 412,
             name: "Killer"
         }],
-        dialogTextAreaValue: "",
     }
 const dialogsReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_DIALOG:
             const newDialog = {
                 id:Math.floor(Math.random() * 100),
-                message: state.dialogTextAreaValue,
+                message: action.newMessage,
                 likesCount: Math.floor(Math.random() * 300)
             }
             return {
                 ...state,
-                dialogTextAreaValue: '',
                 messagesData: [...state.messagesData,newDialog],
             }
             break;
-        case SET_DIALOG_VALUE:
-            return {
-                ...state,
-                dialogTextAreaValue: action.newValue
-            }
         default: return state;
             break;
     }
 }
-export const addDialogAC = () => {
+export const addDialogAC = (newMessage) => {
     return {
         type: ADD_DIALOG,
-    }
-}
-export const updateDialogAC = (newValue) => {
-    return {
-        type: SET_DIALOG_VALUE,
-        newValue
+        newMessage
     }
 }
 

@@ -22,7 +22,6 @@ const initialState = {
         message: "Dada",
         likesCount: 15
     }],
-    textAreaValue: "it-kamasytra",
     profileData: null,
     status: ''
 }
@@ -32,13 +31,12 @@ const profileReducer = (state = initialState, action) => {
         case ADD_POST:
             const newProfile = {
                 id: Math.floor(Math.random() * 100),
-                message: state.textAreaValue,
+                message: action.newPost,
                 likesCount: Math.floor(Math.random() * 100),
             }
             return {
                 ...state,
                 posts: [...state.posts, newProfile],
-                textAreaValue: ''
             }
             break;
         case SET_POST_VALUE:
@@ -66,8 +64,7 @@ const profileReducer = (state = initialState, action) => {
 
 }
 
-export const addPostAC = () => ({type: ADD_POST});
-export const updatePostAC = newValue => ({type: SET_POST_VALUE, newValue: newValue});
+export const addPostAC = (newPost) => ({type: ADD_POST, newPost});
 export const setProfileAC = profileData => ({type: SET_USER_PROFILE, profileData});
 export const setUserStatusAC = status => ({type: SET_USER_STATUS,status });
 export default profileReducer;

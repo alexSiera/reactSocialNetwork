@@ -1,22 +1,36 @@
 import React from 'react';
 import s from './News.scss';
 import OneNew from "./One new/OneNew";
+import { Field, reduxForm } from 'redux-form'
+
 const News = ({newsPage,addNews, updateNews}) => {
+    const NewsForm = ({handleSubmit}) => {
+        return (
+            <form onSubmit={handleSubmit}>
+                <Field component={"textarea"} name={"newNewsText"} className={s.textArea} ></Field>
+                <button>Add news</button>
+            </form>
+            )
+
+    };
+    const NewsReduxForm = reduxForm({
+        form: 'newsForm'
+    })(NewsForm);
+
     const {newsData} = newsPage;
-    const onAddNews = () => {
-        addNews()
-    }
-    const onUpdateNews = (e) => {
-        updateNews(e.target.value);
+    const onAddNews = ({newNewsText}) => {
+        addNews(newNewsText)
     }
     return (
         <div>
             <ul>
-                {newsData.map(({id,img,autor, message }) => {
-                    return <OneNew key={id} img={img} autor={autor} newsData={newsData} message={message}/>
+                {newsData.map(({id,img,author, message }) => {
+                    return <OneNew key={id} img={img} author={author} newsData={newsData} message={message}/>
                 })}
-                <textarea className={s.textArea} onChange={onUpdateNews} value={newsPage.newsPageInput}></textarea>
-                <button onClick={onAddNews}>Add news</button>
+                <div>
+                    <h4>Please Enter New News</h4>
+                    <NewsReduxForm onSubmit={onAddNews}/>
+                </div>
             </ul>
         </div>
     )
