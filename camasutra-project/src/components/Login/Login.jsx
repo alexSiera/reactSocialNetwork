@@ -1,7 +1,6 @@
 import React from 'react';
 import s from './Login.module.scss';
 import { Field, reduxForm } from 'redux-form'
-import {loginMeThunkCreator} from "../../Redux/reducers/authReducer";
 
 const LoginForm = (props) => {
     return (<form onSubmit={props.handleSubmit}>

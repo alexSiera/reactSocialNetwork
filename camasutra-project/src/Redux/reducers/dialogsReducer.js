@@ -1,6 +1,6 @@
 const SET_DIALOG_VALUE = 'SET-DIALOG-VALUE';
 const ADD_DIALOG = 'ADD-DIALOG';
-let initialState = {
+const initialState = {
         messagesData: [{
             id: 121,
             message: "Ok!",

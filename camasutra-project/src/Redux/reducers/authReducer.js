@@ -50,14 +50,12 @@ export const authMeThunkCreator = () => {
             if(!authData || Object.keys(authData).length === 0) throw new Error("You loggin is not pass");
             const {id, email, login} = authData;
             dispatch(setAuthUserDataAC(id, email, login));
-            debugger
         }).catch(e => console.log(e))
     }
 };
 export const loginMeThunkCreator = (email, password, rememberMe= false) => {
     return (dispatch) => {
         authAPI.login(email, password, rememberMe).then(resCode => {
-            debugger
             if(resCode === 0) {
                 dispatch(authMeThunkCreator())
             }

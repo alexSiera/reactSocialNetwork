@@ -2,94 +2,32 @@ import React from 'react';
 import s from './Users.module.scss'
 import userPhoto from '../../assets/images/maleAvatar.jpg'
 import {NavLink} from "react-router-dom";
+import Pagination from "../Common/Pagination/Pagination";
+import User from "./User/User";
 
 const Users = ({users, subscribe,unSubscribe, totalUsersCount, pageSize, onPageChanged, currentSelectedPage,followingInProgress}) => {
-    const pagesCount = Math.ceil(totalUsersCount / pageSize);
+    const pagesCount = Math.ceil(totalUsersCount/pageSize);
     const pages = [];
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i)
+    for (let i = 1; i< pagesCount; i++ ) {
+        pages.push(i);
     }
     return (
         <div>
             <div className={s.paginationBlock}>
                 {
-
                     pages.map((el) => {
                         return (
-                            // <span id={el} onClick={this.selectPage}
-                            //       className={el === this.props.currentSelectedPage ?
-                            //           `${s.selectedPage} ${s.pageNum}` : s.pageNum}>
-                            // {el}
-                            // </span>
-                            <span key={el} id={el} onClick={() => onPageChanged(el)}
-                                  className={el === currentSelectedPage ?
-                                      `${s.selectedPage} ${s.pageNum}` : s.pageNum}>
-                            {el}
-                        </span>
+                            <Pagination id={el}
+                                        key={el}  onPageChanged={onPageChanged}
+                                        currentSelectedPage={currentSelectedPage}
+                            />
                         )
-
-
                     })
                 }
             </div>
-            {/*<button onClick={this.getUsers}>getUsers</button>*/}
-            {
-                users.map((user) => {
-                    return (
-                        <div key={user.id}>
-                            <span className={s.usersContainer}>
-                                <span>
-                                    <div>
-                                        {user.name}
-                                    </div>
-                                    <div>
-                                        {user.status}
-                                    </div>
-                                </span>
-                                <span className={s.usersContainerItemRight}>
-                                    <div>
-                                        {/*{user.location.country}*/}
-                                        Russia
-                                    </div>
-                                    <div>
-                                        {/*{user.location.region ?*/}
-                                        {/*    user.location.region : null*/}
-                                        {/*}*/}
-                                        {/*{*/}
-                                        {/*    user.location.city*/}
-                                        {/*}*/}
-                                        Rostov on
-                                    </div>
-                                </span>
-                            </span>
-                            <span className={s.usersContainerItemLeft}>
-                                <div>
-                                    <NavLink to={`/profile/${user.id}`}>
-                                        <img className={s.usersAvatarImg}
-                                             src={user.photos.small ? user.photos.small : userPhoto}/>
-                                    </NavLink>
-                                    </div>
-                                <div>
-                                    {
-                                        !user.followed ?
-
-                                            <button disabled={followingInProgress.some(id => id === user.id)} onClick={() => {
-                                                subscribe(user.id)
-                                            }}>
-                                                Follow
-                                            </button> :
-                                            <button disabled={followingInProgress.some(id => id === user.id)} onClick={() => {
-                                                unSubscribe(user.id)
-                                            }}>
-                                                Unfollow
-                                            </button>
-                                    }
-                                </div>
-                            </span>
-                        </div>
-                    )
-                })
-            }
+            {users.map(u => {
+                return <User key={u.id} {...u} followingInProgress={followingInProgress} subscribe={subscribe} unSubscribe={unSubscribe}/>
+            })}
         </div>
     )
 }

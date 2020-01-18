@@ -5,8 +5,7 @@ import {connect} from "react-redux";
 
 const mapStateToProps = state => state.profilePage
 
-const MyPostsContainer = connect(mapStateToProps, {
+export default connect(mapStateToProps, {
     addPost,
     updateNewPostText
-})(MyPosts)
-export default MyPostsContainer;
+})(MyPosts);

@@ -3,7 +3,7 @@ import s from './Sidebar.module.scss'
 import {connect} from "react-redux";
 import Sidebar from "./Sidebar";
 
-let mapStateToProps = (state) => {
+const mapStateToProps = (state) => {
     return {
         sidebarData: state.sidebarData
     }

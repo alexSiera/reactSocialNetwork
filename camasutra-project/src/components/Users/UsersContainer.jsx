@@ -1,4 +1,4 @@
-    import React, {Component} from 'react';
+import React, {Component} from 'react';
 import {
     followThunkCreator,
     unFollowThunkCreator,
@@ -15,19 +15,9 @@ class UsersContainer extends Component {
     }
     onSubscribe = (userId) => {
         this.props.follow(userId);
-        // this.props.toggleFollowingProgress(userId, true);
-        // usersAPI.subscribe(userId).then(statusCode => {
-        //     if (statusCode === 0) this.props.follow(userId);
-        //     this.props.toggleFollowingProgress(userId, false);
-        // });
     }
     onUnSubscribe = (userId) => {
         this.props.unfollow(userId);
-        // this.props.toggleFollowingProgress(userId,true );
-        // usersAPI.unSubscribe(userId).then(statusCode => {
-        //     if (statusCode === 0) this.props.unfollow(userId);
-        //     this.props.toggleFollowingProgress(userId,false);
-        // })
     }
 
     componentDidMount() {
