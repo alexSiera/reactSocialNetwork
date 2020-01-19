@@ -1,5 +1,5 @@
 import {authAPI} from "../../api/api";
-
+import {stopSubmit} from 'redux-form';
 const SET_USER_DATA = 'SET-USER-DATA';
 const CLEAR_USER_DATA = 'CLEAR_USER_DATA';
 
@@ -53,19 +53,16 @@ export const authMeThunkCreator = () => {
         }).catch(e => console.log(e))
     }
 };
-export const loginMeThunkCreator = (email, password, rememberMe= false) => {
-    return (dispatch) => {
-        authAPI.login(email, password, rememberMe).then(resCode => {
-            if(resCode === 0) {
+export const loginMeThunkCreator = (email, password, rememberMe= false) => (dispatch) => {
+     authAPI.login(email, password, rememberMe).then(res => {
+            if(res.data.resultCode === 0) {
                 dispatch(authMeThunkCreator());
-                return resCode;
             }
             else {
-                throw new Error();
-                return resCode;
+                const message = res.data.messages.length > 0 ? res.data.messages[0] : "Some error";
+                dispatch(stopSubmit('login', {_error: message}));
             }
         }).catch(e => console.log(e));
-    }
 }
 export const logoutMeThunkCreator = () => {
     return (dispatch) => {

@@ -88,10 +88,9 @@ export const authAPI = {
     },
     login: async (email, password, rememberMe = false) => {
         try {
-            const response = await instance.post(`/auth/login`, {
+            return await instance.post(`/auth/login`, {
                 email, password, rememberMe
             });
-            return response.data.resultCode;
         }
         catch (e) {
             console.log(e)

@@ -1,7 +1,6 @@
 import {profileAPI, usersAPI} from "../../api/api";
 
 const ADD_POST = 'ADD_POST';
-const SET_POST_VALUE = 'SET_POST_VALUE';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_USER_STATUS = 'SET_USER_STATUS';
 const initialState = {
@@ -33,35 +32,24 @@ const profileReducer = (state = initialState, action) => {
                 id: Math.floor(Math.random() * 100),
                 message: action.newPost,
                 likesCount: Math.floor(Math.random() * 100),
-            }
+            };
             return {
                 ...state,
                 posts: [...state.posts, newProfile],
-            }
-            break;
-        case SET_POST_VALUE:
-            return {
-                ...state,
-                textAreaValue: action.newValue
-            }
-            break;
-        default:
-            break;
+            };
         case SET_USER_PROFILE:
             return {
                 ...state,
                 profileData: action.profileData
-            }
-            break;
+            };
         case SET_USER_STATUS:
             return {
                 ...state,
                 status: action.status
-            }
-            break;
-    }
-    return state;
+            };
+        default: return state;
 
+    }
 }
 
 export const addPostAC = (newPost) => ({type: ADD_POST, newPost});
