@@ -3,10 +3,12 @@ import {loginMeThunkCreator} from "../../Redux/reducers/authReducer";
 import Login from "./Login";
 import {connect} from "react-redux";
 
-const LoginContainer = (props) => {
-    return <Login loginMe={props.loginMe} />
+const LoginContainer = ({loginMe, isAuth}) => {
+    return <Login isAuth={isAuth} loginMe={loginMe} />
 }
 
-const mapStateToProps = () =>{}
+const mapStateToProps = ({auth}) => ({
+    isAuth: auth.isAuth
+})
 
 export default connect(mapStateToProps, {loginMe: loginMeThunkCreator})(LoginContainer);

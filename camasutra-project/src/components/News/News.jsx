@@ -1,27 +1,12 @@
 import React from 'react';
 import s from './News.scss';
 import OneNew from "./One new/OneNew";
-import {Field, reduxForm} from 'redux-form'
-import {maxLengthCreator, required} from "../../utils/validators/valiadators";
-import {Textarea} from "../Common/FormsControls/FormsControls";
-const maxLength10 = maxLengthCreator(10)
+import NewsForm from "./NewsForm/NewsForm";
 const News = ({newsPage, addNews}) => {
-    let NewsForm = ({handleSubmit}) => {
-        return (
-            <form onSubmit={handleSubmit}>
-                <Field component={Textarea} name="newNewsText" className={s.textArea} validate={[required, maxLength10]}></Field>
-                <button>Add news</button>
-            </form>
-        )
-    };
-    NewsForm = reduxForm({
-        form: 'newsForm'
-    })(NewsForm);
-
     const {newsData} = newsPage;
     const onAddNews = ({newNewsText}) => {
         addNews(newNewsText)
-    }
+    };
     return (
         <div>
             <ul>
@@ -35,5 +20,5 @@ const News = ({newsPage, addNews}) => {
             </ul>
         </div>
     )
-}
+};
 export default News;

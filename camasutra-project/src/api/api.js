@@ -43,7 +43,7 @@ export const usersAPI = {
             console.log(e)
         }
     },
-}
+};
 export const profileAPI = {
     getUserProfile: async (userId = 2) => {
         try {
@@ -74,7 +74,7 @@ export const profileAPI = {
             console.log(e)
         }
     }
-}
+};
 export const authAPI = {
     getAuthMe: async () => {
         try {
@@ -90,7 +90,7 @@ export const authAPI = {
         try {
             const response = await instance.post(`/auth/login`, {
                 email, password, rememberMe
-            })
+            });
             return response.data.resultCode;
         }
         catch (e) {
@@ -106,6 +106,6 @@ export const authAPI = {
             console.log(e);
         }
     }
-}
+};
 
 

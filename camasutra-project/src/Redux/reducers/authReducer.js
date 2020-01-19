@@ -57,10 +57,12 @@ export const loginMeThunkCreator = (email, password, rememberMe= false) => {
     return (dispatch) => {
         authAPI.login(email, password, rememberMe).then(resCode => {
             if(resCode === 0) {
-                dispatch(authMeThunkCreator())
+                dispatch(authMeThunkCreator());
+                return resCode;
             }
             else {
-                throw new Error()
+                throw new Error();
+                return resCode;
             }
         }).catch(e => console.log(e));
     }
