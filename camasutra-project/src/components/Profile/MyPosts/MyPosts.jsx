@@ -2,20 +2,22 @@ import React from 'react';
 import s from './MyPosts.module.scss';
 import Post from './Post/Post';
 import { Field, reduxForm } from 'redux-form'
-
-const MyPostsForm = ({handleSubmit}) => {
+import {maxLengthCreator, required} from "../../../utils/validators/valiadators";
+import {Textarea} from "../../Common/FormsControls/FormsControls";
+const maxLength10 = maxLengthCreator(10);
+let MyPostsForm = ({handleSubmit}) => {
     return (
         <form onSubmit={handleSubmit}>
-            <Field component={"textarea"} placeholder="Please Enter New Post" name={"textbox"} />
+            <Field component={Textarea} placeholder="Please Enter New Post" name="textbox" validate={[required, maxLength10]}/>
             <div>
                 <button>Send Post</button>
             </div>
         </form>
         )
-}
-const ReduxForm = reduxForm({
+};
+MyPostsForm = reduxForm({
     form: 'mypost'
-})(MyPostsForm)
+})(MyPostsForm);
 const MyPosts = ({posts,addPost }) => {
     const postsElements = posts.map((p => <Post key={p.id} message={p.message} likesCount={p.likesCount} />))
     const onAddPost = (formData) => {
@@ -26,7 +28,7 @@ const MyPosts = ({posts,addPost }) => {
         <div className={s.postsBlock}>
             <h3>My post</h3>
             <div className={s.postsBlockText}>
-                <ReduxForm onSubmit={onAddPost} />
+                <MyPostsForm onSubmit={onAddPost} />
             </div>
             <div className={s.posts}>
                 {postsElements}

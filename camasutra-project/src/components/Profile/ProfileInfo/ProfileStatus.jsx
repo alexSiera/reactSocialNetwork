@@ -8,7 +8,7 @@ class ProfileStatus extends Component {
         status: this.props.status
     }
     toggleEditMode = () => {
-        if(this.state.editMode) {
+        if (this.state.editMode) {
             this.setState({
                 editMode: false
             })
@@ -23,28 +23,29 @@ class ProfileStatus extends Component {
     onUpdateUserStatus = (e) => {
         this.setState({status: e.target.value});
     }
+
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.status !== this.props.status) this.setState({status: this.props.status})
     }
 
     render() {
-        console.log("render!!!")
         return (
             <div>
                 {!this.state.editMode &&
-                    <div>
-                        <span onDoubleClick={this.toggleEditMode}>Status: {this.props.status || "No status"}</span>
-                    </div>
+                <div>
+                    <span onDoubleClick={this.toggleEditMode}>Status: {this.props.status || "No status"}</span>
+                </div>
                 }
                 {this.state.editMode &&
-                    <div className={s.profileInfoInput}>
-                        <input autoFocus onBlur={this.toggleEditMode} value={this.state.status} onChange={this.onUpdateUserStatus}/>
-                    </div>
+                <div className={s.profileInfoInput}>
+                    <input autoFocus onBlur={this.toggleEditMode} value={this.state.status}
+                           onChange={this.onUpdateUserStatus}/>
+                </div>
                 }
             </div>
         )
     }
-
 }
+
 
 export default ProfileStatus;
