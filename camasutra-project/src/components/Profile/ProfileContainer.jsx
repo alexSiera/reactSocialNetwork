@@ -28,12 +28,12 @@ class ProfileContainer extends Component {
         )
     }
 }
-const mapStateToProps = (state) => {
+const mapStateToProps = ({profilePage, auth}) => {
     return {
-        profileData: state.profilePage.profileData,
-        status: state.profilePage.status,
-        autorizedUid: state.auth.userId,
-        isAuth: state.auth.isAuth
+        profileData: profilePage.profileData,
+        status: profilePage.status,
+        autorizedUid: auth.userId,
+        isAuth: auth.isAuth
     }
 }
 export default compose(

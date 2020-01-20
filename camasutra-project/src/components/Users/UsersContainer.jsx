@@ -2,12 +2,19 @@ import React, {Component} from 'react';
 import {
     followThunkCreator,
     unFollowThunkCreator,
-    getUsersThunkCreator,
+    requestUsersThunkCreator,
     selectPageAC as selectPage,
 } from "../../Redux/reducers/usersReducer";
 import {connect} from "react-redux";
 import Users from "./Users";
 import Preloader from "../Common/Preloader/Preloader";
+import {
+    getCurrentSelectedPage, getFollowingInProgress,
+    getIsFetching,
+    getPageSize,
+    getTotalUsersCount,
+    getUsers
+} from "../../Redux/reducers/usersSelectors";
 
 class UsersContainer extends Component {
     onPageChanged = (pageNumber) => {
@@ -36,14 +43,24 @@ class UsersContainer extends Component {
     }
 }
 
+// const mapStateToProps = state => {
+//     return {
+//         ...state.usersPage,
+//     }
+// }
 const mapStateToProps = state => {
     return {
-        ...state.usersPage,
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentSelectedPage: getCurrentSelectedPage(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state)
     }
 }
 const usersContainers = connect(mapStateToProps, {
     selectPage,
-    getUsers: getUsersThunkCreator,
+    getUsers: requestUsersThunkCreator,
     follow: followThunkCreator,
     unfollow: unFollowThunkCreator
 })(UsersContainer);

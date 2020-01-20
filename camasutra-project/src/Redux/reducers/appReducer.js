@@ -1,5 +1,4 @@
-import {authAPI} from "../../api/api";
-import {stopSubmit} from 'redux-form';
+
 import {authMeThunkCreator} from "./authReducer";
 const INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS';
 

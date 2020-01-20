@@ -52,7 +52,7 @@ export const authMeThunkCreator = () => (dispatch) => {
         }).catch(e => console.log(e));
 };
 export const loginMeThunkCreator = (email, password, rememberMe= false) => (dispatch) => {
-     authAPI.login(email, password, rememberMe).then(res => {
+     authAPI.login(email, password, rememberMe).then(res => {   
             if(res.data.resultCode === 0) {
                 dispatch(authMeThunkCreator());
             }

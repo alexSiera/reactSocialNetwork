@@ -101,10 +101,11 @@ export const toggleFollowingProgressAC = (userId, isFetching) => ({type: TOGGLE_
 
 export default userReducer;
 
-export const getUsersThunkCreator = (pageNumber =1,pageSize = 4) => {
+export const requestUsersThunkCreator = (page =1, pageSize = 4) => {
     return (dispatch) => {
         dispatch(toggleFetchingAC(true));
-        usersAPI.getUsers(pageNumber, pageSize)
+        dispatch(selectPageAC(page));
+        usersAPI.getUsers(page, pageSize)
             .then(users => {
                 dispatch(toggleFetchingAC(false));
                 dispatch(setUsersAC(users.items));
