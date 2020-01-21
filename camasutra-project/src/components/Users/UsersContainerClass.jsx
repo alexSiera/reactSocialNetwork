@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {Component} from 'react';
 import {
     followThunkCreator,
     unFollowThunkCreator,
@@ -16,29 +16,38 @@ import {
     getUsersSelector
 } from "../../Redux/reducers/usersSelectors";
 
-const UsersContainer = (props) => {
-    const onPageChanged = (pageNumber) => {
-        props.getUsers(pageNumber, props.pageSize)
-    };
-    const onSubscribe = (userId) => {
-        props.follow(userId);
-    };
-    const onUnSubscribe = (userId) => {
-        props.unfollow(userId);
-    };
-    useEffect(() => {
-        props.getUsers(props.currentSelectedPage, props.pageSize)
-    }, [props.currentSelectedPage,props.pageSize]);
+class UsersContainer extends Component {
+    onPageChanged = (pageNumber) => {
+        this.props.getUsers(pageNumber, this.props.pageSize)
+    }
+    onSubscribe = (userId) => {
+        this.props.follow(userId);
+    }
+    onUnSubscribe = (userId) => {
+        this.props.unfollow(userId);
+    }
 
- return <>
-            {props.isFetching ? <Preloader/> : null}
+    componentDidMount() {
+        this.props.getUsers(this.props.currentSelectedPage, this.props.pageSize)
+    }
+
+    render() {
+        return <>
+            {this.props.isFetching ? <Preloader/> : null}
             <Users
-                {...props}
-                onPageChanged={onPageChanged}
-                subscribe={onSubscribe}
-                unSubscribe={onUnSubscribe}
+                {...this.props}
+                onPageChanged={this.onPageChanged}
+                subscribe={this.onSubscribe}
+                unSubscribe={this.onUnSubscribe}
             /></>
-};
+    }
+}
+
+// const mapStateToProps = state => {
+//     return {
+//         ...state.usersPage,
+//     }
+// }
 const mapStateToProps = state => {
     return {
         users: getUsersSelector(state),

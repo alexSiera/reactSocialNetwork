@@ -3,13 +3,11 @@ import {addNewsAC as addNews } from "../../Redux/reducers/newsReducer";
 import News from "./News";
 import {connect} from "react-redux";
 
-let mapStateToProps = (state) => {
-    return {
-        newsPage: state.newsPage
-    }
+const NewsContainer = (props) => {
+    return <News {...props}/>
 }
+const mapStateToProps = ({newsPage}) => ({newsPage: newsPage});
 
-const NewsContainer = connect(mapStateToProps, {
+export default connect(mapStateToProps, {
     addNews,
-})(News)
-export default NewsContainer;
+})(NewsContainer);

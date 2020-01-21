@@ -1,4 +1,5 @@
-export const getUsers= (state) => {
+import {createSelector} from 'reselect';
+export const getUsersSelector = (state) => {
     return state.usersPage.users;
 };
 
@@ -17,6 +18,10 @@ export const getIsFetching= (state) => {
 export const getFollowingInProgress= (state) => {
     return state.usersPage.followingInProgress;
 };
+export const getUsers = createSelector(getUsersSelector, getIsFetching, (users, isFetching) => {
+    return users;
+});
+
 // export const countSomethingDifficult= (state) => {
 //     //for... math... big array
 //     let count = 23;

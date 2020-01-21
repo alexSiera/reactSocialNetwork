@@ -1,5 +1,7 @@
 dependencies:
   axios: 0.19.1
+  eslint-plugin-react: 7.18.0
+  eslint-plugin-react-hooks: 2.3.0
   node-sass: 4.13.0
   react: 16.12.0
   react-dom: 16.12.0_react@16.12.0
@@ -9,6 +11,7 @@ dependencies:
   redux: 4.0.5
   redux-form: 8.2.6_6de8434a3cc9ad0c0218021e393b1b77
   redux-thunk: 2.3.0
+  reselect: 4.0.0
 lockfileVersion: 5.1
 packages:
   /@babel/code-frame/7.5.5:
@@ -2468,7 +2471,7 @@ packages:
   /array-includes/3.1.1:
     dependencies:
       define-properties: 1.1.3
-      es-abstract: 1.17.0
+      es-abstract: 1.17.3
       is-string: 1.0.5
     dev: false
     engines:
@@ -4378,6 +4381,24 @@ packages:
       node: '>= 0.4'
     resolution:
       integrity: sha512-yYkE07YF+6SIBmg1MsJ9dlub5L48Ek7X0qz+c/CPCHS9EBXfESorzng4cJQjJW5/pB6vDF41u7F8vUhLVDqIug==
+  /es-abstract/1.17.3:
+    dependencies:
+      es-to-primitive: 1.2.1
+      function-bind: 1.1.1
+      has: 1.0.3
+      has-symbols: 1.0.1
+      is-callable: 1.1.5
+      is-regex: 1.0.5
+      object-inspect: 1.7.0
+      object-keys: 1.1.1
+      object.assign: 4.1.0
+      string.prototype.trimleft: 2.1.1
+      string.prototype.trimright: 2.1.1
+    dev: false
+    engines:
+      node: '>= 0.4'
+    resolution:
+      integrity: sha512-AwiVPKf3sKGMoWtFw0J7Y4MTZ4Iek67k4COWOwHqS8B9TOZ71DCfcoBmdamy8Y6mj4MDz0+VNUpC2HKHFHA3pg==
   /es-to-primitive/1.2.1:
     dependencies:
       is-callable: 1.1.5
@@ -4558,6 +4579,14 @@ packages:
       eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
     resolution:
       integrity: sha512-iXTCFcOmlWvw4+TOE8CLWj6yX1GwzT0Y6cUfHHZqWnSk144VmVIRcVGtUAzrLES7C798lmvnt02C7rxaOX1HNA==
+  /eslint-plugin-react-hooks/2.3.0:
+    dev: false
+    engines:
+      node: '>=7'
+    peerDependencies:
+      eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
+    resolution:
+      integrity: sha512-gLKCa52G4ee7uXzdLiorca7JIQZPPXRAQDXV83J4bUEeUuc5pIEyZYAZ45Xnxe5IuupxEqHS+hUhSLIimK1EMw==
   /eslint-plugin-react/7.14.3_eslint@6.8.0:
     dependencies:
       array-includes: 3.1.1
@@ -4577,6 +4606,24 @@ packages:
       eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
     resolution:
       integrity: sha512-EzdyyBWC4Uz2hPYBiEJrKCUi2Fn+BJ9B/pJQcjw5X+x/H2Nm59S4MJIvL4O5NEE0+WbnQwEBxWY03oUk+Bc3FA==
+  /eslint-plugin-react/7.18.0:
+    dependencies:
+      array-includes: 3.1.1
+      doctrine: 2.1.0
+      has: 1.0.3
+      jsx-ast-utils: 2.2.3
+      object.entries: 1.1.1
+      object.fromentries: 2.0.2
+      object.values: 1.1.1
+      prop-types: 15.7.2
+      resolve: 1.14.2
+    dev: false
+    engines:
+      node: '>=4'
+    peerDependencies:
+      eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
+    resolution:
+      integrity: sha512-p+PGoGeV4SaZRDsXqdj9OWcOrOpZn8gXoGPcIQTzo2IDMbAKhNDnME9myZWqO3Ic4R3YmwAZ1lDjWl2R2hMUVQ==
   /eslint-scope/4.0.3:
     dependencies:
       esrecurse: 4.2.1
@@ -7893,7 +7940,7 @@ packages:
   /object.entries/1.1.1:
     dependencies:
       define-properties: 1.1.3
-      es-abstract: 1.17.0
+      es-abstract: 1.17.3
       function-bind: 1.1.1
       has: 1.0.3
     dev: false
@@ -7904,7 +7951,7 @@ packages:
   /object.fromentries/2.0.2:
     dependencies:
       define-properties: 1.1.3
-      es-abstract: 1.17.0
+      es-abstract: 1.17.3
       function-bind: 1.1.1
       has: 1.0.3
     dev: false
@@ -9928,6 +9975,10 @@ packages:
     dev: false
     resolution:
       integrity: sha1-kl0mAdOaxIXgkc8NpcbmlNw9yv8=
+  /reselect/4.0.0:
+    dev: false
+    resolution:
+      integrity: sha512-qUgANli03jjAyGlnbYVAV5vvnOmJnODyABz51RdBN7M4WaVu8mecZWgyQNkG8Yqe3KRGRt0l4K4B3XVEULC4CA==
   /resolve-cwd/2.0.0:
     dependencies:
       resolve-from: 3.0.0
@@ -11948,6 +11999,8 @@ packages:
       integrity: sha1-a6MY6xaWFyf10oT46gA+jWFU0Mg=
 specifiers:
   axios: ^0.19.1
+  eslint-plugin-react: ^7.18.0
+  eslint-plugin-react-hooks: ^2.3.0
   node-sass: ^4.13.0
   react: ^16.12.0
   react-dom: ^16.12.0
@@ -11957,3 +12010,4 @@ specifiers:
   redux: ^4.0.5
   redux-form: ^8.2.6
   redux-thunk: ^2.3.0
+  reselect: ^4.0.0

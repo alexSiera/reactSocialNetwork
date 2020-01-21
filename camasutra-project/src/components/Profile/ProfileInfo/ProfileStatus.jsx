@@ -6,23 +6,23 @@ class ProfileStatus extends Component {
     state = {
         editMode: false,
         status: this.props.status
-    }
+    };
     toggleEditMode = () => {
         if (this.state.editMode) {
             this.setState({
                 editMode: false
-            })
+            });
             this.props.updateUserStatus(this.state.status);
         } else {
             this.setState({
                 editMode: true
             })
         }
-    }
+    };
 
     onUpdateUserStatus = (e) => {
         this.setState({status: e.target.value});
-    }
+    };
 
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.status !== this.props.status) this.setState({status: this.props.status})

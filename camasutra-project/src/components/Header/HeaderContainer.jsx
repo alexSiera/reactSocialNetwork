@@ -6,18 +6,13 @@ import {
 } from "../../Redux/reducers/authReducer";
 import {connect} from "react-redux";
 
-class HeaderContainer extends Component {
+const HeaderContainer = (props) => {
+    return (
+        <Header {...props} />
+    )
+};
 
-    render() {
-        return (
-            <Header {...this.props} />
-        )
-    }
-}
-
-const mapStateToProps = (state) => {
-    return {...state.auth}
-}
+const mapStateToProps = ({auth}) => ({...auth});
 export default connect(mapStateToProps, {
     setAuthUserData,
     logOut: logoutMeThunkCreator
