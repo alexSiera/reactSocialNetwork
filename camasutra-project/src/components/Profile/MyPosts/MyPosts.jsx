@@ -2,7 +2,7 @@ import React from 'react';
 import s from './MyPosts.module.scss';
 import Post from './Post/Post';
 import MyPostsForm from "./MyPostsForm/MyPostsForm";
-const MyPosts = ({posts,addPost }) => {
+const MyPosts = React.memo(({posts,addPost }) => {
     const postsElements = posts.map((p => <Post key={p.id} message={p.message} likesCount={p.likesCount} />))
     const onAddPost = (formData) => {
         addPost(formData.textbox);
@@ -19,5 +19,5 @@ const MyPosts = ({posts,addPost }) => {
             </div>
         </div>
     )
-}
+})
 export default MyPosts;

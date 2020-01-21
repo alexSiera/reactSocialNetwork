@@ -6,7 +6,7 @@ import {withAuthRedirect} from "../../HOC/withAuthRedirect";
 import {compose} from "redux";
 const DialogsContainer = (props) => {
     return <Dialogs {...props} />
-}
+};
 const mapStateToProps = ({dialogsPage}) => ({dialogsPage: dialogsPage});
 export default compose(
     connect(mapStateToProps, {

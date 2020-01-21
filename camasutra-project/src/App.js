@@ -18,7 +18,7 @@ import ProfileContainerWithHooks from "./components/Profile/ProfileContainerWith
 
 const App = ({initializeApp, initialized}) => {
     useEffect(() => {
-            initializeApp()
+            initializeApp();
         }
         , []);
     if (!initialized) return <Preloader/>;
