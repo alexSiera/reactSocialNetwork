@@ -2,13 +2,14 @@ import React from 'react';
 import s from './ProfileInfo.module.scss';
 import Preloader from "../../Common/Preloader/Preloader";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
+import avatar from '../../../assets/images/maleAvatar.jpg';
 const ProfileInfo = ({profileData, updateUserStatus, status}) => {
     if(!profileData) return <Preloader/>;
     return (
         <div>
             <h2>Profile Info</h2>
             <div>
-                <img src={profileData.photos.large} className={s.imgMain} />
+                <img src={profileData.photos.large ? profileData.photos.large : avatar} className={s.imgMain} />
             </div>
             <div className={s.descriptionBlock}>
                 <div>

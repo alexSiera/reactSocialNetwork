@@ -1,5 +1,5 @@
 import React from 'react'
-import s from "../../Users/Users.module.scss";
+import s from "./Pagination.module.scss";
 
 const Pagination = ({onPageChanged, currentSelectedPage, totalUsersCount, pageSize}) => {
     const pagesCount = Math.ceil(totalUsersCount / pageSize);
