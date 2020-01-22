@@ -47,7 +47,7 @@ export const usersAPI = {
 export const profileAPI = {
     getUserProfile: async (userId = 2) => {
         try {
-            const profile = await instance.get(`profile/${userId}`)
+            const profile = await instance.get(`profile/${userId}`);
             return profile.data
         }
         catch (e) {
@@ -78,7 +78,7 @@ export const profileAPI = {
 export const authAPI = {
     getAuthMe: async () => {
         try {
-            const authData = await instance.get(`auth/me`)
+            const authData = await instance.get(`auth/me`);
             if(authData.data.resultCode === 0) return authData.data.data;
             return {};
         }

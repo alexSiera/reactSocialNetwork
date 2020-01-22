@@ -3,6 +3,7 @@ import {profileAPI, usersAPI} from "../../api/api";
 const ADD_POST = 'ADD_POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_USER_STATUS = 'SET_USER_STATUS';
+const DELETE_POST = 'DELETE_POST';
 const initialState = {
     posts: [{
         id: 113,
@@ -23,7 +24,7 @@ const initialState = {
     }],
     profileData: null,
     status: ''
-}
+};
 
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -47,35 +48,48 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 status: action.status
             };
+        case DELETE_POST :
+            return {
+                ...state,
+                posts: state.posts.filter((p) => {
+                    return p.id !== action.id;
+                })
+            };
         default: return state;
-
     }
-}
+};
 
 export const addPostAC = (newPost) => ({type: ADD_POST, newPost});
 export const setProfileAC = profileData => ({type: SET_USER_PROFILE, profileData});
 export const setUserStatusAC = status => ({type: SET_USER_STATUS,status });
+export const deletePostAC = id => ({type: DELETE_POST, id});
 export default profileReducer;
 
-export const getUserProfileThunkCreator = (userId) => {
-    return (dispatch) => {
-        usersAPI.getUserProfile(userId).then(profile => {
+export const getUserProfileThunkCreator = (userId) => async (dispatch) => {
+        try {
+            const profile = await usersAPI.getUserProfile(userId);
             dispatch(setProfileAC(profile));
-        });
+        }
+        catch (e) {
+            console.log(e)
+        }
+};
+export const getUserStatusThunkCreator = (userId) => async (dispatch) => {
+    try {
+        const status = profileAPI.getStatus(userId);
+        dispatch(setUserStatusAC(status));
     }
-}
-export const getUserStatusThunkCreator = (userId) => {
-    return (dispatch) => {
-        profileAPI.getStatus(userId).then(status => {
-            dispatch(setUserStatusAC(status));
-        })
+    catch (e) {
+        console.log(e)
     }
-}
+};
 
-export const updateStatusThunkCreator = (status) => {
-    return (dispatch) => {
-        profileAPI.updateStatus(status).then(serverStatus => {
-            if(serverStatus.data.resultCode === 0) dispatch(setUserStatusAC(status));
-        })
+export const updateStatusThunkCreator = (status) => async (dispatch) => {
+    try {
+        const serverStatus = await profileAPI.updateStatus(status);
+        if(serverStatus.data.resultCode === 0) dispatch(setUserStatusAC(status));
     }
-}
+    catch (e) {
+        console.log(e)
+    }
+};

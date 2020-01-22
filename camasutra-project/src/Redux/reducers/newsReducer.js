@@ -17,7 +17,7 @@ const initialState = {
         author: 'Micle',
         message: 'Latest breaking news, including politics, crime and celebrity. Find stories, updates and expert opinion.'
     }],
-}
+};
 const newsReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_NEWS:
@@ -26,20 +26,20 @@ const newsReducer = (state = initialState, action) => {
                 img: 'http://ldfl.ru/wp-content/uploads/2017/09/news.jpg',
                 author: "Someone",
                 message: action.newNewsText
-            }
+            };
             return {
                 ...state,
                 newsData: [...state.newsData, newNews],
-            }
+            };
 
         default: return state;
     }
-}
+};
 
 export const addNewsAC = (newNewsText) => {
     return {
         type: ADD_NEWS,
         newNewsText
     }
-}
+};
 export default newsReducer;

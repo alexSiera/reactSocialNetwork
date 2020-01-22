@@ -19,9 +19,12 @@ const appReducer = (state = initialState, action) => {
 export const initializingSuccess = () => ({type: INITIALIZED_SUCCESS});
 
 export const initializeApp = () => async (dispatch) => {
-    const promise = dispatch(authMeThunkCreator());
-    await promise.then(() => {
+    try {
+        const promise = await dispatch(authMeThunkCreator());
         dispatch(initializingSuccess());
-    }).catch(e => console.log(e))
+    }
+    catch (e) {
+        console.log(e)
+    }
 };
 export default appReducer;
