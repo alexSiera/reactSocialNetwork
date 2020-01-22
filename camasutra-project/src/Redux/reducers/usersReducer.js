@@ -1,13 +1,13 @@
 import {usersAPI} from "../../api/api";
 import {updateObjectInArray} from "../../utils/objectHelpers";
 
-const FOLLOW = 'FOLLOW';
-const UNFOLLOW = 'UNFOLLOW';
-const SET_USERS = 'SET_USERS';
-const SELECT_PAGE = 'SELECT_PAGE';
-const SET_TOTAL_USERS_COUNT = 'SET_TOTAL-USERS_COUNT';
-const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
-const TOGGLE_IS_FOLLOWING_IN_PROGRESS = 'TOGGLE_IS_FOLLOWING_IN_PROGRESS';
+const FOLLOW = 'users/FOLLOW';
+const UNFOLLOW = 'users/UNFOLLOW';
+const SET_USERS = 'users/SET_USERS';
+const SELECT_PAGE = 'users/SELECT_PAGE';
+const SET_TOTAL_USERS_COUNT = 'users/SET_TOTAL-USERS_COUNT';
+const TOGGLE_IS_FETCHING = 'users/TOGGLE_IS_FETCHING';
+const TOGGLE_IS_FOLLOWING_IN_PROGRESS = 'users/TOGGLE_IS_FOLLOWING_IN_PROGRESS';
 
 const initialState = {
     users: [],
@@ -95,10 +95,15 @@ export const requestUsersThunkCreator = (page = 1, pageSize = 4) => async (dispa
     }
 };
 const followUnfollowFlow = async (dispatch, userId, apiMethod , actionCreator) => {
+    try {
         dispatch(toggleFollowingProgressAC(userId, true));
         const statusCode = await apiMethod(userId);
+        debugger
         if (statusCode === 0) dispatch(actionCreator(userId));
         dispatch(toggleFollowingProgressAC(userId, false));
+    } catch (e) {
+        console.log(e);
+    }
 };
 
 export const followThunkCreator = (userId) => async (dispatch) => {

@@ -9,7 +9,6 @@ import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import NewsContainer from "./components/News/NewsContainer";
 import Navbar from "./components/Navbar/Navbar";
 import UsersContainer from "./components/Users/UsersContainer";
-import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginContainer from "./components/Login/LoginContainer";
 import {initializeApp} from "./Redux/reducers/appReducer";

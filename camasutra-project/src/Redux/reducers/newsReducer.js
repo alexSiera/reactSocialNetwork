@@ -1,5 +1,4 @@
-const SET_NEWS_VALUE = 'SET-NEWS-VALUE';
-const ADD_NEWS = 'ADD-NEWS';
+const ADD_NEWS = 'news/ADD_NEWS';
 const initialState = {
     newsData: [{
         id: 1131,
@@ -31,7 +30,6 @@ const newsReducer = (state = initialState, action) => {
                 ...state,
                 newsData: [...state.newsData, newNews],
             };
-
         default: return state;
     }
 };

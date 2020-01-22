@@ -5,28 +5,18 @@ import {NavLink} from "react-router-dom";
 import Pagination from "../Common/Pagination/Pagination";
 import User from "./User/User";
 
-const Users = ({users, subscribe,unSubscribe, totalUsersCount, pageSize, onPageChanged, currentSelectedPage,followingInProgress}) => {
-    const pagesCount = Math.ceil(totalUsersCount/pageSize);
+const Users = ({users, subscribe, unSubscribe, totalUsersCount, pageSize, onPageChanged, currentSelectedPage, followingInProgress}) => {
+    const pagesCount = Math.ceil(totalUsersCount / pageSize);
     const pages = [];
-    for (let i = 1; i< pagesCount; i++ ) {
+    for (let i = 1; i < pagesCount; i++) {
         pages.push(i);
     }
     return (
         <div>
-            <div className={s.paginationBlock}>
-                {
-                    pages.map((el) => {
-                        return (
-                            <Pagination id={el}
-                                        key={el}  onPageChanged={onPageChanged}
-                                        currentSelectedPage={currentSelectedPage}
-                            />
-                        )
-                    })
-                }
-            </div>
+            <Pagination onPageChanged={onPageChanged} currentSelectedPage={currentSelectedPage} totalUsersCount={totalUsersCount} pageSize={pageSize}/>
             {users.map(u => {
-                return <User key={u.id} {...u} followingInProgress={followingInProgress} subscribe={subscribe} unSubscribe={unSubscribe}/>
+                return <User key={u.id} {...u} followingInProgress={followingInProgress} subscribe={subscribe}
+                             unSubscribe={unSubscribe}/>
             })}
         </div>
     )

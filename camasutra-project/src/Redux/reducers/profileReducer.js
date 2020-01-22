@@ -1,9 +1,9 @@
 import {profileAPI, usersAPI} from "../../api/api";
 
-const ADD_POST = 'ADD_POST';
-const SET_USER_PROFILE = 'SET_USER_PROFILE';
-const SET_USER_STATUS = 'SET_USER_STATUS';
-const DELETE_POST = 'DELETE_POST';
+const ADD_POST = 'profile/ADD_POST';
+const SET_USER_PROFILE = 'profile/SET_USER_PROFILE';
+const SET_USER_STATUS = 'profile/SET_USER_STATUS';
+const DELETE_POST = 'profile/DELETE_POST';
 const initialState = {
     posts: [{
         id: 113,
@@ -55,41 +55,38 @@ const profileReducer = (state = initialState, action) => {
                     return p.id !== action.id;
                 })
             };
-        default: return state;
+        default:
+            return state;
     }
 };
 
 export const addPostAC = (newPost) => ({type: ADD_POST, newPost});
-export const setProfileAC = profileData => ({type: SET_USER_PROFILE, profileData});
-export const setUserStatusAC = status => ({type: SET_USER_STATUS,status });
+export const setProfileAC = (profileData) => ({type: SET_USER_PROFILE, profileData});
+export const setUserStatusAC = status => ({type: SET_USER_STATUS, status});
 export const deletePostAC = id => ({type: DELETE_POST, id});
 export default profileReducer;
 
 export const getUserProfileThunkCreator = (userId) => async (dispatch) => {
-        try {
-            const profile = await usersAPI.getUserProfile(userId);
-            dispatch(setProfileAC(profile));
-        }
-        catch (e) {
-            console.log(e)
-        }
+    try {
+        const profile = await usersAPI.getUserProfile(userId);
+        dispatch(setProfileAC(profile));
+    } catch (e) {
+        console.log(e)
+    }
 };
 export const getUserStatusThunkCreator = (userId) => async (dispatch) => {
     try {
-        const status = profileAPI.getStatus(userId);
+        const status = await profileAPI.getStatus(userId);
         dispatch(setUserStatusAC(status));
-    }
-    catch (e) {
+    } catch (e) {
         console.log(e)
     }
 };
-
 export const updateStatusThunkCreator = (status) => async (dispatch) => {
     try {
         const serverStatus = await profileAPI.updateStatus(status);
-        if(serverStatus.data.resultCode === 0) dispatch(setUserStatusAC(status));
-    }
-    catch (e) {
+        if (serverStatus.data.resultCode === 0) dispatch(setUserStatusAC(status));
+    } catch (e) {
         console.log(e)
     }
-};
+};  

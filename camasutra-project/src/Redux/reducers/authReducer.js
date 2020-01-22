@@ -56,8 +56,8 @@ export const authMeThunkCreator = () => async (dispatch) => {
     }
 };
 export const loginMeThunkCreator = (email, password, rememberMe = false) => async (dispatch) => {
-    const res = authAPI.login(email, password, rememberMe);
     try {
+        const res = await authAPI.login(email, password, rememberMe);
         if (res.data.resultCode === 0) {
             dispatch(authMeThunkCreator());
         } else {
