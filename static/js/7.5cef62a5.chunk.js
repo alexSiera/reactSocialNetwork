@@ -1,0 +1,2 @@
+(this["webpackJsonpcamasutra-project"]=this["webpackJsonpcamasutra-project"]||[]).push([[7],{303:function(t,n,a){},305:function(t,n,a){"use strict";a.r(n);var e=a(0),c=a.n(e);a(303);n.default=function(){return c.a.createElement("div",null,"Settings!!!")}}}]);
+//# sourceMappingURL=7.5cef62a5.chunk.js.map
