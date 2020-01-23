@@ -1,14 +1,14 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "6fda6de1590fc3fee7317f9617ecdb81",
+    "revision": "3d7145232cbacda5b11f8a348ef8d385",
     "url": "/reactKamasutra/index.html"
   },
   {
-    "revision": "372dfb780c51f6e32f95",
+    "revision": "bbff26c88b776b618298",
     "url": "/reactKamasutra/static/css/3.ea2f4f2e.chunk.css"
   },
   {
-    "revision": "58d7bf4ded62f9a8f9cb",
+    "revision": "959c319cd756c80a1387",
     "url": "/reactKamasutra/static/css/4.28379483.chunk.css"
   },
   {
@@ -24,20 +24,20 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/reactKamasutra/static/css/7.14df5458.chunk.css"
   },
   {
-    "revision": "578ac158742738ab54ed",
+    "revision": "8485fc545b69017fa9d0",
     "url": "/reactKamasutra/static/css/main.3bb221e5.chunk.css"
   },
   {
-    "revision": "af6aed1a3ed9417e9d1f",
-    "url": "/reactKamasutra/static/js/2.c954561f.chunk.js"
+    "revision": "bf902c575cb875ab0dd2",
+    "url": "/reactKamasutra/static/js/2.b959229b.chunk.js"
   },
   {
-    "revision": "372dfb780c51f6e32f95",
-    "url": "/reactKamasutra/static/js/3.ba597fe2.chunk.js"
+    "revision": "bbff26c88b776b618298",
+    "url": "/reactKamasutra/static/js/3.97049791.chunk.js"
   },
   {
-    "revision": "58d7bf4ded62f9a8f9cb",
-    "url": "/reactKamasutra/static/js/4.d1fbd8a9.chunk.js"
+    "revision": "959c319cd756c80a1387",
+    "url": "/reactKamasutra/static/js/4.4862e539.chunk.js"
   },
   {
     "revision": "73a2113d5847c4a5b297",
@@ -52,12 +52,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/reactKamasutra/static/js/7.5cef62a5.chunk.js"
   },
   {
-    "revision": "578ac158742738ab54ed",
-    "url": "/reactKamasutra/static/js/main.32d14fa4.chunk.js"
+    "revision": "8485fc545b69017fa9d0",
+    "url": "/reactKamasutra/static/js/main.75c0b92b.chunk.js"
   },
   {
-    "revision": "e7713829c3a0bd149aa7",
-    "url": "/reactKamasutra/static/js/runtime-main.166836d9.js"
+    "revision": "d85d00987447a4e4cf62",
+    "url": "/reactKamasutra/static/js/runtime-main.44dd2e21.js"
   },
   {
     "revision": "88fc734d12a7104615d449760f9e90d5",
