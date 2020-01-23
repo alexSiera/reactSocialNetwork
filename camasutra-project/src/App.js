@@ -9,15 +9,15 @@ import {initializeApp} from "./Redux/reducers/appReducer";
 import UsersContainer from "./components/Users/UsersContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginContainer from "./components/Login/LoginContainer";
-//import ProfileContainerWithHooks from "./components/Profile/ProfileContainerWithHooks";
 import Navbar from "./components/Navbar/Navbar";
-import Music from "./components/Music/Music";
-import Settings from "./components/Settings/Settings";
-//import DialogsContainer from "./components/Dialogs/DialogsContainer";
-// import NewsContainer from "./components/News/NewsContainer";
+import {WithSuspense} from "./HOC/withSuspense";
+
 const DialogsContainer = lazy(() => import('./components/Dialogs/DialogsContainer'));
 const NewsContainer = lazy(() => import('./components/News/NewsContainer'));
 const ProfileContainerWithHooks = lazy(() => import('./components/Profile/ProfileContainerWithHooks'));
+const Settings = lazy(() => import('./components/Settings/Settings'));
+const Music = lazy(() => import('./components/Music/Music'));
+
 const App = ({initializeApp, initialized}) => {
     useEffect(() => {
             initializeApp();
@@ -29,33 +29,12 @@ const App = ({initializeApp, initialized}) => {
             <HeaderContainer/>
             <Navbar/>
             <div className="app-wrapper-content">
-                <Route path="/dialogs" render={() => {
-                    return (
-                        <Suspense fallback={<div>Loading...</div>}>
-                            <DialogsContainer/>
-                        </Suspense>
-                    )
-                }
-                }/>
-                <Route path="/profile/:userId?" render={() => {
-                    return (
-                        <Suspense fallback={<div>Loading...</div>}>
-                            <ProfileContainerWithHooks/>
-                        </Suspense>
-                    )
-                }
-                }/>
+                <Route path="/dialogs" render={WithSuspense(DialogsContainer)}/>
+                <Route path="/profile/:userId?" render={WithSuspense(ProfileContainerWithHooks)}/>
                 <Route path="/users" render={() => <UsersContainer/>}/>
-                <Route path="/music" component={Music}/>
-                <Route path="/news" render={() => {
-                    return (
-                        <Suspense fallback={<div>Loading...</div>}>
-                            <NewsContainer/>
-                        </Suspense>
-                    )
-                }
-                }/>
-                <Route path="/settings" component={Settings}/>
+                <Route path="/music" render={WithSuspense(Music)}/>
+                <Route path="/news" render={WithSuspense(NewsContainer)}/>
+                <Route path="/settings" render={WithSuspense(Settings)}/>
                 <Route path="/login" render={() => <LoginContainer/>}/>
             </div>
         </div>
