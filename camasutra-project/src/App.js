@@ -14,7 +14,7 @@ import {WithSuspense} from "./HOC/withSuspense";
 
 const DialogsContainer = lazy(() => import('./components/Dialogs/DialogsContainer'));
 const NewsContainer = lazy(() => import('./components/News/NewsContainer'));
-const ProfileContainerWithHooks = lazy(() => import('./components/Profile/ProfileContainerWithHooks'));
+const ProfileContainer = lazy(() => import('./components/Profile/ProfileContainer'));
 const Settings = lazy(() => import('./components/Settings/Settings'));
 const Music = lazy(() => import('./components/Music/Music'));
 
@@ -30,7 +30,7 @@ const App = ({initializeApp, initialized}) => {
             <Navbar/>
             <div className="app-wrapper-content">
                 <Route path="/dialogs" render={WithSuspense(DialogsContainer)}/>
-                <Route path="/profile/:userId?" render={WithSuspense(ProfileContainerWithHooks)}/>
+                <Route path="/profile/:userId?" render={WithSuspense(ProfileContainer)}/>
                 <Route path="/users" render={() => <UsersContainer/>}/>
                 <Route path="/music" render={WithSuspense(Music)}/>
                 <Route path="/news" render={WithSuspense(NewsContainer)}/>

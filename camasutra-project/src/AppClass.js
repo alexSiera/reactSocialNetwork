@@ -14,7 +14,7 @@ import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginContainer from "./components/Login/LoginContainer";
 import {initializeApp} from "./Redux/reducers/appReducer";
 import Preloader from "./components/Common/Preloader/Preloader";
-import ProfileContainerWithHooks from "./components/Profile/ProfileContainerWithHooks";
+import ProfileContainerWithHooks from "./components/Profile/ProfileContainer";
 
 class AppClass extends Component {
     componentDidMount() {

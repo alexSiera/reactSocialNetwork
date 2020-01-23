@@ -257,9 +257,9 @@
                 "name": "ProfileContainer.jsx"
             },
             {
-                "relativePath": "src/components/Profile/ProfileContainerWithHooks.jsx",
+                "relativePath": "src/components/Profile/ProfileContainer.jsx",
                 "test": false,
-                "name": "ProfileContainerWithHooks.jsx"
+                "name": "ProfileContainer.jsx"
             },
             {
                 "relativePath": "src/components/Profile/ProfileInfo/ProfileInfo.jsx",
@@ -277,14 +277,14 @@
                 "name": "ProfileStatus.jsx"
             },
             {
-                "relativePath": "src/components/Profile/ProfileInfo/ProfileStatusWithHooks.jsx",
+                "relativePath": "src/components/Profile/ProfileInfo/ProfileStatus.jsx",
                 "test": false,
-                "name": "ProfileStatusWithHooks.jsx"
+                "name": "ProfileStatus.jsx"
             },
             {
-                "relativePath": "src/components/Profile/ProfileInfo/ProfileStatusWithHooks.test.jsx",
+                "relativePath": "src/components/Profile/ProfileInfo/ProfileStatusClass.test.jsx",
                 "test": false,
-                "name": "ProfileStatusWithHooks.test.jsx"
+                "name": "ProfileStatusClass.test.jsx"
             }
         ],
         "mainFile": "src/components/Profile/Profile.jsx",
