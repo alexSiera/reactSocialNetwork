@@ -43,7 +43,7 @@ const userReducer = (state = initialState, action) => {
         case SET_TOTAL_USERS_COUNT:
             return {
                 ...state,
-                totalUsersCount: action.totalUsersCount - 1600
+                totalUsersCount: action.totalUsersCount
             };
         case TOGGLE_IS_FETCHING:
             if (action.fetching === true) {
@@ -98,7 +98,6 @@ const followUnfollowFlow = async (dispatch, userId, apiMethod , actionCreator) =
     try {
         dispatch(toggleFollowingProgressAC(userId, true));
         const statusCode = await apiMethod(userId);
-        debugger
         if (statusCode === 0) dispatch(actionCreator(userId));
         dispatch(toggleFollowingProgressAC(userId, false));
     } catch (e) {

@@ -7,18 +7,29 @@ class ProfileStatus extends Component {
         editMode: false,
         status: this.props.status
     };
-    toggleEditMode = () => {
-        if (this.state.editMode) {
-            this.setState({
-                editMode: false
-            });
-            this.props.updateUserStatus(this.state.status);
-        } else {
-            this.setState({
-                editMode: true
-            })
-        }
-    };
+    activateEditMode = () => {
+        this.setState({
+            editMode: true
+        });
+    }
+    deActivateEditMode = () => {
+        this.setState({
+            editMode: false
+        });
+        this.props.updateUserStatus(this.state.status);
+    }
+    // toggleEditMode = () => {
+    //     if (this.state.editMode) {
+    //         this.setState({
+    //             editMode: false
+    //         });
+    //         this.props.updateUserStatus(this.state.status);
+    //     } else {
+    //         this.setState({
+    //             editMode: true
+    //         })
+    //     }
+    // };
 
     onUpdateUserStatus = (e) => {
         this.setState({status: e.target.value});
@@ -33,12 +44,12 @@ class ProfileStatus extends Component {
             <div>
                 {!this.state.editMode &&
                 <div>
-                    <span onDoubleClick={this.toggleEditMode}>Status: {this.props.status || "No status"}</span>
+                    <span onDoubleClick={this.activateEditMode}>Status: {this.props.status || "No status"}</span>
                 </div>
                 }
                 {this.state.editMode &&
                 <div className={s.profileInfoInput}>
-                    <input autoFocus onBlur={this.toggleEditMode} value={this.state.status}
+                    <input autoFocus onBlur={this.deActivateEditMode} value={this.state.status}
                            onChange={this.onUpdateUserStatus}/>
                 </div>
                 }

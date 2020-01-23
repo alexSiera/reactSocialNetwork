@@ -14,6 +14,9 @@ import LoginContainer from "./components/Login/LoginContainer";
 import {initializeApp} from "./Redux/reducers/appReducer";
 import Preloader from "./components/Common/Preloader/Preloader";
 import ProfileContainerWithHooks from "./components/Profile/ProfileContainerWithHooks";
+import store from "./Redux/reduxStore";
+import {BrowserRouter} from "react-router-dom";
+import {Provider} from "react-redux";
 
 const App = ({initializeApp, initialized}) => {
     useEffect(() => {
@@ -38,9 +41,19 @@ const App = ({initializeApp, initialized}) => {
     );
 };
 const mapStateToProps = ({app}) => ({initialized: app.initialized});
-export default compose(
+const AppContainer = compose(
     withRouter,
     connect(mapStateToProps, {
         initializeApp
     })
-)(App)
+)(App);
+const SamuraiJSApp = (props) => {
+    return (
+        <BrowserRouter>
+            <Provider store={store}>
+                <AppContainer/>
+            </Provider>
+        </BrowserRouter>
+    )
+};
+export default SamuraiJSApp;

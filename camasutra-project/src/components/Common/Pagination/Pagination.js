@@ -1,24 +1,38 @@
-import React from 'react'
+import React, {useState} from 'react'
 import s from "./Pagination.module.scss";
 
-const Pagination = ({onPageChanged, currentSelectedPage, totalUsersCount, pageSize}) => {
-    const pagesCount = Math.ceil(totalUsersCount / pageSize);
+const Pagination = ({onPageChanged, currentSelectedPage, totalItemsCount, pageSize, portionSize = 10}) => {
+    const pagesCount = Math.ceil(totalItemsCount / pageSize);
     const pages = [];
     for (let i = 1; i < pagesCount; i++) {
         pages.push(i);
     }
+    const portionCount = Math.ceil(pagesCount / portionSize);
+    let [portionNumber, setPortionNumber] = useState(1);
+    const leftPortionPageNumber = (portionNumber - 1) * portionSize + 1;
+    const rightPortionPageNumber = portionNumber * portionSize;
     return (
         <div className={s.paginationBlock}>
-        {
-            pages.map((el) => {
-                return (
-                    <PaginationElement id={el}
-                                key={el} onPageChanged={onPageChanged}
-                                currentSelectedPage={currentSelectedPage}
-                    />
-                )
-            })
-        }
+            <div className={s.paginator}>
+                {portionNumber > 1 &&
+                <button onClick={() => {
+                    setPortionNumber(portionNumber - 1)
+                }}>PREV</button>}
+                {
+                    pages.filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber).map((p) => {
+                        return (
+                            <PaginationElement id={p}
+                                               key={p} onPageChanged={onPageChanged}
+                                               currentSelectedPage={currentSelectedPage}
+                            />
+                        )
+                    })
+                }
+                {portionCount > portionNumber &&
+                <button onClick={() => {
+                    setPortionNumber(portionNumber + 1)
+                }}>NEXT</button>}
+            </div>
         </div>
     )
 };
