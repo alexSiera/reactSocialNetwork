@@ -1,4 +1,4 @@
-import React, {useEffect, lazy, Suspense} from "react";
+import React, {useEffect, lazy} from "react";
 import "./App.scss";
 import Preloader from "./components/Common/Preloader/Preloader";
 import store from "./Redux/reduxStore";
