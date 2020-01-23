@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "c6ac07ba3d7d6e0da940119c58d6b1c8",
+    "revision": "6fda6de1590fc3fee7317f9617ecdb81",
     "url": "/reactKamasutra/index.html"
   },
   {
@@ -24,7 +24,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/reactKamasutra/static/css/7.14df5458.chunk.css"
   },
   {
-    "revision": "e67d4bbc46433d4277af",
+    "revision": "578ac158742738ab54ed",
     "url": "/reactKamasutra/static/css/main.3bb221e5.chunk.css"
   },
   {
@@ -52,8 +52,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/reactKamasutra/static/js/7.5cef62a5.chunk.js"
   },
   {
-    "revision": "e67d4bbc46433d4277af",
-    "url": "/reactKamasutra/static/js/main.9c5885cf.chunk.js"
+    "revision": "578ac158742738ab54ed",
+    "url": "/reactKamasutra/static/js/main.32d14fa4.chunk.js"
   },
   {
     "revision": "e7713829c3a0bd149aa7",
