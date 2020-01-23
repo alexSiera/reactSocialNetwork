@@ -1,19 +1,20 @@
 import React, {useEffect} from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import { withRouter } from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import {
     getUserProfileThunkCreator,
-    getUserStatusThunkCreator,
+    getUserStatusThunkCreator, savePhotoThunkCreator,
     updateStatusThunkCreator
 } from "../../Redux/reducers/profileReducer";
 import {compose} from "redux";
-const ProfileContainerWithHooks = (props) => {
+
+const ProfileContainer = (props) => {
     const refreshProfile = () => {
         let userId = parseInt(props.match.params.userId);
-        if(!userId ) {
+        if (!userId) {
             userId = props.autorizedUid;
-            if(!userId) {
+            if (!userId) {
                 props.history.push("/login");
             }
         }
@@ -23,9 +24,9 @@ const ProfileContainerWithHooks = (props) => {
     useEffect(() => {
         refreshProfile();
     }, [props.match.params.userId]);
-        return (
-            <Profile {...props} />
-        )
+    return (
+        <Profile {...props} isOwner={!props.match.params.userId} savePhoto={props.savePhoto} />
+    )
 }
 const mapStateToProps = ({profilePage, auth}) => {
     return {
@@ -36,6 +37,11 @@ const mapStateToProps = ({profilePage, auth}) => {
     }
 }
 export default compose(
-    connect(mapStateToProps, {getUserProfile: getUserProfileThunkCreator, getUserStatus: getUserStatusThunkCreator, updateUserStatus: updateStatusThunkCreator}),
+    connect(mapStateToProps, {
+        getUserProfile: getUserProfileThunkCreator,
+        getUserStatus: getUserStatusThunkCreator,
+        updateUserStatus: updateStatusThunkCreator,
+        savePhoto: savePhotoThunkCreator
+    }),
     withRouter,
-)(ProfileContainerWithHooks);
+)(ProfileContainer);
