@@ -100,7 +100,6 @@ export const updateStatusThunkCreator = (status) => async (dispatch) => {
 export const savePhotoThunkCreator = (file) => async (dispatch) => {
     try {
         const response = await profileAPI.savePhoto(file);
-        debugger
         if (response.data.resultCode === 0) dispatch(savePhotoSuccess(response.data.data.photos));
     } catch (e) {
         console.log(e)
