@@ -34,15 +34,6 @@ export const usersAPI = {
             console.log(e)
         }
     },
-    getUserProfile: async (userId = 2) => {
-        try {
-            console.warn('Obsolete method. Please use profileAPI object')
-            return profileAPI.getUserProfile(userId);
-        }
-        catch (e) {
-            console.log(e)
-        }
-    },
 };
 export const profileAPI = {
     getUserProfile: async (userId = 2) => {

@@ -68,7 +68,7 @@ export default profileReducer;
 
 export const getUserProfileThunkCreator = (userId) => async (dispatch) => {
     try {
-        const profile = await usersAPI.getUserProfile(userId);
+        const profile = await profileAPI.getUserProfile(userId);
         dispatch(setProfileAC(profile));
     } catch (e) {
         console.log(e)

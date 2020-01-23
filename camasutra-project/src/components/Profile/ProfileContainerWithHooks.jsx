@@ -7,10 +7,9 @@ import {
     getUserStatusThunkCreator,
     updateStatusThunkCreator
 } from "../../Redux/reducers/profileReducer";
-// import {withAuthRedirect} from "../../HOC/withAuthRedirect";
 import {compose} from "redux";
 const ProfileContainerWithHooks = (props) => {
-    useEffect(() => {
+    const refreshProfile = () => {
         let userId = parseInt(props.match.params.userId);
         if(!userId ) {
             userId = props.autorizedUid;
@@ -20,7 +19,10 @@ const ProfileContainerWithHooks = (props) => {
         }
         props.getUserProfile(userId);
         props.getUserStatus(userId);
-    }, []);
+    };
+    useEffect(() => {
+        refreshProfile();
+    }, [props.match.params.userId]);
         return (
             <Profile {...props} />
         )
@@ -36,5 +38,4 @@ const mapStateToProps = ({profilePage, auth}) => {
 export default compose(
     connect(mapStateToProps, {getUserProfile: getUserProfileThunkCreator, getUserStatus: getUserStatusThunkCreator, updateUserStatus: updateStatusThunkCreator}),
     withRouter,
-    //withAuthRedirect
 )(ProfileContainerWithHooks);

@@ -4,7 +4,7 @@ import Preloader from "./components/Common/Preloader/Preloader";
 import store from "./Redux/reduxStore";
 import {compose} from 'redux';
 import {connect, Provider} from "react-redux";
-import {Route, withRouter, BrowserRouter, HashRouter} from "react-router-dom";
+import {Route, withRouter, HashRouter} from "react-router-dom";
 import {initializeApp} from "./Redux/reducers/appReducer";
 import UsersContainer from "./components/Users/UsersContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";

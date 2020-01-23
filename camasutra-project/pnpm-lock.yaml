@@ -1,5 +1,6 @@
 dependencies:
   axios: 0.19.1
+  classnames: 2.2.6
   node-sass: 4.13.0
   npm-run-all: 4.1.5
   react: 16.12.0
@@ -3293,6 +3294,10 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-qOhPa/Fj7s6TY8H8esGu5QNpMMQxz79h+urzrNYN6mn+9BnxlDGf5QZ+XeCDsxSjPqsSR56XOZOJmpeurnLMeg==
+  /classnames/2.2.6:
+    dev: false
+    resolution:
+      integrity: sha512-JR/iSQOSt+LQIWwrwEzJ9uk0xfN3mTVYMwt1Ir5mUcSN6pU+V4zQFFaJsclJbPuAUQH+yfWef6tm7l1quW3C8Q==
   /clean-css/4.2.1:
     dependencies:
       source-map: 0.6.1
@@ -12090,6 +12095,7 @@ packages:
       integrity: sha1-a6MY6xaWFyf10oT46gA+jWFU0Mg=
 specifiers:
   axios: ^0.19.1
+  classnames: ^2.2.6
   gh-pages: ^2.2.0
   identity-obj-proxy: ^3.0.0
   node-sass: ^4.13.0
