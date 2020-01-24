@@ -119,4 +119,4 @@ export const saveProfileDataThunkCreator = (profileData) => async (dispatch) => 
     } catch (e) {
         console.log(e)
     }
-}
+};

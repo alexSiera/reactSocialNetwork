@@ -20,14 +20,21 @@
   margin-left: 5px;
   display: inline-flex;
   &:hover {
-    cursor: pointer;
     img {
         filter: brightness(0.4);
         transition: all 0.8s ease;
     }
+
     .photosInputContainer {
+      cursor: pointer;
       display: block;
       z-index: 1;
+      input {
+        cursor: pointer;
+      }
+      label {
+        cursor: pointer;
+      }
     }
   }
 }
@@ -39,7 +46,6 @@
   transform: translate(-30px, -24px);
   display: none;
   transition: all 3s ease;
-  cursor: pointer;
 }
 
 .photosInput {
@@ -55,9 +61,4 @@
   font-weight: 700;
   color: white;
   display: inline-block;
-}
-
-.photosInput:focus + label,
-.photosInput + label:hover {
-  background-color: red;
 }

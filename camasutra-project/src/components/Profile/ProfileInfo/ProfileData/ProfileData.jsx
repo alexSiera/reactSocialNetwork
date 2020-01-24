@@ -3,13 +3,13 @@ import s from './ProfileData.module.scss';
 
 const ProfileData = ({profileData, isOwner, goToEditMode}) => {
     return (
-        <div>
+        <div className={s.descriptionBlock}>
             <h2>Profile Info</h2>
             {isOwner && <div>
                 <button onClick={goToEditMode}>Edit information</button>
             </div>}
 
-            <div className={s.descriptionBlock}>
+            <div>
                 <div>
                     <b>Full name:</b> {profileData.fullName ? profileData.fullName : "No info"}
                 </div>
