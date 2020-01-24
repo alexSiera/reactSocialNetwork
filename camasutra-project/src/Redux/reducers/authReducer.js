@@ -71,7 +71,7 @@ export const loginMeThunkCreator = (email, password, rememberMe = false) => asyn
 };
 export const logoutMeThunkCreator = () =>  async (dispatch) =>{
         try {
-            const resCode = await authAPI.logOut()
+            const resCode = await authAPI.logOut();
             if (resCode === 0) dispatch(clearLoginDataAC());
         }
         catch (e) {

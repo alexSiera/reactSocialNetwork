@@ -72,7 +72,6 @@ export const setProfileAC = (profileData) => ({type: SET_USER_PROFILE, profileDa
 export const setUserStatusAC = status => ({type: SET_USER_STATUS, status});
 export const savePhotoSuccess = photos => ({type: SAVE_PHOTO_SUCCESS, photos});
 export const deletePostAC = id => ({type: DELETE_POST, id});
-export default profileReducer;
 
 export const getUserProfileThunkCreator = (userId) => async (dispatch) => {
     try {
@@ -110,12 +109,16 @@ export const saveProfileDataThunkCreator = (profileData) => async (dispatch, get
     try {
         const userId = getState().auth.userId;
         const response = await profileAPI.saveProfileData(profileData);
-        if (response.data.resultCode === 0) dispatch(getUserProfileThunkCreator(userId));
-        else if (response.data.resultCode === 1) {
+        if (response.data.resultCode === 0) {
+            dispatch(getUserProfileThunkCreator(userId));
+        }
+        else {
             const message = response.data.messages.length > 0 ? response.data.messages[0] : "Some error";
-            dispatch(stopSubmit('profileData', {_error: message}));
+            dispatch(stopSubmit('edit-profile', {_error: message}));
+            return Promise.reject(response.data.messages[0]);
         }
     } catch (e) {
         console.log(e)
     }
 };
+export default profileReducer;

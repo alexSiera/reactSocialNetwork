@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './LoginForm.module.scss';
-import {Field, reduxForm} from 'redux-form'
+import {reduxForm} from 'redux-form'
 import {createField, Input} from "../../Common/FormsControls/FormsControls";
 import {required} from "../../../utils/validators/valiadators";
 
@@ -21,7 +21,7 @@ const LoginForm = ({handleSubmit, error}) => {
                 </div>
             </div>
         </form>)
-}
+};
 export default reduxForm({
     form: 'login'
 })(LoginForm);
