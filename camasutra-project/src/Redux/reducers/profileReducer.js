@@ -1,11 +1,11 @@
 import {profileAPI, usersAPI} from "../../api/api";
+import {stopSubmit} from 'redux-form';
 
 const ADD_POST = 'profile/ADD_POST';
 const SET_USER_PROFILE = 'profile/SET_USER_PROFILE';
 const SET_USER_STATUS = 'profile/SET_USER_STATUS';
 const DELETE_POST = 'profile/DELETE_POST';
 const SAVE_PHOTO_SUCCESS = 'profile/SAVE_PHOTO_SUCCESS';
-const UPDATE_PROFILE_DATA = 'profile/UPDATE_PROFILE_DATA';
 const initialState = {
     posts: [{
         id: 113,
@@ -110,7 +110,11 @@ export const saveProfileDataThunkCreator = (profileData) => async (dispatch, get
     try {
         const userId = getState().auth.userId;
         const response = await profileAPI.saveProfileData(profileData);
-        if (response.data.resultCode === 0) dispatch(getUserProfileThunkCreator(userId))
+        if (response.data.resultCode === 0) dispatch(getUserProfileThunkCreator(userId));
+        else if (response.data.resultCode === 1) {
+            const message = response.data.messages.length > 0 ? response.data.messages[0] : "Some error";
+            dispatch(stopSubmit('profileData', {_error: message}));
+        }
     } catch (e) {
         console.log(e)
     }

@@ -82,12 +82,8 @@ export const profileAPI = {
     },
     saveProfileData: async (profileData) => {
         try {
-            const {aboutMe, fullName, lookingForAJob, lookingForAJobDescription} = profileData;
             const userStatus = await instance.put(`profile`, {
-                "aboutMe": aboutMe,
-                "lookingForAJob": lookingForAJob,
-                "lookingForAJobDescription": lookingForAJobDescription,
-                "fullName": fullName
+                ...profileData
             });
             return userStatus;
         }
