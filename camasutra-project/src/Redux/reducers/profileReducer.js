@@ -106,8 +106,9 @@ export const savePhotoThunkCreator = (file) => async (dispatch) => {
         console.log(e)
     }
 };
-export const saveProfileDataThunkCreator = (userId, profileData) => async (dispatch) => {
+export const saveProfileDataThunkCreator = (profileData) => async (dispatch, getState) => {
     try {
+        const userId = getState().auth.userId;
         const response = await profileAPI.saveProfileData(profileData);
         if (response.data.resultCode === 0) dispatch(getUserProfileThunkCreator(userId))
     } catch (e) {
