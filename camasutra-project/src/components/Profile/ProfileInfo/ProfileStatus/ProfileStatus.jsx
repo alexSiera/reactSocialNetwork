@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import s from './ProfileInfo.module.scss';
+import s from './ProfileStatus.module.scss';
 
 const ProfileStatus = (props) => {
     const [editMode, setEditMode] = useState(false);
@@ -8,6 +8,7 @@ const ProfileStatus = (props) => {
         setStatus(props.status);
     }, [props.status]);
     const toggleEditMode = () => {
+        if(!props.isOwner) return;
         if(!editMode) {
             setEditMode(true);
         }
@@ -20,10 +21,10 @@ const ProfileStatus = (props) => {
         setStatus(e.target.value)
     };
     return (
-        <div>
+        <div className={s.profileStatusBlock}>
             {!editMode &&
             <div>
-                <span onDoubleClick={toggleEditMode}>Status: {props.status}</span>
+                <span onDoubleClick={toggleEditMode}><b>Status:</b> {props.status}</span>
             </div>
             }
             {editMode &&

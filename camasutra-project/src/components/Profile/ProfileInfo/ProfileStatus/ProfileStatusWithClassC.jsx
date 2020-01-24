@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import s from './ProfileInfo.module.scss';
+import s from '../ProfileInfo.module.scss';
 
 class ProfileStatus extends Component {
 
