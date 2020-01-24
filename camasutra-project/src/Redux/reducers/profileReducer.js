@@ -67,7 +67,7 @@ const profileReducer = (state = initialState, action) => {
         case SET_PROFILE_UPDATE_STATUS:
             return {
                 ...state,
-                profileUpdateStatusSuccess: action.updateStatus
+                profileUpdateStatusSuccess: true
             };
         default:
             return state;
@@ -79,7 +79,7 @@ export const setProfileAC = (profileData) => ({type: SET_USER_PROFILE, profileDa
 export const setUserStatusAC = status => ({type: SET_USER_STATUS, status});
 export const savePhotoSuccess = photos => ({type: SAVE_PHOTO_SUCCESS, photos});
 export const deletePostAC = id => ({type: DELETE_POST, id});
-export const setProfileUpdateStatus = (updateStatus) => ({type: SET_PROFILE_UPDATE_STATUS, updateStatus});
+export const setProfileUpdateStatus = () => ({type: SET_PROFILE_UPDATE_STATUS});
 export const getUserProfileThunkCreator = (userId) => async (dispatch) => {
     try {
         const profile = await profileAPI.getUserProfile(userId);

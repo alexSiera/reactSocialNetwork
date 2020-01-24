@@ -6,7 +6,7 @@ import ProfileData from "./ProfileData/ProfileData";
 import ProfileDataForm from "./ProfileData/ProfileDataForm";
 import avatar from "../../../assets/images/maleAvatar.jpg";
 
-const ProfileInfo = ({profileData, updateUserStatus, status, isOwner, savePhoto, saveProfileData}) => {
+const ProfileInfo = ({profileData, updateUserStatus, status, isOwner, savePhoto, saveProfileData ,profileUpdateStatusSuccess}) => {
     const [editMode, setEditMode] = useState(false);
     if (!profileData) return <Preloader/>;
     const onMainPhotoSelected = (e) => {
@@ -17,8 +17,8 @@ const ProfileInfo = ({profileData, updateUserStatus, status, isOwner, savePhoto,
     };
     const onProfileDataFormSubmit = (profileFormData) => {
             saveProfileData(profileFormData).then(() => {
-                setEditMode(false);
-            }).then(e => console.log(e));
+                if(profileUpdateStatusSuccess) setEditMode(false);
+            }).catch(e => console.log(e));
     };
     return (
         <div>
