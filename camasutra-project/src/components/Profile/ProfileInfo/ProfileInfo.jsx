@@ -16,10 +16,8 @@ const ProfileInfo = ({profileData, updateUserStatus, status, isOwner, savePhoto,
         }
     };
     const onProfileDataFormSubmit = (profileFormData) => {
-        const data = {...profileFormData};
-        if (!data.lookingForAJob) data.lookingForAJob = false;
         setEditMode(false);
-        saveProfileData(data);
+        saveProfileData(profileData.userId, profileFormData);
     };
     return (
         <div>
