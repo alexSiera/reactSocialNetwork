@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './ProfileData.module.scss';
-import {createField, Input} from "../../../Common/FormsControls/FormsControls";
+import {createField, Input, Textarea} from "../../../Common/FormsControls/FormsControls";
 import {reduxForm} from 'redux-form';
 import {maxLengthCreator} from "../../../../utils/validators/valiadators";
 const ProfileDataForm = ({handleSubmit, profileData}) => {
@@ -23,7 +23,7 @@ const ProfileDataForm = ({handleSubmit, profileData}) => {
             <div className={s.formDataItems}>
                 <label><b>Skills:</b> </label>
                 <div className={s.formDataItemsInput}>
-                    {createField("Enter you skills", "lookingForAJobDescription",[maxLength15], Input, {type: "text"})}
+                    {createField("Enter you skills", "lookingForAJobDescription",[maxLength15], Textarea, {type: "text"})}
                 </div>
             </div>
             <div className={s.formDataItems}>

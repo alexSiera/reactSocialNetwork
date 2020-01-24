@@ -18,11 +18,15 @@ const ProfileData = ({profileData, isOwner, goToEditMode}) => {
                 </div>
                 {profileData.lookingForAJob &&
                 <div className={s.aboutMe}>
+                    <div className={s.aboutMe}>
+                        <b>Job status:</b> Yes I'am looking for a job.
+                    </div>
                     <b>My professional skills:</b>
                     {
                         profileData.lookingForAJobDescription ? profileData.lookingForAJobDescription : "No one"
                     }
-                </div>}
+                </div>
+                }
                 {!profileData.lookingForAJob &&
                 <div className={s.aboutMe}>
                     <b>Job status:</b> I'am not looking for a job right now.
