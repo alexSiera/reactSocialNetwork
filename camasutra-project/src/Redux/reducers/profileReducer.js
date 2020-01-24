@@ -6,6 +6,7 @@ const SET_USER_PROFILE = 'profile/SET_USER_PROFILE';
 const SET_USER_STATUS = 'profile/SET_USER_STATUS';
 const DELETE_POST = 'profile/DELETE_POST';
 const SAVE_PHOTO_SUCCESS = 'profile/SAVE_PHOTO_SUCCESS';
+const SET_PROFILE_UPDATE_STATUS = '/profile/SET_PROFILE_UPDATE_STATUS';
 const initialState = {
     posts: [{
         id: 113,
@@ -25,6 +26,7 @@ const initialState = {
         likesCount: 15
     }],
     profileData: null,
+    profileUpdateStatusSuccess: null,
     status: ''
 };
 
@@ -62,6 +64,11 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 profileData: {...state.profileData, photos: action.photos}
             };
+        case SET_PROFILE_UPDATE_STATUS:
+            return {
+                ...state,
+                profileUpdateStatusSuccess: action.updateStatus
+            };
         default:
             return state;
     }
@@ -72,7 +79,7 @@ export const setProfileAC = (profileData) => ({type: SET_USER_PROFILE, profileDa
 export const setUserStatusAC = status => ({type: SET_USER_STATUS, status});
 export const savePhotoSuccess = photos => ({type: SAVE_PHOTO_SUCCESS, photos});
 export const deletePostAC = id => ({type: DELETE_POST, id});
-
+export const setProfileUpdateStatus = (updateStatus) => ({type: SET_PROFILE_UPDATE_STATUS, updateStatus});
 export const getUserProfileThunkCreator = (userId) => async (dispatch) => {
     try {
         const profile = await profileAPI.getUserProfile(userId);
@@ -111,6 +118,7 @@ export const saveProfileDataThunkCreator = (profileData) => async (dispatch, get
         const response = await profileAPI.saveProfileData(profileData);
         if (response.data.resultCode === 0) {
             dispatch(getUserProfileThunkCreator(userId));
+            dispatch(setProfileUpdateStatus());
         }
         else {
             const message = response.data.messages.length > 0 ? response.data.messages[0] : "Some error";

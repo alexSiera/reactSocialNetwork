@@ -8,6 +8,8 @@ import {
     updateStatusThunkCreator
 } from "../../Redux/reducers/profileReducer";
 import {compose} from "redux";
+import {getProfileData, getProfileUpdateStatus, getStatus} from "../../Redux/selectors/profileSelectors";
+import {getIsAuth, getUserId} from "../../Redux/selectors/authSelectors";
 
 const ProfileContainer = (props) => {
     const refreshProfile = () => {
@@ -30,10 +32,11 @@ const ProfileContainer = (props) => {
 }
 const mapStateToProps = ({profilePage, auth}) => {
     return {
-        profileData: profilePage.profileData,
-        status: profilePage.status,
-        autorizedUid: auth.userId,
-        isAuth: auth.isAuth
+        profileData: getProfileData(profilePage),
+        status: getStatus(profilePage),
+        profileUpdateStatusSuccess: getProfileUpdateStatus(profilePage),
+        autorizedUid: getUserId(auth),
+        isAuth: getIsAuth(auth),
     }
 }
 export default compose(

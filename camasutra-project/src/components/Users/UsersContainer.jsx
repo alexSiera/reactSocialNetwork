@@ -14,7 +14,7 @@ import {
     getPageSize,
     getTotalUsersCount,
     getUsersSelector
-} from "../../Redux/reducers/usersSelectors";
+} from "../../Redux/selectors/usersSelectors";
 
 const UsersContainer = (props) => {
     const onPageChanged = (pageNumber) => {

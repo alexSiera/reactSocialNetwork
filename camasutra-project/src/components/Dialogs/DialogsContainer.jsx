@@ -4,10 +4,11 @@ import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {withAuthRedirect} from "../../HOC/withAuthRedirect";
 import {compose} from "redux";
+import {getDialogsPage} from "../../Redux/selectors/dialogsSelectors";
 const DialogsContainer = (props) => {
     return <Dialogs {...props} />
 };
-const mapStateToProps = ({dialogsPage}) => ({dialogsPage: dialogsPage});
+const mapStateToProps = ({dialogsPage}) => ({dialogsPage: getDialogsPage(dialogsPage)});
 export default compose(
     connect(mapStateToProps, {
         dialogTextAreaSubmit,

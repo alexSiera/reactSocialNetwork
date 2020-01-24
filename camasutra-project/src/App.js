@@ -11,6 +11,7 @@ import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginContainer from "./components/Login/LoginContainer";
 import Navbar from "./components/Navbar/Navbar";
 import {WithSuspense} from "./HOC/withSuspense";
+import {getInitialized} from "./Redux/selectors/appSelectors";
 
 const DialogsContainer = lazy(() => import('./components/Dialogs/DialogsContainer'));
 const NewsContainer = lazy(() => import('./components/News/NewsContainer'));
@@ -41,7 +42,7 @@ const App = ({initializeApp, initialized}) => {
     )
         ;
 };
-const mapStateToProps = ({app}) => ({initialized: app.initialized});
+const mapStateToProps = ({app}) => ({initialized: getInitialized(app)});
 const AppContainer = compose(
     withRouter,
     connect(mapStateToProps, {
