@@ -1,15 +1,14 @@
 import React from 'react';
 import s from './ProfileData.module.scss';
-import avatar from '../../../../assets/images/maleAvatar.jpg';
 
-const ProfileData = ({profileData, isOwner, savePhoto}) => {
+const ProfileData = ({profileData, isOwner, goToEditMode}) => {
     return (
         <div>
             <h2>Profile Info</h2>
-            <div>
-                <img src={profileData.photos.large ? profileData.photos.large : avatar} className={s.imgMain}/>
-                {isOwner && <input type="file" onChange={savePhoto}/>}
-            </div>
+            {isOwner && <div>
+                <button onClick={goToEditMode}>Edit information</button>
+            </div>}
+
             <div className={s.descriptionBlock}>
                 <div>
                     <b>Full name:</b> {profileData.fullName ? profileData.fullName : "No info"}
@@ -30,34 +29,20 @@ const ProfileData = ({profileData, isOwner, savePhoto}) => {
                 </div>
                 }
                 <div>
-                    <ContactsData contactTitle={Object.keys(profileData.contacts)}
-                                  contactValue={Object.values(profileData.contacts)}/>
+                    <b>Contacts: {Object.keys(profileData.contacts)
+                        .map((c => {
+                            return <ContactsData key={c} contactTitle={c} contactValue={profileData.contacts[c]}/>
+                        }))}
+                    </b>
                 </div>
             </div>
+
         </div>
     )
 };
 const ContactsData = ({contactTitle, contactValue}) => {
     return (
-        <>
-            <h4 className={s.contactsHeading}>Contacts: </h4>
-            <ul className={s.contactsLists}>
-                <div>
-                    {contactTitle.map((t) => {
-                        return (
-                            <li><b>{t}</b></li>
-                        )
-                    })}
-                </div>
-                <div>
-                    {contactValue.map((v) => {
-                        return (
-                            <li><b>{v}</b></li>
-                        )
-                    })}
-                </div>
-            </ul>
-        </>
+        <div className={s.contactsData}><b>{contactTitle}</b>: {contactValue}</div>
     )
 };
 export default ProfileData;
