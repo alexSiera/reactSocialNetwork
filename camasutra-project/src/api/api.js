@@ -79,8 +79,22 @@ export const profileAPI = {
         catch (e) {
             console.log(e)
         }
+    },
+    saveProfileData: async (profileData) => {
+        try {
+            const {aboutMe, fullName, lookingForAJob, lookingForAJobDescription} = profileData;
+            const userStatus = await instance.put(`profile`, {
+                "aboutMe": aboutMe,
+                "lookingForAJob": lookingForAJob,
+                "lookingForAJobDescription": lookingForAJobDescription,
+                "fullName": fullName
+            });
+            return userStatus;
+        }
+        catch (e) {
+            console.log(e)
+        }
     }
-
 };
 export const authAPI = {
     getAuthMe: async () => {

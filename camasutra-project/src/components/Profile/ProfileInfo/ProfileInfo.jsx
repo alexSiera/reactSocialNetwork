@@ -6,7 +6,7 @@ import ProfileData from "./ProfileData/ProfileData";
 import ProfileDataForm from "./ProfileData/ProfileDataForm";
 import avatar from "../../../assets/images/maleAvatar.jpg";
 
-const ProfileInfo = ({profileData, updateUserStatus, status, isOwner, savePhoto}) => {
+const ProfileInfo = ({profileData, updateUserStatus, status, isOwner, savePhoto,saveProfileData}) => {
     const [editMode, setEditMode] = useState(false);
     if (!profileData) return <Preloader/>;
     const onMainPhotoSelected = (e) => {
@@ -15,12 +15,13 @@ const ProfileInfo = ({profileData, updateUserStatus, status, isOwner, savePhoto}
             savePhoto(file);
         }
     };
-    const onProfileDataFormSubmit = ({profileFormData}) => {
-
+    const onProfileDataFormSubmit = (profileFormData) => {
+        setEditMode(false);
+        saveProfileData(profileFormData);
     };
     return (
         <div>
-            <div>
+            <div className={s.profileAvatar}>
                 <img src={profileData.photos.large ? profileData.photos.large : avatar} className={s.imgMain}/>
                 {isOwner && <input type="file" onChange={onMainPhotoSelected}/>}
             </div>

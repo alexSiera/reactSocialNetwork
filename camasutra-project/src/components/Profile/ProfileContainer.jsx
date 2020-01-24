@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {withRouter} from 'react-router-dom';
 import {
     getUserProfileThunkCreator,
-    getUserStatusThunkCreator, savePhotoThunkCreator,
+    getUserStatusThunkCreator, savePhotoThunkCreator, saveProfileDataThunkCreator,
     updateStatusThunkCreator
 } from "../../Redux/reducers/profileReducer";
 import {compose} from "redux";
@@ -25,7 +25,7 @@ const ProfileContainer = (props) => {
         refreshProfile();
     }, [props.match.params.userId]);
     return (
-        <Profile {...props} isOwner={!props.match.params.userId} savePhoto={props.savePhoto} />
+        <Profile {...props} isOwner={!props.match.params.userId} savePhoto={props.savePhoto} saveProfileData={props.saveProfileData} />
     )
 }
 const mapStateToProps = ({profilePage, auth}) => {
@@ -41,7 +41,8 @@ export default compose(
         getUserProfile: getUserProfileThunkCreator,
         getUserStatus: getUserStatusThunkCreator,
         updateUserStatus: updateStatusThunkCreator,
-        savePhoto: savePhotoThunkCreator
+        savePhoto: savePhotoThunkCreator,
+        saveProfileData: saveProfileDataThunkCreator
     }),
     withRouter,
 )(ProfileContainer);

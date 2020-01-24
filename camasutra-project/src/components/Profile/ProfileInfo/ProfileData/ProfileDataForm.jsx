@@ -17,13 +17,19 @@ const ProfileDataForm = ({handleSubmit, profileData}) => {
             <div className={s.formDataItems}>
                 <label><b>About me:</b> </label>
                 <div className={s.formDataItemsInput}>
-                    {createField("Enter about me info", "about",[maxLength15], Input, {type: "text"})}
+                    {createField("Enter about me info", "aboutMe",[maxLength15], Input, {type: "text"})}
                 </div>
             </div>
             <div className={s.formDataItems}>
-                <label><b>Job Status:</b> </label>
+                <label><b>Skills:</b> </label>
                 <div className={s.formDataItemsInput}>
-                    {createField("Enter job status", "jobStatus",[maxLength15], Input, {type: "text"})}
+                    {createField("Enter you skills", "lookingForAJobDescription",[maxLength15], Input, {type: "text"})}
+                </div>
+            </div>
+            <div className={s.formDataItems}>
+                <label><b>Are you looking for a job ?</b> </label>
+                <div className={s.formDataItemsInput}>
+                    {createField("Enter job status", "lookingForAJob",[], Input, {type: "checkbox"})}
                 </div>
             </div>
             <div className={s.formSubmitBtn}>
