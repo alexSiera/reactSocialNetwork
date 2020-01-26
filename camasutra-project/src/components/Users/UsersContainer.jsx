@@ -28,16 +28,16 @@ const UsersContainer = (props) => {
     };
     useEffect(() => {
         props.getUsers(props.currentSelectedPage, props.pageSize)
-    }, [props.currentSelectedPage,props.pageSize]);
+    }, [props.currentSelectedPage, props.pageSize]);
 
- return <>
-            {props.isFetching ? <Preloader/> : null}
-            <Users
-                {...props}
-                onPageChanged={onPageChanged}
-                subscribe={onSubscribe}
-                unSubscribe={onUnSubscribe}
-            /></>
+    return <>
+        {props.isFetching ? <Preloader/> : null}
+        <Users
+            {...props}
+            onPageChanged={onPageChanged}
+            subscribe={onSubscribe}
+            unSubscribe={onUnSubscribe}
+        /></>
 };
 const mapStateToProps = state => {
     return {

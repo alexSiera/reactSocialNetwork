@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import s from "./Pagination.module.scss";
+import cn from 'classnames';
 
 const Pagination = ({onPageChanged, currentSelectedPage, totalItemsCount, pageSize, portionSize = 10}) => {
     const pagesCount = Math.ceil(totalItemsCount / pageSize);
@@ -13,7 +14,7 @@ const Pagination = ({onPageChanged, currentSelectedPage, totalItemsCount, pageSi
     const rightPortionPageNumber = portionNumber * portionSize;
     return (
         <div className={s.paginationBlock}>
-            <div className={s.paginator}>
+            <div className={ cn(s.paginator)}>
                 {portionNumber > 1 &&
                 <button onClick={() => {
                     setPortionNumber(portionNumber - 1)
@@ -40,9 +41,8 @@ const Pagination = ({onPageChanged, currentSelectedPage, totalItemsCount, pageSi
 const PaginationElement = ({id, onPageChanged, currentSelectedPage}) => {
     return (
         <span key={id} id={id} onClick={() => onPageChanged(id)}
-              className={id === currentSelectedPage ?
-                  `${s.selectedPage} ${s.pageNum}` : s.pageNum}>
-                            {id}
+              className={ cn ({[s.selectedPage] : currentSelectedPage === id }, s.pageNum)}>
+        {id}
         </span>
     )
 

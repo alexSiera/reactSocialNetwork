@@ -27,7 +27,7 @@ const ProfileContainer = (props) => {
         refreshProfile();
     }, [props.match.params.userId]);
     return (
-        <Profile {...props} profileUpdateStatusSuccess={props.profileUpdateStatusSuccess} isOwner={!props.match.params.userId} savePhoto={props.savePhoto} saveProfileData={props.saveProfileData} />
+        <Profile {...props} isOwner={!props.match.params.userId} />
     )
 }
 const mapStateToProps = ({profilePage, auth}) => {

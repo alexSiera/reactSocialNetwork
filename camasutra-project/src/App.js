@@ -21,10 +21,19 @@ const Settings = lazy(() => import('./components/Settings/Settings'));
 const Music = lazy(() => import('./components/Music/Music'));
 
 const App = ({initializeApp, initialized}) => {
+
     useEffect(() => {
             initializeApp();
+            window.addEventListener("unhandledrejection", catchAllUnhandledErrors);
+            return () => {
+                window.removeEventListener("unhandledrejection", catchAllUnhandledErrors)
+            }
         }
         , []);
+    const catchAllUnhandledErrors = (promiseRejectectionEvent) => {
+        alert("some error occured");
+        console.error(promiseRejectectionEvent);
+    };
     if (!initialized) return <Preloader/>;
     return (
         <div className="app-wrapper">
@@ -39,8 +48,8 @@ const App = ({initializeApp, initialized}) => {
                     <Route path="/news" render={WithSuspense(NewsContainer)}/>
                     <Route path="/settings" render={WithSuspense(Settings)}/>
                     <Route path="/login" render={() => <LoginContainer/>}/>
-                    <Redirect from="/" exact  to="/profile/"/>
-                    <Route path="*" render={() => <NotFound />}/>
+                    <Redirect from="/" exact to="/profile/"/>
+                    <Route path="*" render={() => <NotFound/>}/>
 
                 </Switch>
             </div>
