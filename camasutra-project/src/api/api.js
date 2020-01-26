@@ -123,5 +123,16 @@ export const authAPI = {
         }
     }
 };
+export const securityAPI = {
+    getCaptcha: async () => {
+        try {
+            const response = await instance.get(`security/get-captcha-url`);
+            return response;
+        }
+        catch (e) {
+            console.log(e)
+        }
+    }
+};
 
 

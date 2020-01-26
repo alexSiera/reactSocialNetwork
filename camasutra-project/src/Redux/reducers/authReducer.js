@@ -1,14 +1,15 @@
-import {authAPI} from "../../api/api";
+import {authAPI, securityAPI} from "../../api/api";
 import {stopSubmit} from 'redux-form';
 
 const SET_USER_DATA = 'auth/SET-USER-DATA';
 const CLEAR_USER_DATA = 'auth/CLEAR_USER_DATA';
-
+const SET_CAPTCHA = 'auth/SET_CAPTCHA'
 const initialState = {
     userId: null,
     email: null,
     login: null,
-    isAuth: false
+    isAuth: false,
+    captchaUrl: null
 };
 const authReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -26,8 +27,19 @@ const authReducer = (state = initialState, action) => {
                 login: null,
                 isAuth: false
             };
+        case SET_CAPTCHA :
+            return {
+                ...state,
+                captchaUrl: action.captchaImg
+            };
         default:
             return state;
+    }
+};
+export const setCaptcha = (captchaImg) => {
+    return {
+        type: SET_CAPTCHA,
+        captchaImg
     }
 };
 export const setAuthUserDataAC = (userId, email, login) => {
@@ -60,10 +72,20 @@ export const loginMeThunkCreator = (email, password, rememberMe = false) => asyn
         const res = await authAPI.login(email, password, rememberMe);
         if (res.data.resultCode === 0) {
             dispatch(authMeThunkCreator());
-        } else {
+        }
+        else {
             const message = res.data.messages.length > 0 ? res.data.messages[0] : "Some error";
             dispatch(stopSubmit('login', {_error: message}));
         }
+    }
+    catch (e) {
+        console.log(e);
+    }
+};
+export const getAndSetCaptchaImage = () => async dispatch => {
+    try {
+        const response = await securityAPI.getCaptcha();
+        dispatch(setCaptcha(response.data.url));
     }
     catch (e) {
         console.log(e);

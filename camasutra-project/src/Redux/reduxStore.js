@@ -19,8 +19,7 @@ const reducers = combineReducers({
     auth: authReducer,
     form: formReducer,
     app: appReducer,
-
-})
+});
 
 const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunkMiddleware)));
 window.__store__ = store;
