@@ -103,7 +103,7 @@ export const authAPI = {
             console.log(e)
         }
     },
-    login: async (email, password, rememberMe = false) => {
+    login: async (email, password, rememberMe = false, captcha = null) => {
         try {
             return await instance.post(`/auth/login`, {
                 email, password, rememberMe

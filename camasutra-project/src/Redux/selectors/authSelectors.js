@@ -4,3 +4,6 @@ export const getUserId = (auth) => {
 export const getIsAuth = (auth) => {
     return auth.userId;
 };
+export const getCaptchaUrl = (auth) => {
+    return auth.captchaUrl
+};
