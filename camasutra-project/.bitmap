@@ -242,9 +242,9 @@
                 "name": "Post.module.scss"
             },
             {
-                "relativePath": "src/components/Profile/Profile.jsx",
+                "relativePath": "src/components/Profile/NotFound.jsx",
                 "test": false,
-                "name": "Profile.jsx"
+                "name": "NotFound.jsx"
             },
             {
                 "relativePath": "src/components/Profile/Profile.module.scss",
@@ -287,7 +287,7 @@
                 "name": "ProfileStatusClass.test.jsx"
             }
         ],
-        "mainFile": "src/components/Profile/Profile.jsx",
+        "mainFile": "src/components/Profile/NotFound.jsx",
         "trackDir": "src/components/Profile",
         "origin": "AUTHORED",
         "exported": false
