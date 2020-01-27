@@ -1,0 +1,1 @@
+{"version":3,"sources":["OneNew.module.scss","NewsForm.scss"],"names":[],"mappings":"AAAA,8BACE,oBAAqB,CAGvB,yBACE,cAAe,CCLjB,UACE,eAAgB,CAChB,gBAAiB","file":"5.ee7e113a.chunk.css","sourcesContent":[".oneNewListItem {\n  list-style-type: none;\n\n}\n.oneNewImg {\n  max-width: 80px;\n}\n",".textArea {\n  margin-top: 60px;\n  margin-left: 30px;\n}\n"]}
