@@ -1,6 +1,10 @@
 import {stopSubmit} from "redux-form";
+import {Dispatch} from "redux";
+import {profileAPI} from "../../../api/api";
+import {savePhotoSuccess, setProfileAC, setUserStatusAC} from "../../reducers/profile/actions";
+import {ProfileData} from "../../reducers/profile/types";
 
-export const getUserProfileThunkCreator = (userId) => async (dispatch) => {
+export const getUserProfileThunkCreator = (userId: number) => async (dispatch: Dispatch) => {
     try {
         const profile = await profileAPI.getUserProfile(userId);
         dispatch(setProfileAC(profile));
@@ -8,7 +12,7 @@ export const getUserProfileThunkCreator = (userId) => async (dispatch) => {
         console.log(e)
     }
 };
-export const getUserStatusThunkCreator = (userId) => async (dispatch) => {
+export const getUserStatusThunkCreator = (userId: number) => async (dispatch: Dispatch) => {
     try {
         const status = await profileAPI.getStatus(userId);
         dispatch(setUserStatusAC(status));
@@ -16,7 +20,7 @@ export const getUserStatusThunkCreator = (userId) => async (dispatch) => {
         console.log(e)
     }
 };
-export const updateStatusThunkCreator = (status) => async (dispatch) => {
+export const updateStatusThunkCreator = (status: string) => async (dispatch: Dispatch) => {
     try {
         const serverStatus = await profileAPI.updateStatus(status);
         if (serverStatus.data.resultCode === 0) dispatch(setUserStatusAC(status));
@@ -24,7 +28,7 @@ export const updateStatusThunkCreator = (status) => async (dispatch) => {
         console.log(e)
     }
 };
-export const savePhotoThunkCreator = (file) => async (dispatch) => {
+export const savePhotoThunkCreator = (file: File) => async (dispatch: Dispatch) => {
     try {
         const response = await profileAPI.savePhoto(file);
         if (response.data.resultCode === 0) dispatch(savePhotoSuccess(response.data.data.photos));
@@ -32,15 +36,17 @@ export const savePhotoThunkCreator = (file) => async (dispatch) => {
         console.log(e)
     }
 };
-export const saveProfileDataThunkCreator = (profileData) => async (dispatch, getState) => {
+// @ts-ignore
+export const saveProfileDataThunkCreator = (profileData: ProfileData) => async (dispatch: Dispatch, getState: any) => {
     try {
         const userId = getState().auth.userId;
         const response = await profileAPI.saveProfileData(profileData);
         if (response.data.resultCode === 0) {
+            // @ts-ignore
             dispatch(getUserProfileThunkCreator(userId));
         }
         else {
-            const message = response.data.messages.length > 0 ? response.data.messages[0] : "Some error";
+            const message: Array<string> = response.data.messages.length > 0 ? response.data.messages[0] : "Some error";
             dispatch(stopSubmit('edit-profile', {_error: message}));
             return Promise.reject(response.data.messages[0]);
         }

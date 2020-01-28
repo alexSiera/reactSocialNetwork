@@ -2,19 +2,20 @@ import {stopSubmit} from "redux-form";
 import {AuthState} from "../../reducers/auth/types";
 import { ThunkAction } from "redux-thunk";
 import { Action } from "redux";
-import {authAPI} from "../../../api/api";
+import {authAPI, securityAPI} from "../../../api/api";
+import {clearLoginDataAC, setAuthUserDataAC, setCaptcha} from "../../reducers/auth/actions";
 
-export const authMeThunkCreator = (): ThunkAction<void, AuthState, null, null> => async (dispatch) => {
+export const authMeThunkCreator = (): ThunkAction<void, AuthState, null, any> => async (dispatch) => {
     try {
-        const authData = await authAPI.getAuthMe();
+        const authData: AuthState = await authAPI.getAuthMe();
         if (!authData || Object.keys(authData).length === 0) throw new Error("You loggin is not pass");
-        const {id, email, login} = authData;
-        dispatch(setAuthUserDataAC(id, email, login, true));
+        const data = {...authData, isAuth: true};
+        dispatch(setAuthUserDataAC(data));
     } catch (e) {
         console.log(e)
     }
 };
-export const loginMeThunkCreator = (email, password, rememberMe = false, captcha) => async (dispatch) => {
+export const loginMeThunkCreator = (email: string, password: string, rememberMe: boolean = false, captcha: string): ThunkAction<void, AuthState, null, Action<string>> => async (dispatch) => {
     try {
         const res = await authAPI.login(email, password, rememberMe, captcha);
         if (res.data.resultCode === 0) dispatch(authMeThunkCreator()); // success, get auth data
@@ -27,7 +28,8 @@ export const loginMeThunkCreator = (email, password, rememberMe = false, captcha
         console.log(e);
     }
 };
-export const getAndSetCaptchaImage = () => async dispatch => {
+
+export const getAndSetCaptchaImage = (): ThunkAction<void, AuthState, null, any> => async (dispatch) => {
     try {
         const response = await securityAPI.getCaptcha();
         dispatch(setCaptcha(response.data.url));
@@ -35,7 +37,7 @@ export const getAndSetCaptchaImage = () => async dispatch => {
         console.log(e);
     }
 };
-export const logoutMeThunkCreator = () => async (dispatch) => {
+export const logoutMeThunkCreator = (): ThunkAction<void, AuthState, null, any> => async (dispatch) => {
     try {
         const resCode = await authAPI.logOut();
         if (resCode === 0) dispatch(clearLoginDataAC());
