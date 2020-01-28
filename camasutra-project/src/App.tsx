@@ -20,8 +20,11 @@ const ProfileContainer = lazy(() => import('./components/Profile/ProfileContaine
 const Settings = lazy(() => import('./components/Settings/Settings'));
 const Music = lazy(() => import('./components/Music/Music'));
 
-const App = ({initializeApp, initialized}) => {
-
+interface AppProps {
+    initializeApp: () => void
+    initialized: boolean
+}
+const App: React.FC<AppProps> = ({initializeApp, initialized}) => {
     useEffect(() => {
             initializeApp();
             window.addEventListener("unhandledrejection", catchAllUnhandledErrors);
@@ -30,7 +33,7 @@ const App = ({initializeApp, initialized}) => {
             }
         }
         , []);
-    const catchAllUnhandledErrors = (promiseRejectectionEvent) => {
+    const catchAllUnhandledErrors = (promiseRejectectionEvent: any) => {
         alert("some error occured");
         console.error(promiseRejectectionEvent);
     };
@@ -50,24 +53,25 @@ const App = ({initializeApp, initialized}) => {
                     <Route path="/login" render={() => <LoginContainer/>}/>
                     <Redirect from="/" exact to="/profile/"/>
                     <Route path="*" render={() => <NotFound/>}/>
-
                 </Switch>
             </div>
         </div>
     )
         ;
 };
-const mapStateToProps = ({app}) => ({initialized: getInitialized(app)});
+// @ts-ignore
+const mapStateToProps = ({app: any}) => ({initialized: getInitialized(app)});
 const AppContainer = compose(
     withRouter,
     connect(mapStateToProps, {
         initializeApp
     })
 )(App);
-const SamuraiJSApp = (props) => {
+const SamuraiJSApp = () => {
     return (
         <HashRouter>
             <Provider store={store}>
+                // @ts-ignore
                 <AppContainer/>
             </Provider>
         </HashRouter>
