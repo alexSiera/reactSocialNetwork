@@ -1,5 +1,5 @@
 import React from 'react';
-import {addDialogAC as dialogTextAreaSubmit } from "../../Redux/reducers/dialogsReducer";
+import {addDialogAC as dialogTextAreaSubmit } from "../../Redux/reducers/dialogs/dialogsReducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {withAuthRedirect} from "../../HOC/withAuthRedirect";

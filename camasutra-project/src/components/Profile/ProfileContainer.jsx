@@ -6,7 +6,7 @@ import {
     getUserProfileThunkCreator,
     getUserStatusThunkCreator, savePhotoThunkCreator, saveProfileDataThunkCreator,
     updateStatusThunkCreator
-} from "../../Redux/reducers/profileReducer";
+} from "../../Redux/reducers/profile/profileReducer";
 import {compose} from "redux";
 import {getProfileData, getProfileUpdateStatus, getStatus} from "../../Redux/selectors/profileSelectors";
 import {getIsAuth, getUserId} from "../../Redux/selectors/authSelectors";

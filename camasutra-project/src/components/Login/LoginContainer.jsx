@@ -1,5 +1,5 @@
 import React from 'react';
-import {loginMeThunkCreator} from "../../Redux/reducers/authReducer";
+import {loginMeThunkCreator} from "../../Redux/reducers/auth/authReducer";
 import Login from "./Login";
 import {connect} from "react-redux";
 import {getCaptchaUrl, getIsAuth} from "../../Redux/selectors/authSelectors";

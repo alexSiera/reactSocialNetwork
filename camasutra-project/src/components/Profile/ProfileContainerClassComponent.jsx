@@ -6,7 +6,7 @@ import {
     getUserProfileThunkCreator,
     getUserStatusThunkCreator,
     updateStatusThunkCreator
-} from "../../Redux/reducers/profileReducer";
+} from "../../Redux/reducers/profile/profileReducer";
 // import {withAuthRedirect} from "../../HOC/withAuthRedirect";
 import {compose} from "redux";
 class ProfileContainer extends Component {

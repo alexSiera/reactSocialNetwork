@@ -1,5 +1,5 @@
 import React from 'react';
-import {addNewsAC as addNews } from "../../Redux/reducers/newsReducer";
+import {addNewsAC as addNews } from "../../Redux/reducers/news/newsReducer";
 import News from "./News";
 import {connect} from "react-redux";
 import {getNewsPage} from "../../Redux/selectors/newsSelectors";

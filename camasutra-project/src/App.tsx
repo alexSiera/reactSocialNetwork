@@ -1,11 +1,12 @@
 import React, {useEffect, lazy, FC} from "react";
 import "./App.scss";
 import Preloader from "./components/Common/Preloader/Preloader";
-import store from "./Redux/store/reduxStore";
 import {compose} from 'redux';
 import {connect, Provider} from "react-redux";
 import {Route, withRouter, HashRouter, Switch, Redirect} from "react-router-dom";
-import {initializeApp} from "./Redux/reducers/appReducer";
+import {initializeApp} from "./Redux/reducers/app/reducers";
+import {getPath} from "./router-path";
+import configureStore, {AppState} from "./Redux/store/reduxStore";
 import UsersContainer from "./components/Users/UsersContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginContainer from "./components/Login/LoginContainer";
@@ -13,8 +14,6 @@ import Navbar from "./components/Navbar/Navbar";
 import {WithSuspense} from "./HOC/withSuspense";
 import {getInitialized} from "./Redux/selectors/appSelectors";
 import NotFound from "./components/NotFound/NotFound";
-import {getPath} from "./router-path";
-import { RootState } from 'MyTypes';
 
 const DialogsContainer = lazy(() => import('./components/Dialogs/DialogsContainer'));
 const NewsContainer = lazy(() => import('./components/News/NewsContainer'));
@@ -22,12 +21,12 @@ const ProfileContainer = lazy(() => import('./components/Profile/ProfileContaine
 const Settings = lazy(() => import('./components/Settings/Settings'));
 const Music = lazy(() => import('./components/Music/Music'));
 
-type OwnProps = {
-    initializeApp: () => void,
+interface AppProps {
+    initializeApp: () => null,
     initialized: boolean
 }
-
-const App: FC = ({initializeApp, initialized}: Props) => {
+const store = configureStore();
+const App: FC<AppProps> = ({initializeApp, initialized}) => {
     useEffect(() => {
             initializeApp();
             window.addEventListener("unhandledrejection", catchAllUnhandledErrors);
@@ -62,8 +61,7 @@ const App: FC = ({initializeApp, initialized}: Props) => {
     )
         ;
 };
-const mapStateToProps = (state: RootState) => ({initialized: getInitialized(state.app)});
-type Props = ReturnType<typeof mapStateToProps>;
+const mapStateToProps = (state: AppState) => ({initialized: getInitialized(state.app)});
 
 const AppContainer = compose(
     withRouter,

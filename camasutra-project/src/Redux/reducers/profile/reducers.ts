@@ -1,12 +1,11 @@
 
-import {authMeThunkCreator} from "./authReducer";
-const INITIALIZED_SUCCESS = 'app/INITIALIZED_SUCCESS';
+import {authMeThunkCreator} from "../auth/authReducer";
+import {AppActionTypes, ApplicationState, INITIALIZED_SUCCESS} from "./types";
 
-const initialState = {
-    initialized: false,
-
+const initialState: ApplicationState = {
+    initialized: false
 };
-const appReducer = (state = initialState, action) => {
+const appReducer = (state = initialState, action: AppActionTypes): ApplicationState => {
     switch (action.type) {
         case INITIALIZED_SUCCESS :
             return {

@@ -4,7 +4,7 @@ import {
     unFollowThunkCreator,
     requestUsersThunkCreator,
     selectPageAC as selectPage,
-} from "../../Redux/reducers/usersReducer";
+} from "../../Redux/reducers/users/usersReducer";
 import {connect} from "react-redux";
 import Users from "./Users";
 import Preloader from "../Common/Preloader/Preloader";

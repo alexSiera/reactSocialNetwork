@@ -3,7 +3,7 @@ import Header from "./Header";
 import {
     logoutMeThunkCreator,
     setAuthUserDataAC as setAuthUserData
-} from "../../Redux/reducers/authReducer";
+} from "../../Redux/reducers/auth/authReducer";
 import {connect} from "react-redux";
 
 const HeaderContainer = (props) => {

@@ -1,5 +1,7 @@
-const ADD_DIALOG = 'dialogs/ADD_DIALOG';
-const initialState = {
+import {ADD_DIALOG, DialogsActionTypes, DialogsState, messageData} from "./types";
+
+
+const initialState: DialogsState = {
     messagesData: [{
         id: 121,
         message: "Ok!",
@@ -31,26 +33,19 @@ const initialState = {
         name: "Killer"
     }],
 };
-const dialogsReducer = (state = initialState, action) => {
+const dialogsReducer = (state = initialState, action: DialogsActionTypes): DialogsState => {
     switch (action.type) {
         case ADD_DIALOG:
-            const newDialog = {
+            const newDialog: messageData = {
                 id: Math.floor(Math.random() * 100),
-                message: action.newMessage,
+                message: action.payload,
                 likesCount: Math.floor(Math.random() * 300)
-            }
+            };
             return {
                 ...state,
                 messagesData: [...state.messagesData, newDialog],
-            }
-        default:
-            return state;
-    }
-};
-export const addDialogAC = (newMessage) => {
-    return {
-        type: ADD_DIALOG,
-        newMessage
+            };
+        default: return state;
     }
 };
 
