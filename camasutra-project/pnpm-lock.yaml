@@ -21,14 +21,15 @@ devDependencies:
   '@types/node': 13.5.0
   '@types/react': 16.9.19
   '@types/react-dom': 16.9.5
-  '@types/react-form': 2.16.2
   '@types/react-redux': 7.1.7
   '@types/react-router-dom': 5.1.3
+  '@types/redux-form': 8.2.0
   gh-pages: 2.2.0
   identity-obj-proxy: 3.0.0
   redux-devtools-extension: 2.13.8_redux@4.0.5
   source-map-loader: 0.2.4
   ts-loader: 6.2.1_typescript@3.7.5
+  tslib: 1.10.0
   typescript: 3.7.5
 lockfileVersion: 5.1
 packages:
@@ -2193,12 +2194,6 @@ packages:
     dev: true
     resolution:
       integrity: sha512-BX6RQ8s9D+2/gDhxrj8OW+YD4R+8hj7FEM/OJHGNR0KipE1h1mSsf39YeyC81qafkq+N3rU3h3RFbLSwE5VqUg==
-  /@types/react-form/2.16.2:
-    dependencies:
-      '@types/react': 16.9.19
-    dev: true
-    resolution:
-      integrity: sha512-hXWSs5M3OdTbgQHk8q5X1/VhttJz/VgOt3B9ZDj5z8mPv9eaaI5O/h/DUmE8EaGSGoZ1pluDPbhqo0sTmTjRew==
   /@types/react-redux/7.1.7:
     dependencies:
       '@types/hoist-non-react-statics': 3.3.1
@@ -2230,6 +2225,13 @@ packages:
     dev: true
     resolution:
       integrity: sha512-LJV97//H+zqKWMms0kvxaKYJDG05U2TtQB3chRLF8MPNs+MQh/H1aGlyDUxjaHvu08EAGerdX2z4LTBc7ns77A==
+  /@types/redux-form/8.2.0:
+    dependencies:
+      '@types/react': 16.9.19
+      redux: 4.0.5
+    dev: true
+    resolution:
+      integrity: sha512-tC3DGzd7hvunwjcb+8VOuzaRq+/m56aw5zujHE8AsZs0ZjqIpJDrq95T40Wms7cAazfR+02hpQS/NzsNJICoJA==
   /@types/stack-utils/1.0.1:
     dev: false
     resolution:
@@ -11600,7 +11602,6 @@ packages:
     resolution:
       integrity: sha512-1J/vefLC+BWSo+qe8OnJQfWTYRS6ingxjwqmHMqaMxXMj7kFtKLgAaYW3JeX3mktjgUL+etlU8/B4VUAUI9QGw==
   /tslib/1.10.0:
-    dev: false
     resolution:
       integrity: sha512-qOebF53frne81cf0S9B41ByenJ3/IuH8yJKngAX35CmiZySA0khhkovshKK+jGCaMnVomla7gVlIcc3EvKPbTQ==
   /tsutils/3.17.1_typescript@3.7.5:
@@ -12439,9 +12440,9 @@ specifiers:
   '@types/node': ^13.5.0
   '@types/react': ^16.9.19
   '@types/react-dom': ^16.9.5
-  '@types/react-form': ^2.16.2
   '@types/react-redux': ^7.1.7
   '@types/react-router-dom': ^5.1.3
+  '@types/redux-form': ^8.2.0
   axios: ^0.19.1
   classnames: ^2.2.6
   gh-pages: ^2.2.0
@@ -12461,4 +12462,5 @@ specifiers:
   reselect: ^4.0.0
   source-map-loader: ^0.2.4
   ts-loader: ^6.2.1
+  tslib: ^1.10.0
   typescript: ^3.7.5

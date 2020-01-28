@@ -1,7 +1,7 @@
-import React, {useEffect, lazy} from "react";
+import React, {useEffect, lazy, FC} from "react";
 import "./App.scss";
 import Preloader from "./components/Common/Preloader/Preloader";
-import store from "./Redux/reduxStore";
+import store from "./Redux/store/reduxStore";
 import {compose} from 'redux';
 import {connect, Provider} from "react-redux";
 import {Route, withRouter, HashRouter, Switch, Redirect} from "react-router-dom";
@@ -13,6 +13,8 @@ import Navbar from "./components/Navbar/Navbar";
 import {WithSuspense} from "./HOC/withSuspense";
 import {getInitialized} from "./Redux/selectors/appSelectors";
 import NotFound from "./components/NotFound/NotFound";
+import {getPath} from "./router-path";
+import { RootState } from 'MyTypes';
 
 const DialogsContainer = lazy(() => import('./components/Dialogs/DialogsContainer'));
 const NewsContainer = lazy(() => import('./components/News/NewsContainer'));
@@ -20,11 +22,12 @@ const ProfileContainer = lazy(() => import('./components/Profile/ProfileContaine
 const Settings = lazy(() => import('./components/Settings/Settings'));
 const Music = lazy(() => import('./components/Music/Music'));
 
-interface AppProps {
-    initializeApp: () => void
+type OwnProps = {
+    initializeApp: () => void,
     initialized: boolean
 }
-const App: React.FC<AppProps> = ({initializeApp, initialized}) => {
+
+const App: FC = ({initializeApp, initialized}: Props) => {
     useEffect(() => {
             initializeApp();
             window.addEventListener("unhandledrejection", catchAllUnhandledErrors);
@@ -44,23 +47,24 @@ const App: React.FC<AppProps> = ({initializeApp, initialized}) => {
             <Navbar/>
             <div className="app-wrapper-content">
                 <Switch>
-                    <Route path="/dialogs" render={WithSuspense(DialogsContainer)}/>
-                    <Route path="/profile/:userId?" render={WithSuspense(ProfileContainer)}/>
-                    <Route path="/users" render={() => <UsersContainer/>}/>
-                    <Route path="/music" render={WithSuspense(Music)}/>
-                    <Route path="/news" render={WithSuspense(NewsContainer)}/>
-                    <Route path="/settings" render={WithSuspense(Settings)}/>
-                    <Route path="/login" render={() => <LoginContainer/>}/>
-                    <Redirect from="/" exact to="/profile/"/>
-                    <Route path="*" render={() => <NotFound/>}/>
+                    <Route path={getPath('dialogs')} render={WithSuspense(DialogsContainer)}/>
+                    <Route path={getPath('profile', ':userId?')} render={WithSuspense(ProfileContainer)}/>
+                    <Route path={getPath('users')} render={() => <UsersContainer/>}/>
+                    <Route path={getPath('music')} render={WithSuspense(Music)}/>
+                    <Route path={getPath('news')} render={WithSuspense(NewsContainer)}/>
+                    <Route path={getPath('settings')} render={WithSuspense(Settings)}/>
+                    <Route path={getPath('login')} render={() => <LoginContainer/>}/>
+                    <Redirect from="/" exact to={getPath('profile')}/>
+                    <Route path={getPath('notFound')} render={() => <NotFound/>}/>
                 </Switch>
             </div>
         </div>
     )
         ;
 };
-// @ts-ignore
-const mapStateToProps = ({app: any}) => ({initialized: getInitialized(app)});
+const mapStateToProps = (state: RootState) => ({initialized: getInitialized(state.app)});
+type Props = ReturnType<typeof mapStateToProps>;
+
 const AppContainer = compose(
     withRouter,
     connect(mapStateToProps, {
