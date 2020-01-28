@@ -7,11 +7,8 @@ export const SET_TOTAL_USERS_COUNT = 'users/SET_TOTAL-USERS_COUNT';
 export const TOGGLE_IS_FETCHING = 'users/TOGGLE_IS_FETCHING';
 export const TOGGLE_IS_FOLLOWING_IN_PROGRESS = 'users/TOGGLE_IS_FOLLOWING_IN_PROGRESS';
 // Describing the shape of the app's slice of state
-export interface Initializing {
-    initialized: boolean
-}
 export interface UsersState {
-    users: Array<Users>,
+    users: Users,
     pageSize: number
     totalUsersCount: number
     currentSelectedPage: number
@@ -19,15 +16,15 @@ export interface UsersState {
     followingInProgress: number[]
 }
 export interface Users {
-    name: string | null
-    id: number | null
+    name: string
+    id: number
     photos: {
-        small: string | null
-        large: string | null
+        small: string
+        large: string
     }
-    uniqueUrlName: any | null
-    status: string | null
-    followed: boolean | null
+    uniqueUrlName: any
+    status: string
+    followed: boolean
 }
 
 interface FollowingProgressItems {

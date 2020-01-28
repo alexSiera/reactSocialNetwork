@@ -1,30 +1,16 @@
+import {
+    ADD_POST,
+    DELETE_POST,
+    Photos,
+    ProfileData,
+    SAVE_PHOTO_SUCCESS,
+    SET_USER_PROFILE,
+    SET_USER_STATUS
+} from "./types";
 
-import {authMeThunkCreator} from "../auth/authReducer";
-const INITIALIZED_SUCCESS = 'app/INITIALIZED_SUCCESS';
 
-const initialState = {
-    initialized: false,
-
-};
-const appReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case INITIALIZED_SUCCESS :
-            return {
-                ...state,
-                initialized: true
-            };
-        default: return state;
-    }
-};
-export const initializingSuccess = () => ({type: INITIALIZED_SUCCESS});
-
-export const initializeApp = () => async (dispatch) => {
-    try {
-        const promise = await dispatch(authMeThunkCreator());
-        dispatch(initializingSuccess());
-    }
-    catch (e) {
-        console.log(e)
-    }
-};
-export default appReducer;
+export const addPostAC = (newPost: string) => ({type: ADD_POST, payload: newPost});
+export const setProfileAC = (profileData: ProfileData) => ({type: SET_USER_PROFILE, payload: profileData});
+export const setUserStatusAC = (status: string) => ({type: SET_USER_STATUS, payload: status});
+export const savePhotoSuccess = (photos: Photos) => ({type: SAVE_PHOTO_SUCCESS, payload: photos});
+export const deletePostAC = (id: number) => ({type: DELETE_POST, payload: id});
