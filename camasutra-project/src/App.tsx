@@ -4,7 +4,6 @@ import Preloader from "./components/Common/Preloader/Preloader";
 import {compose} from 'redux';
 import {connect, Provider} from "react-redux";
 import {Route, withRouter, HashRouter, Switch, Redirect} from "react-router-dom";
-import {initializeApp} from "./Redux/reducers/app/reducers";
 import {getPath} from "./router-path";
 import configureStore, {AppState} from "./Redux/store/reduxStore";
 import UsersContainer from "./components/Users/UsersContainer";
@@ -14,6 +13,7 @@ import Navbar from "./components/Navbar/Navbar";
 import {WithSuspense} from "./HOC/withSuspense";
 import {getInitialized} from "./Redux/selectors/appSelectors";
 import NotFound from "./components/NotFound/NotFound";
+import {initializeApp} from "./Redux/thunks/app/thunks";
 
 const DialogsContainer = lazy(() => import('./components/Dialogs/DialogsContainer'));
 const NewsContainer = lazy(() => import('./components/News/NewsContainer'));

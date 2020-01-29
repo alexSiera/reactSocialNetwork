@@ -1,5 +1,5 @@
 
-import {AppActionTypes, ApplicationState, INITIALIZED_SUCCESS} from "./types";
+import AppActionTypes, {ApplicationState, INITIALIZED_SUCCESS} from "./types";
 
 const initialState: ApplicationState = {
     initialized: false

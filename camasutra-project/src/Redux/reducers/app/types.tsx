@@ -12,4 +12,5 @@ interface InitilizingApp {
     type: typeof INITIALIZED_SUCCESS;
     payload: Initializing;
 }
-export type AppActionTypes = InitilizingApp;
+type AppActionTypes = InitilizingApp;
+export default AppActionTypes
