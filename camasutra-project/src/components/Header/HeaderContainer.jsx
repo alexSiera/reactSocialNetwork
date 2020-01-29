@@ -1,10 +1,7 @@
 import React, {Component} from 'react';
 import Header from "./Header";
-import {
-    logoutMeThunkCreator,
-    setAuthUserDataAC as setAuthUserData
-} from "../../Redux/reducers/auth/authReducer";
 import {connect} from "react-redux";
+import {logoutMeThunkCreator} from "../../Redux/thunks/auth/thunks";
 
 const HeaderContainer = (props) => {
     return (
@@ -14,6 +11,5 @@ const HeaderContainer = (props) => {
 
 const mapStateToProps = ({auth}) => ({...auth});
 export default connect(mapStateToProps, {
-    setAuthUserData,
     logOut: logoutMeThunkCreator
 })(HeaderContainer)

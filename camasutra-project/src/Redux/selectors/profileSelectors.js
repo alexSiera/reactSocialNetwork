@@ -1,3 +1,6 @@
+export const getProfileProfilePage = (profilePage) => {
+    return profilePage;
+};
 export const getProfileData = (profilePage) => {
     return profilePage.profileData;
 };
@@ -6,4 +9,4 @@ export const getStatus = (profilePage) => {
 };
 export const getProfileUpdateStatus= (profilePage) => {
     return profilePage.profileUpdateStatusSuccess;
-}
+};

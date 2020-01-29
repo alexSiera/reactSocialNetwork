@@ -12,7 +12,7 @@ import {updateObjectInArray} from "../../../utils/objectHelpers";
 
 
 const initialState: UsersState = {
-    users: {
+    users: [{
         name: '',
         id: 0,
         photos: {
@@ -22,7 +22,7 @@ const initialState: UsersState = {
         uniqueUrlName: null,
         status: '',
         followed: false
-    },
+    }],
     pageSize: 5,
     totalUsersCount: 0,
     currentSelectedPage: 1,

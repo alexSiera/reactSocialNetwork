@@ -6,7 +6,7 @@ export const SET_CAPTCHA = 'auth/SET_CAPTCHA';
 
 // Describing the shape of the app's slice of state
 export interface AuthState {
-    userId: number,
+    id: null | number,
     email: string,
     login: string,
     isAuth: boolean,
@@ -24,7 +24,7 @@ interface SetCaptcha {
 interface SetAuthUserDataAC {
     type: typeof SET_USER_DATA;
     payload: {
-        userId: number,
+        id: number,
         email: string,
         login: string,
         isAuth: boolean
@@ -32,6 +32,11 @@ interface SetAuthUserDataAC {
 }
 interface ClearLoginDataAC {
     type: typeof CLEAR_USER_DATA;
-    payload: null
+    payload: {
+        id: number | null,
+        email: string,
+        login: string,
+        isAuth: boolean
+    }
 }
 export type AuthActionTypes = SetCaptcha | SetAuthUserDataAC | ClearLoginDataAC;

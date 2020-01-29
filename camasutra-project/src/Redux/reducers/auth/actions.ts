@@ -17,6 +17,11 @@ export const setAuthUserDataAC = (authData: AuthState) => {
 export const clearLoginDataAC = () => {
     return {
         type: CLEAR_USER_DATA,
-        payload: null
+        payload: {
+            id: null,
+            email: '',
+            login: '',
+            isAuth: false
+        }
     }
 };

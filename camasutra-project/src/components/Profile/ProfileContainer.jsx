@@ -2,14 +2,14 @@ import React, {useEffect} from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {withRouter} from 'react-router-dom';
+import {compose} from "redux";
+import {getProfileData, getProfileUpdateStatus, getStatus} from "../../Redux/selectors/profileSelectors";
+import {getIsAuth, getUserId} from "../../Redux/selectors/authSelectors";
 import {
     getUserProfileThunkCreator,
     getUserStatusThunkCreator, savePhotoThunkCreator, saveProfileDataThunkCreator,
     updateStatusThunkCreator
-} from "../../Redux/reducers/profile/profileReducer";
-import {compose} from "redux";
-import {getProfileData, getProfileUpdateStatus, getStatus} from "../../Redux/selectors/profileSelectors";
-import {getIsAuth, getUserId} from "../../Redux/selectors/authSelectors";
+} from "../../Redux/thunks/profile/thunks";
 
 const ProfileContainer = (props) => {
     const refreshProfile = () => {

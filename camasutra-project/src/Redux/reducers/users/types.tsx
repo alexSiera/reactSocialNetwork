@@ -8,14 +8,14 @@ export const TOGGLE_IS_FETCHING = 'users/TOGGLE_IS_FETCHING';
 export const TOGGLE_IS_FOLLOWING_IN_PROGRESS = 'users/TOGGLE_IS_FOLLOWING_IN_PROGRESS';
 // Describing the shape of the app's slice of state
 export interface UsersState {
-    users: Users,
+    users: Array<User>,
     pageSize: number
     totalUsersCount: number
     currentSelectedPage: number
     isFetching: boolean
     followingInProgress: number[]
 }
-export interface Users {
+export interface User {
     name: string
     id: number
     photos: {
@@ -42,7 +42,7 @@ interface unfollowAC {
 }
 interface setUsersAC {
     type: typeof SET_USERS,
-    payload: Users
+    payload: Array<User>
 }
 interface selectPageAC {
     type: typeof SELECT_PAGE,

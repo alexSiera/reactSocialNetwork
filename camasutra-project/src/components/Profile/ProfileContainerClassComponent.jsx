@@ -7,7 +7,6 @@ import {
     getUserStatusThunkCreator,
     updateStatusThunkCreator
 } from "../../Redux/reducers/profile/profileReducer";
-// import {withAuthRedirect} from "../../HOC/withAuthRedirect";
 import {compose} from "redux";
 class ProfileContainer extends Component {
     componentDidMount() {
@@ -37,7 +36,11 @@ const mapStateToProps = ({profilePage, auth}) => {
     }
 }
 export default compose(
-    connect(mapStateToProps, {getUserProfile: getUserProfileThunkCreator, getUserStatus: getUserStatusThunkCreator, updateUserStatus: updateStatusThunkCreator}),
+    connect(mapStateToProps,
+        {
+            getUserProfile: getUserProfileThunkCreator,
+            getUserStatus: getUserStatusThunkCreator,
+            updateUserStatus: updateStatusThunkCreator
+        }),
     withRouter,
-    //withAuthRedirect
 )(ProfileContainer);

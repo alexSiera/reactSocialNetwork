@@ -13,5 +13,5 @@ const Users = ({users, subscribe, unSubscribe, totalUsersCount, pageSize, onPage
             })}
         </div>
     )
-}
+};
 export default Users;

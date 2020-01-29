@@ -1,10 +1,4 @@
 import React, {useEffect} from 'react';
-import {
-    followThunkCreator,
-    unFollowThunkCreator,
-    requestUsersThunkCreator,
-    selectPageAC as selectPage,
-} from "../../Redux/reducers/users/usersReducer";
 import {connect} from "react-redux";
 import Users from "./Users";
 import Preloader from "../Common/Preloader/Preloader";
@@ -15,6 +9,8 @@ import {
     getTotalUsersCount,
     getUsersSelector
 } from "../../Redux/selectors/usersSelectors";
+import {followThunkCreator, requestUsersThunkCreator, unFollowThunkCreator} from "../../Redux/thunks/users/thunks";
+import {selectPageAC} from "../../Redux/reducers/users/actions";
 
 const UsersContainer = (props) => {
     const onPageChanged = (pageNumber) => {
@@ -27,7 +23,7 @@ const UsersContainer = (props) => {
         props.unfollow(userId);
     };
     useEffect(() => {
-        props.getUsers(props.currentSelectedPage, props.pageSize)
+        props.getUsers(props.currentSelectedPage, props.pageSize);
     }, [props.currentSelectedPage, props.pageSize]);
 
     return <>
@@ -50,9 +46,14 @@ const mapStateToProps = state => {
     }
 };
 const usersContainers = connect(mapStateToProps, {
-    selectPage,
+    selectPage: selectPageAC,
     getUsers: requestUsersThunkCreator,
     follow: followThunkCreator,
     unfollow: unFollowThunkCreator
 })(UsersContainer);
 export default usersContainers;
+
+// selectPage,
+//     getUsers: requestUsersThunkCreator,
+//     follow: followThunkCreator,
+//     unfollow: unFollowThunkCreator

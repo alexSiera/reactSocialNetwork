@@ -39,7 +39,7 @@ export const savePhotoThunkCreator = (file: File) => async (dispatch: Dispatch) 
 // @ts-ignore
 export const saveProfileDataThunkCreator = (profileData: ProfileData) => async (dispatch: Dispatch, getState: any) => {
     try {
-        const userId = getState().auth.userId;
+        const userId = getState().auth.id;
         const response = await profileAPI.saveProfileData(profileData);
         if (response.data.resultCode === 0) {
             // @ts-ignore

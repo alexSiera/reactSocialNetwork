@@ -1,8 +1,6 @@
 import {
     ADD_POST, DELETE_POST,
-    Posts,
     ProfileActionTypes,
-    ProfileData,
     ProfileState, SAVE_PHOTO_SUCCESS,
     SET_USER_PROFILE,
     SET_USER_STATUS
@@ -10,9 +8,21 @@ import {
 
 const initialState: ProfileState = {
     posts: [{
-        id: 0,
-        message: '',
-        likesCount: 0
+        id: 113,
+        message: "Hi how are you ?",
+        likesCount: 12
+    }, {
+        id: 2123,
+        message: "It's my first post",
+        likesCount: 11
+    }, {
+        id: 3221,
+        message: "Blabla",
+        likesCount: 13
+    }, {
+        id: 4332,
+        message: "Dada",
+        likesCount: 15
     }],
     profileData: {
         aboutMe: '',

@@ -1,8 +1,8 @@
 export const getUserId = (auth) => {
-    return  auth.userId;
+    return auth.id;
 };
 export const getIsAuth = (auth) => {
-    return auth.userId;
+    return auth.isAuth;
 };
 export const getCaptchaUrl = (auth) => {
     return auth.captchaUrl

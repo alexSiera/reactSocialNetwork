@@ -1,8 +1,8 @@
 import React from 'react';
-import {loginMeThunkCreator} from "../../Redux/reducers/auth/authReducer";
 import Login from "./Login";
 import {connect} from "react-redux";
 import {getCaptchaUrl, getIsAuth} from "../../Redux/selectors/authSelectors";
+import {loginMeThunkCreator} from "../../Redux/thunks/auth/thunks";
 
 const LoginContainer = (props) => {
     return <Login {...props} />

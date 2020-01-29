@@ -1,13 +1,13 @@
 import {AuthActionTypes, AuthState, CLEAR_USER_DATA, SET_CAPTCHA, SET_USER_DATA} from "./types";
 
 const initialState: AuthState = {
-    userId: 0,
+    id: null,
     email: '',
     login: '',
     isAuth: false,
     captchaUrl: ''
 };
-const appReducer = (state = initialState, action: AuthActionTypes): AuthState => {
+const authReducer = (state = initialState, action: AuthActionTypes): AuthState => {
     switch (action.type) {
         case SET_USER_DATA :
         case SET_CAPTCHA :
@@ -20,4 +20,4 @@ const appReducer = (state = initialState, action: AuthActionTypes): AuthState =>
             return state;
     }
 };
-export default appReducer;
+export default authReducer;

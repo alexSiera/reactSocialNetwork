@@ -1,8 +1,8 @@
 import React from 'react';
-import {addNewsAC as addNews } from "../../Redux/reducers/news/newsReducer";
 import News from "./News";
 import {connect} from "react-redux";
 import {getNewsPage} from "../../Redux/selectors/newsSelectors";
+import {addNewsAC as addNews} from "../../Redux/reducers/news/actions";
 
 const NewsContainer = (props) => {
     return <News {...props}/>

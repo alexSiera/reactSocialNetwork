@@ -6,7 +6,7 @@ const Sidebar = ({sidebarData}) => {
         <div>
             <h1 className={s.sidebarMainHeading}>Friends</h1>
             <div className={s.sidebarItemsContainer}>
-                {sidebarData.map((el) => {
+                {sidebarData.sidebarData.map((el) => {
                     return <SidebarItem name={el.name} img={el.img} key={el.id} />
                 })}
             </div>

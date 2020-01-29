@@ -7,7 +7,7 @@ import DialogsForm from "./DialogsForm/DialogsForm";
 const Dialogs = (props) => {
     const onDialogTextAreaSubmit = ({messageText}) => {
         props.dialogTextAreaSubmit(messageText);
-    }
+    };
     if(!props.isAuth) return <Redirect to={"/login"} />
     return (
         <div className={s.dialogs}>

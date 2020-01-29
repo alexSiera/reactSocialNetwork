@@ -18,7 +18,7 @@ export const usersAPI = {
 
     subscribe: async (userId) => {
         try {
-            const subscribeStatus = await instance.post(`follow/${userId}`)
+            const subscribeStatus = await instance.post(`follow/${userId}`);
             return subscribeStatus.data.resultCode;
         }
         catch (e) {

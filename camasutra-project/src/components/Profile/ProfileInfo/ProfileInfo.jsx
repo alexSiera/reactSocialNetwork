@@ -6,7 +6,7 @@ import ProfileData from "./ProfileData/ProfileData";
 import ProfileDataForm from "./ProfileData/ProfileDataForm";
 import avatar from "../../../assets/images/maleAvatar.jpg";
 
-const ProfileInfo = ({profileData, updateUserStatus, status, isOwner, savePhoto, saveProfileData ,profileUpdateStatusSuccess}) => {
+const ProfileInfo = ({profileData, updateUserStatus, status, isOwner, savePhoto, saveProfileData}) => {
     const [editMode, setEditMode] = useState(false);
     if (!profileData) return <Preloader/>;
     const onMainPhotoSelected = (e) => {
@@ -16,9 +16,9 @@ const ProfileInfo = ({profileData, updateUserStatus, status, isOwner, savePhoto,
         }
     };
     const onProfileDataFormSubmit = (profileFormData) => {
-            saveProfileData(profileFormData).then(() => {
-                setEditMode(false);
-            }).catch(e => console.log(e));
+        saveProfileData(profileFormData).then(() => {
+            setEditMode(false);
+        }).catch(e => console.log(e));
     };
     return (
         <div>
@@ -31,7 +31,8 @@ const ProfileInfo = ({profileData, updateUserStatus, status, isOwner, savePhoto,
 
                 </span>}
             </div>
-            {editMode && <ProfileDataForm initialValues={profileData} onSubmit={onProfileDataFormSubmit} savePhoto={onMainPhotoSelected}
+            {editMode && <ProfileDataForm initialValues={profileData} onSubmit={onProfileDataFormSubmit}
+                                          savePhoto={onMainPhotoSelected}
                                           profileData={profileData}/>}
             {!editMode &&
             <ProfileData profileData={profileData} isOwner={isOwner} goToEditMode={() => setEditMode(true)}/>}
