@@ -21,10 +21,10 @@ const ProfileContainer = lazy(() => import('./components/Profile/ProfileContaine
 const Settings = lazy(() => import('./components/Settings/Settings'));
 const Music = lazy(() => import('./components/Music/Music'));
 
-export interface StateProps {
+interface StateProps {
     initialized: boolean
 }
-export interface OwnProps {
+interface OwnProps {
     propFromParent: number
 }
 interface DispatchProps {
@@ -68,7 +68,7 @@ const App: FC<Props> = ({initializeApp, initialized}) => {
     );
 };
 const mapStateToProps = (state: AppState): StateProps => ({initialized: getInitialized(state.app)});
-const AppContainer: any  = compose(
+const AppContainer: any = compose(
     withRouter,
     connect (mapStateToProps, {
         initializeApp
