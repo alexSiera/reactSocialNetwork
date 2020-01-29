@@ -68,7 +68,7 @@ const App: FC<Props> = ({initializeApp, initialized}) => {
     );
 };
 const mapStateToProps = (state: AppState): StateProps => ({initialized: getInitialized(state.app)});
-const AppContainer = compose(
+const AppContainer: any  = compose(
     withRouter,
     connect (mapStateToProps, {
         initializeApp
@@ -78,7 +78,6 @@ const SamuraiJSApp = () => {
     return (
         <HashRouter>
             <Provider store={store}>
-                // @ts-ignore
                 <AppContainer/>
             </Provider>
         </HashRouter>
