@@ -11,9 +11,9 @@ import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginContainer from "./components/Login/LoginContainer";
 import Navbar from "./components/Navbar/Navbar";
 import {WithSuspense} from "./HOC/withSuspense";
-import {getInitialized} from "./Redux/selectors/appSelectors";
 import NotFound from "./components/NotFound/NotFound";
 import {initializeApp} from "./Redux/thunks/app/thunks";
+import {getInitialized} from "./Redux/selectors/appSelectors";
 
 const DialogsContainer = lazy(() => import('./components/Dialogs/DialogsContainer'));
 const NewsContainer = lazy(() => import('./components/News/NewsContainer'));
@@ -21,12 +21,19 @@ const ProfileContainer = lazy(() => import('./components/Profile/ProfileContaine
 const Settings = lazy(() => import('./components/Settings/Settings'));
 const Music = lazy(() => import('./components/Music/Music'));
 
-interface AppProps {
-    initializeApp: () => null,
+export interface StateProps {
     initialized: boolean
 }
+export interface OwnProps {
+    propFromParent: number
+}
+interface DispatchProps {
+    initializeApp: () => void
+}
+
+type Props = StateProps & DispatchProps & OwnProps
 const store = configureStore();
-const App: FC<AppProps> = ({initializeApp, initialized}) => {
+const App: FC<Props> = ({initializeApp, initialized}) => {
     useEffect(() => {
             initializeApp();
             window.addEventListener("unhandledrejection", catchAllUnhandledErrors);
@@ -58,14 +65,12 @@ const App: FC<AppProps> = ({initializeApp, initialized}) => {
                 </Switch>
             </div>
         </div>
-    )
-        ;
+    );
 };
-const mapStateToProps = (state: AppState) => ({initialized: getInitialized(state.app)});
-
+const mapStateToProps = (state: AppState): StateProps => ({initialized: getInitialized(state.app)});
 const AppContainer = compose(
     withRouter,
-    connect(mapStateToProps, {
+    connect (mapStateToProps, {
         initializeApp
     })
 )(App);
