@@ -2,7 +2,7 @@ import React from 'react';
 import s from './LoginForm.module.scss';
 import {reduxForm} from 'redux-form'
 import {createField, Input} from "../../Common/FormsControls/FormsControls";
-import {required} from "../../../utils/validators/valiadators";
+import {required} from "../../../utils/validators/valiadators.ts";
 
 const LoginForm = ({handleSubmit, error, captchaUrl}) => {
     return (
