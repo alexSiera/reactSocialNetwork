@@ -4,7 +4,6 @@ import {Link} from "react-router-dom";
 import PrimarySearchAppBar from "./AppBarMaterial";
 
 const Header = (props) => {
-    debugger
     return (
         <header className={s.header}>
             <PrimarySearchAppBar isAuth={props.isAuth} login={props.login} logOut={props.logOut} avatarPhoto={props.photo} isOwner={props.isOwner} />

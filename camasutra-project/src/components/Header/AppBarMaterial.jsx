@@ -14,9 +14,19 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import List from '@material-ui/core/List';
+import Divider from '@material-ui/core/Divider';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
 import {NavLink} from "react-router-dom";
 import logo from '../../assets/images/logo_transparent.png';
 import s from './Header.module.scss';
+import Drawer from '@material-ui/core/Drawer';
+import NavbarMaterial from "../Navbar/NavbarMaterial";
+
+const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
     grow: {
@@ -24,6 +34,9 @@ const useStyles = makeStyles(theme => ({
     },
     menuButton: {
         marginRight: theme.spacing(2),
+    },
+    appBar: {
+        zIndex: 1,
     },
     title: {
         display: 'none',
@@ -78,6 +91,9 @@ const useStyles = makeStyles(theme => ({
             display: 'none',
         },
     },
+    drawerPaper: {
+        width: drawerWidth,
+    },
 }));
 
 const PrimarySearchAppBar = ({login, logOut, isAuth, avatarPhoto, isOwner}) => {
@@ -108,7 +124,7 @@ const PrimarySearchAppBar = ({login, logOut, isAuth, avatarPhoto, isOwner}) => {
     };
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
-        <>
+        <div>
             {isOwner &&
             <Menu
                 anchorEl={anchorEl}
@@ -120,19 +136,18 @@ const PrimarySearchAppBar = ({login, logOut, isAuth, avatarPhoto, isOwner}) => {
                 onClose={handleMenuClose}
             >
                 {!isAuth && <Button color="inherit"><NavLink to="/login">Login</NavLink></Button>}
-                {isAuth && <><img src={avatarPhoto}/>
+                {isAuth && <div><img src={avatarPhoto}/>
                     <MenuItem onClick={handleMenuClose}><NavLink className={s.profileMenuLinks}
                                                                  to="/profile">Profile</NavLink></MenuItem>
                     <MenuItem onClick={handleMenuClose}><NavLink className={s.profileMenuLinks}
                                                                  to="/dialogs">Message</NavLink></MenuItem>
                     <MenuItem onClick={handleLogout} className={s.profileMenuLinks}>Logout</MenuItem>
-                </>}
+                </div>}
 
             </Menu>
             }
             {null}
-        </>
-
+        </div>
     );
 
     const mobileMenuId = 'primary-search-account-menu-mobile';
@@ -239,6 +254,7 @@ const PrimarySearchAppBar = ({login, logOut, isAuth, avatarPhoto, isOwner}) => {
                     </div>
                 </Toolbar>
             </AppBar>
+            {/*<NavbarMaterial />*/}
             {renderMobileMenu}
             {renderMenu}
         </div>
