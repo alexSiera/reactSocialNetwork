@@ -2,7 +2,7 @@
 // Describing the different ACTION NAMES available
 export const INITIALIZED_SUCCESS = 'app/INITIALIZED_SUCCESS';
 // Describing the shape of the app's slice of state
-export interface Initializing {
+interface Initializing {
     initialized: boolean
 }
 export interface ApplicationState {

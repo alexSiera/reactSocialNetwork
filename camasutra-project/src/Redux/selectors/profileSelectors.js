@@ -10,3 +10,7 @@ export const getStatus = (profilePage) => {
 export const getProfileUpdateStatus= (profilePage) => {
     return profilePage.profileUpdateStatusSuccess;
 };
+export const getProfileAvatar = (profilePage) => {
+    if(!profilePage.profileData) return '';
+    else if (profilePage.profileData.photos) return profilePage.profileData.photos.small;
+};

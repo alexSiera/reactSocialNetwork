@@ -9,7 +9,7 @@ const appReducer = (state = initialState, action: AppActionTypes): ApplicationSt
         case INITIALIZED_SUCCESS :
             return {
                 ...state,
-                initialized: true
+                initialized: true,
             };
         default: return state;
     }

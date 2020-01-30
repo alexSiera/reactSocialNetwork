@@ -24,14 +24,11 @@ const Music = lazy(() => import('./components/Music/Music'));
 interface StateProps {
     initialized: boolean
 }
-interface OwnProps {
-    propFromParent: number
-}
 interface DispatchProps {
     initializeApp: () => void
 }
 
-type Props = StateProps & DispatchProps & OwnProps
+type Props = StateProps & DispatchProps
 const store = configureStore();
 const App: FC<Props> = ({initializeApp, initialized}) => {
     useEffect(() => {
