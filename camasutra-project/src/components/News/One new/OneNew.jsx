@@ -1,14 +1,21 @@
 import React from 'react';
-import s from './OneNew.module.scss';
-const OneNews = ({id, img,author, message}) => {
+import styled from 'styled-components';
+
+const OneNewListItem = styled.li`
+    list-style-type: none;
+`;
+const OneNewImg = styled.img`
+    max-width: 80px;
+`;
+const OneNews = ({id, img, author, message}) => {
     return (
-        <li id={id} className={s.oneNewListItem}>
+        <OneNewListItem id={id}>
             <h1>
                 {`AuthorName: ${author}`}
             </h1>
             <p>{message}</p>
-            <img className={s.oneNewImg} src={img} />
-        </li>
+            <OneNewImg src={img}/>
+        </OneNewListItem>
     )
-}
+};
 export default OneNews;

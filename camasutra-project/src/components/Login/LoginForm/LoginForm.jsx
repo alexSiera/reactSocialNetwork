@@ -1,13 +1,18 @@
 import React from 'react';
-import s from './LoginForm.module.scss';
 import {reduxForm} from 'redux-form'
 import {createField, Input} from "../../Common/FormsControls/FormsControls";
 import {required} from "../../../utils/validators/valiadators.ts";
-
+import {FormSummaryError} from "../../Common/FormsControls/formsStyles";
+import styled from 'styled-components';
+const FormContainer = styled.div`
+    margin-left: 10px;
+    div {
+        margin-bottom: 5px;
+    }`;
 const LoginForm = ({handleSubmit, error, captchaUrl}) => {
     return (
         <form onSubmit={handleSubmit}>
-            <div className={s.formContainer}>
+            <FormContainer>
                 {createField("Login", "login", [required], Input)}
                 {createField("Password", "password", [required], Input, {type: "password"})}
                 {createField(null, "rememberMe", null, Input, {type: "checkbox"}, "remember me")}
@@ -17,14 +22,14 @@ const LoginForm = ({handleSubmit, error, captchaUrl}) => {
                     <img src={captchaUrl} />
                 </div>}
                 {error &&
-                <div className={s.formSummaryError}>
+                <FormSummaryError>
                     {error}
-                </div>
+                </FormSummaryError>
                 }
                 <div>
                     <button>Login</button>
                 </div>
-            </div>
+            </FormContainer>
         </form>)
 };
 export default reduxForm({

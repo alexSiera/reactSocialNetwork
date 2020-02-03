@@ -1,7 +1,7 @@
 import React from 'react';
-import s from './News.scss';
 import OneNew from "./One new/OneNew";
 import NewsForm from "./NewsForm/NewsForm";
+
 const News = ({newsPage, addNews}) => {
     const {newsData} = newsPage;
     const onAddNews = ({newNewsText}) => {

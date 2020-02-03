@@ -1,23 +1,30 @@
 import React from 'react';
-import s from './MyPosts.module.scss';
 import Post from './Post/Post';
 import MyPostsForm from "./MyPostsForm/MyPostsForm";
-const MyPosts = React.memo(({posts,addPost}) => {
-    const postsElements = posts.map((p => <Post key={p.id} message={p.message} likesCount={p.likesCount} />));
+import styled from 'styled-components';
+
+const PostsBlock = styled.div`
+    padding: 10px;
+`;
+const PostsBlockText = styled.div`
+    margin: 20px 0;
+`;
+const MyPosts = React.memo(({posts, addPost}) => {
+    const postsElements = posts.map((p => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>));
     const onAddPost = (formData) => {
         addPost(formData.textbox);
     };
 
     return (
-        <div className={s.postsBlock}>
+        <PostsBlock>
             <h3>My post</h3>
-            <div className={s.postsBlockText}>
-                <MyPostsForm onSubmit={onAddPost} />
-            </div>
-            <div className={s.posts}>
+            <PostsBlockText>
+                <MyPostsForm onSubmit={onAddPost}/>
+            </PostsBlockText>
+            <div>
                 {postsElements}
             </div>
-        </div>
+        </PostsBlock>
     )
 });
 export default MyPosts;

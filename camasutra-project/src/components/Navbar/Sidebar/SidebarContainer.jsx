@@ -1,5 +1,4 @@
 import React from 'react';
-import s from './Sidebar.module.scss'
 import {connect} from "react-redux";
 import Sidebar from "./Sidebar";
 import {getSidebarData} from "../../../Redux/selectors/sidebarSelectors";

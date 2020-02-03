@@ -1,5 +1,4 @@
 import React, {useEffect, lazy, FC} from "react";
-import "./App.scss";
 import Preloader from "./components/Common/Preloader/Preloader";
 import {compose} from 'redux';
 import {connect, Provider} from "react-redux";
@@ -14,23 +13,29 @@ import {WithSuspense} from "./HOC/withSuspense";
 import NotFound from "./components/NotFound/NotFound";
 import {initializeApp} from "./Redux/thunks/app/thunks";
 import {getInitialized} from "./Redux/selectors/appSelectors";
+import styled from 'styled-components';
 
+const AppWrapper = styled.div`
+    display: grid;
+      width: 1200px;
+      margin: 0 auto;
+      grid-template-areas: "header header" "nav content";
+      grid-template-rows: 60px 1fr;
+      grid-template-columns: 2fr 10fr;
+  /* grid-gap: 10px; */
+`;
+const AppWrapperContent = styled.div`
+    grid-area: content;
+    background-color: darkblue;
+`
 const DialogsContainer = lazy(() => import('./components/Dialogs/DialogsContainer'));
 const NewsContainer = lazy(() => import('./components/News/NewsContainer'));
 const ProfileContainer = lazy(() => import('./components/Profile/ProfileContainer'));
 const Settings = lazy(() => import('./components/Settings/Settings'));
 const Music = lazy(() => import('./components/Music/Music'));
 
-interface StateProps {
-    initialized: boolean
-}
-interface DispatchProps {
-    initializeApp: () => void
-}
-
-type Props = StateProps & DispatchProps
 const store = configureStore();
-const App: FC<Props> = ({initializeApp, initialized}) => {
+const App = ({initializeApp, initialized}) => {
     useEffect(() => {
             initializeApp();
             window.addEventListener("unhandledrejection", catchAllUnhandledErrors);
@@ -39,16 +44,16 @@ const App: FC<Props> = ({initializeApp, initialized}) => {
             }
         }
         , []);
-    const catchAllUnhandledErrors = (promiseRejectectionEvent: any) => {
+    const catchAllUnhandledErrors = (promiseRejectectionEvent) => {
         alert("some error occured");
         console.error(promiseRejectectionEvent);
     };
     if (!initialized) return <Preloader/>;
     return (
-        <div className="app-wrapper">
+        <AppWrapper>
             <HeaderContainer/>
             <Navbar/>
-            <div className="app-wrapper-content">
+            <AppWrapperContent>
                 <Switch>
                     <Route path={getPath('dialogs')} render={WithSuspense(DialogsContainer)}/>
                     <Route path={getPath('profile', ':userId?')} render={WithSuspense(ProfileContainer)}/>
@@ -60,14 +65,14 @@ const App: FC<Props> = ({initializeApp, initialized}) => {
                     <Redirect from="/" exact to={getPath('profile')}/>
                     <Route path={getPath('notFound')} render={() => <NotFound/>}/>
                 </Switch>
-            </div>
-        </div>
+            </AppWrapperContent>
+        </AppWrapper>
     );
 };
-const mapStateToProps = (state: AppState): StateProps => ({initialized: getInitialized(state.app)});
-const AppContainer: any = compose(
+const mapStateToProps = (state) => ({initialized: getInitialized(state.app)});
+const AppContainer = compose(
     withRouter,
-    connect (mapStateToProps, {
+    connect(mapStateToProps, {
         initializeApp
     })
 )(App);
