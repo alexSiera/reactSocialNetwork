@@ -1,2 +1,0 @@
-(this["webpackJsonpcamasutra-project"]=this["webpackJsonpcamasutra-project"]||[]).push([[6],{311:function(t,a,c){},313:function(t,a,c){"use strict";c.r(a);var n=c(0),e=c.n(n);c(311);a.default=function(){return e.a.createElement("div",null,"Music!!!")}}}]);
-//# sourceMappingURL=6.be5ca728.chunk.js.map
