@@ -14,7 +14,7 @@ const Pagination = ({onPageChanged, currentSelectedPage, totalItemsCount, pageSi
     const rightPortionPageNumber = portionNumber * portionSize;
     return (
         <div className={s.paginationBlock}>
-            <div className={ cn(s.paginator)}>
+            <div className={cn(s.paginator)}>
                 {portionNumber > 1 &&
                 <button onClick={() => {
                     setPortionNumber(portionNumber - 1)
@@ -41,7 +41,7 @@ const Pagination = ({onPageChanged, currentSelectedPage, totalItemsCount, pageSi
 const PaginationElement = ({id, onPageChanged, currentSelectedPage}) => {
     return (
         <span key={id} id={id} onClick={() => onPageChanged(id)}
-              className={ cn ({[s.selectedPage] : currentSelectedPage === id }, s.pageNum)}>
+              className={cn({[s.selectedPage]: currentSelectedPage === id}, s.pageNum)}>
         {id}
         </span>
     )
