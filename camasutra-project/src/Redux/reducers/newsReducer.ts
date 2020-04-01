@@ -23,7 +23,7 @@ type NewsData = {
     author: string
     message: string
 }
-type InitialStateType = typeof initialState;
+export type InitialStateType = typeof initialState;
 const newsReducer = (state = initialState, action: any): InitialStateType => {
     switch (action.type) {
         case ADD_NEWS:

@@ -10,11 +10,14 @@ const initialState = [{
         id: 31312,
         img: 'https://st2.depositphotos.com/9223672/12056/v/950/depositphotos_120568116-stock-illustration-female-face-avatar-round-flat.jpg',
         name: 'Milka'
-    }];
-type InitialStateType = {
-
+    }] as Array<SidebarDataType>;
+type SidebarDataType = {
+    id: number | null
+    img: string
+    name: string
 }
-const sidebarReducer = (state = initialState,action) => {
+export type InitialStateType = typeof initialState;
+const sidebarReducer = (state = initialState,action: any): InitialStateType => {
     return state;
 };
 export default sidebarReducer;
