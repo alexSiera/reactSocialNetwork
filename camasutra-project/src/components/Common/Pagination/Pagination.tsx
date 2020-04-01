@@ -3,13 +3,17 @@ import s from './Pagination.module.scss';
 import cn from 'classnames';
 
 type PropsType = {
-    onPageChanged: () => void;
+    onPageChanged: (pageNumber: number) => void;
     currentSelectedPage: number;
     totalItemsCount: number;
     pageSize: number;
-    portionSize: number;
+    portionSize?: number;
 };
-
+type PaginationElementPropsType = {
+    id: any;
+    onPageChanged: (page: number) => void;
+    currentSelectedPage: number;
+};
 const Pagination: React.FC<PropsType> = ({
     onPageChanged,
     currentSelectedPage,
@@ -18,12 +22,13 @@ const Pagination: React.FC<PropsType> = ({
     portionSize = 10,
 }) => {
     const pagesCount = Math.ceil(totalItemsCount / pageSize);
-    const pages = [];
+    const pages: Array<number> = [];
     for (let i = 1; i < pagesCount; i++) {
         pages.push(i);
     }
     const portionCount = Math.ceil(pagesCount / portionSize);
-    const [portionNumber, setPortionNumber] = useState(1);
+    // eslint-disable-next-line prefer-const
+    let [portionNumber, setPortionNumber] = useState(1);
     const leftPortionPageNumber = (portionNumber - 1) * portionSize + 1;
     const rightPortionPageNumber = portionNumber * portionSize;
     return (
@@ -64,7 +69,7 @@ const Pagination: React.FC<PropsType> = ({
     );
 };
 
-const PaginationElement = ({ id, onPageChanged, currentSelectedPage }) => {
+const PaginationElement: React.FC<PaginationElementPropsType> = ({ id, onPageChanged, currentSelectedPage }) => {
     return (
         <span
             key={id}

@@ -272,14 +272,14 @@
                 "name": "ProfileInfo.module.scss"
             },
             {
-                "relativePath": "src/components/Profile/ProfileInfo/ProfileStatus.jsx",
+                "relativePath": "src/components/Profile/ProfileInfo/ProfileStatus.tsx",
                 "test": false,
-                "name": "ProfileStatus.jsx"
+                "name": "ProfileStatus.tsx"
             },
             {
-                "relativePath": "src/components/Profile/ProfileInfo/ProfileStatus.jsx",
+                "relativePath": "src/components/Profile/ProfileInfo/ProfileStatus.tsx",
                 "test": false,
-                "name": "ProfileStatus.jsx"
+                "name": "ProfileStatus.tsx"
             },
             {
                 "relativePath": "src/components/Profile/ProfileInfo/ProfileStatusClass.test.jsx",
@@ -323,9 +323,9 @@
                 "name": "User.module.scss"
             },
             {
-                "relativePath": "src/components/Users/Users.jsx",
+                "relativePath": "src/components/Users/Users.tsx",
                 "test": false,
-                "name": "Users.jsx"
+                "name": "Users.tsx"
             },
             {
                 "relativePath": "src/components/Users/Users.module.scss",
@@ -333,9 +333,9 @@
                 "name": "Users.module.scss"
             },
             {
-                "relativePath": "src/components/Users/UsersContainer.jsx",
+                "relativePath": "src/components/Users/UsersContainer.tsx",
                 "test": false,
-                "name": "UsersContainer.jsx"
+                "name": "UsersContainer.tsx"
             },
             {
                 "relativePath": "src/components/Users/UsersContainerClass.jsx",
@@ -343,7 +343,7 @@
                 "name": "UsersContainerClass.jsx"
             }
         ],
-        "mainFile": "src/components/Users/Users.jsx",
+        "mainFile": "src/components/Users/Users.tsx",
         "trackDir": "src/components/Users",
         "origin": "AUTHORED",
         "exported": false
