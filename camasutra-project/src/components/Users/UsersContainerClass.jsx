@@ -1,45 +1,49 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
     followThunkCreator,
     unFollowThunkCreator,
     requestUsersThunkCreator,
     selectPageAC as selectPage,
-} from "../../Redux/reducers/usersReducer";
-import {connect} from "react-redux";
-import Users from "./Users";
-import Preloader from "../Common/Preloader/Preloader";
+} from '../../Redux/reducers/usersReducer';
+import { connect } from 'react-redux';
+import Users from './Users';
+import Preloader from '../Common/Preloader/Preloader';
 import {
-    getCurrentSelectedPage, getFollowingInProgress,
+    getCurrentSelectedPage,
+    getFollowingInProgress,
     getIsFetching,
     getPageSize,
     getTotalUsersCount,
-    getUsersSelector
-} from "../../Redux/selectors/usersSelectors";
+    getUsersSelector,
+} from '../../Redux/selectors/usersSelectors';
 
 class UsersContainer extends Component {
     onPageChanged = (pageNumber) => {
-        this.props.getUsers(pageNumber, this.props.pageSize)
-    }
+        this.props.getUsers(pageNumber, this.props.pageSize);
+    };
     onSubscribe = (userId) => {
         this.props.follow(userId);
-    }
+    };
     onUnSubscribe = (userId) => {
         this.props.unfollow(userId);
-    }
+    };
 
     componentDidMount() {
-        this.props.getUsers(this.props.currentSelectedPage, this.props.pageSize)
+        this.props.getUsers(this.props.currentSelectedPage, this.props.pageSize);
     }
 
     render() {
-        return <>
-            {this.props.isFetching ? <Preloader/> : null}
-            <Users
-                {...this.props}
-                onPageChanged={this.onPageChanged}
-                subscribe={this.onSubscribe}
-                unSubscribe={this.onUnSubscribe}
-            /></>
+        return (
+            <>
+                {this.props.isFetching ? <Preloader /> : null}
+                <Users
+                    {...this.props}
+                    onPageChanged={this.onPageChanged}
+                    subscribe={this.onSubscribe}
+                    unSubscribe={this.onUnSubscribe}
+                />
+            </>
+        );
     }
 }
 
@@ -48,20 +52,20 @@ class UsersContainer extends Component {
 //         ...state.usersPage,
 //     }
 // }
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
     return {
         users: getUsersSelector(state),
         pageSize: getPageSize(state),
         totalUsersCount: getTotalUsersCount(state),
         currentSelectedPage: getCurrentSelectedPage(state),
         isFetching: getIsFetching(state),
-        followingInProgress: getFollowingInProgress(state)
-    }
+        followingInProgress: getFollowingInProgress(state),
+    };
 };
 const usersContainers = connect(mapStateToProps, {
     selectPage,
     getUsers: requestUsersThunkCreator,
     follow: followThunkCreator,
-    unfollow: unFollowThunkCreator
+    unfollow: unFollowThunkCreator,
 })(UsersContainer);
 export default usersContainers;

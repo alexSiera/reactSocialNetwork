@@ -4,9 +4,9 @@
     "dialogs": {
         "files": [
             {
-                "relativePath": "src/components/Dialogs/DialogItem/DialogItem.jsx",
+                "relativePath": "src/components/Dialogs/DialogItem/DialogItem.tsx",
                 "test": false,
-                "name": "DialogItem.jsx"
+                "name": "DialogItem.tsx"
             },
             {
                 "relativePath": "src/components/Dialogs/DialogItem/DialogItem.module.scss",
@@ -14,9 +14,9 @@
                 "name": "DialogItem.module.scss"
             },
             {
-                "relativePath": "src/components/Dialogs/Dialogs.jsx",
+                "relativePath": "src/components/Dialogs/Dialogs.tsx",
                 "test": false,
-                "name": "Dialogs.jsx"
+                "name": "Dialogs.tsx"
             },
             {
                 "relativePath": "src/components/Dialogs/Dialogs.module.scss",
@@ -24,19 +24,19 @@
                 "name": "Dialogs.module.scss"
             },
             {
-                "relativePath": "src/components/Dialogs/DialogsContainer.jsx",
+                "relativePath": "src/components/Dialogs/DialogsContainer.tsx",
                 "test": false,
-                "name": "DialogsContainer.jsx"
+                "name": "DialogsContainer.tsx"
             },
             {
-                "relativePath": "src/components/Dialogs/DialogsForm/DialogsForm.jsx",
+                "relativePath": "src/components/Dialogs/DialogsForm/DialogsForm.tsx",
                 "test": false,
-                "name": "DialogsForm.jsx"
+                "name": "DialogsForm.tsx"
             },
             {
-                "relativePath": "src/components/Dialogs/Message/Message.jsx",
+                "relativePath": "src/components/Dialogs/Message/Message.tsx",
                 "test": false,
-                "name": "Message.jsx"
+                "name": "Message.tsx"
             },
             {
                 "relativePath": "src/components/Dialogs/Message/Message.module.scss",
@@ -44,7 +44,7 @@
                 "name": "Message.module.scss"
             }
         ],
-        "mainFile": "src/components/Dialogs/Dialogs.jsx",
+        "mainFile": "src/components/Dialogs/Dialogs.tsx",
         "trackDir": "src/components/Dialogs",
         "origin": "AUTHORED",
         "exported": false
@@ -52,9 +52,9 @@
     "header": {
         "files": [
             {
-                "relativePath": "src/components/Header/Header.jsx",
+                "relativePath": "src/components/Header/Header.tsx",
                 "test": false,
-                "name": "Header.jsx"
+                "name": "Header.tsx"
             },
             {
                 "relativePath": "src/components/Header/Header.module.scss",
@@ -62,12 +62,12 @@
                 "name": "Header.module.scss"
             },
             {
-                "relativePath": "src/components/Header/HeaderContainer.jsx",
+                "relativePath": "src/components/Header/HeaderContainer.tsx",
                 "test": false,
-                "name": "HeaderContainer.jsx"
+                "name": "HeaderContainer.tsx"
             }
         ],
-        "mainFile": "src/components/Header/Header.jsx",
+        "mainFile": "src/components/Header/Header.tsx",
         "trackDir": "src/components/Header",
         "origin": "AUTHORED",
         "exported": false
@@ -262,9 +262,9 @@
                 "name": "ProfileContainer.jsx"
             },
             {
-                "relativePath": "src/components/Profile/ProfileInfo/ProfileInfo.jsx",
+                "relativePath": "src/components/Profile/ProfileInfo/ProfileInfo.tsx",
                 "test": false,
-                "name": "ProfileInfo.jsx"
+                "name": "ProfileInfo.tsx"
             },
             {
                 "relativePath": "src/components/Profile/ProfileInfo/ProfileInfo.module.scss",
@@ -295,9 +295,9 @@
     "settings": {
         "files": [
             {
-                "relativePath": "src/components/Settings/Settings.jsx",
+                "relativePath": "src/components/Settings/Settings.tsx",
                 "test": false,
-                "name": "Settings.jsx"
+                "name": "Settings.tsx"
             },
             {
                 "relativePath": "src/components/Settings/Settings.scss",
@@ -305,7 +305,7 @@
                 "name": "Settings.scss"
             }
         ],
-        "mainFile": "src/components/Settings/Settings.jsx",
+        "mainFile": "src/components/Settings/Settings.tsx",
         "trackDir": "src/components/Settings",
         "origin": "AUTHORED",
         "exported": false
@@ -313,9 +313,9 @@
     "users": {
         "files": [
             {
-                "relativePath": "src/components/Users/User/User.jsx",
+                "relativePath": "src/components/Users/User/User.tsx",
                 "test": false,
-                "name": "User.jsx"
+                "name": "User.tsx"
             },
             {
                 "relativePath": "src/components/Users/User/User.module.scss",

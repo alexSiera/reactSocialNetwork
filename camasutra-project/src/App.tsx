@@ -1,7 +1,7 @@
-import React, { useEffect, lazy } from 'react';
+import React, { useEffect, lazy, FC } from 'react';
 import './App.scss';
 import Preloader from './components/Common/Preloader/Preloader';
-import store from './Redux/reduxStore';
+import store, { AppStateType } from './Redux/reduxStore';
 import { compose } from 'redux';
 import { connect, Provider } from 'react-redux';
 import { Route, withRouter, HashRouter, Switch, Redirect } from 'react-router-dom';
@@ -19,16 +19,24 @@ const NewsContainer = lazy(() => import('./components/News/NewsContainer'));
 const ProfileContainer = lazy(() => import('./components/Profile/ProfileContainer'));
 const Settings = lazy(() => import('./components/Settings/Settings'));
 const Music = lazy(() => import('./components/Music/Music'));
+type MapStatePropsType = {
+    initialized: boolean;
+};
+type MapDispatchPropsType = {
+    initializeApp: () => void;
+};
+type OwnPropsType = {};
+type PropsType = MapStatePropsType & MapDispatchPropsType & OwnPropsType;
 
-const App = ({ initializeApp, initialized }) => {
-    const catchAllUnhandledErrors = (promiseRejectectionEvent) => {
+const App: FC<PropsType> = ({ initializeApp, initialized }) => {
+    const catchAllUnhandledErrors = (promiseRejectectionEvent: PromiseRejectionEvent): void => {
         alert('some error occured');
         console.error(promiseRejectectionEvent);
     };
     useEffect(() => {
         initializeApp();
         window.addEventListener('unhandledrejection', catchAllUnhandledErrors);
-        return () => {
+        return (): void => {
             window.removeEventListener('unhandledrejection', catchAllUnhandledErrors);
         };
     }, []);
@@ -36,6 +44,7 @@ const App = ({ initializeApp, initialized }) => {
     if (!initialized) return <Preloader />;
     return (
         <div className="app-wrapper">
+            // @ts-ignore
             <HeaderContainer />
             <Navbar />
             <div className="app-wrapper-content">
@@ -54,17 +63,18 @@ const App = ({ initializeApp, initialized }) => {
         </div>
     );
 };
-const mapStateToProps = ({ app }) => ({ initialized: getInitialized(app) });
+const mapStateToProps = (state: AppStateType): MapStatePropsType => ({ initialized: getInitialized(state.app) });
 const AppContainer = compose(
     withRouter,
-    connect(mapStateToProps, {
+    connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, AppStateType>(mapStateToProps, {
         initializeApp,
     }),
 )(App);
-const SamuraiJSApp = (props) => {
+const SamuraiJSApp: React.FC = () => {
     return (
         <HashRouter>
             <Provider store={store}>
+                // @ts-ignore
                 <AppContainer />
             </Provider>
         </HashRouter>

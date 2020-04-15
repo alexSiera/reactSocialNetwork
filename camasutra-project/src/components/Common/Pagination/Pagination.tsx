@@ -36,7 +36,7 @@ const Pagination: React.FC<PropsType> = ({
             <div className={cn(s.paginator)}>
                 {portionNumber > 1 && (
                     <button
-                        onClick={() => {
+                        onClick={(): void => {
                             setPortionNumber(portionNumber - 1);
                         }}
                     >
@@ -57,7 +57,7 @@ const Pagination: React.FC<PropsType> = ({
                     })}
                 {portionCount > portionNumber && (
                     <button
-                        onClick={() => {
+                        onClick={(): void => {
                             setPortionNumber(portionNumber + 1);
                         }}
                     >
@@ -74,7 +74,7 @@ const PaginationElement: React.FC<PaginationElementPropsType> = ({ id, onPageCha
         <span
             key={id}
             id={id}
-            onClick={() => onPageChanged(id)}
+            onClick={(): void => onPageChanged(id)}
             className={cn({ [s.selectedPage]: currentSelectedPage === id }, s.pageNum)}
         >
             {id}
