@@ -9,6 +9,7 @@ type MessageType = {
     message: string;
     name: string;
 };
+type ActionsTypes = AddDialogACType;
 const initialState = {
     messagesData: [
         {
@@ -52,7 +53,7 @@ const initialState = {
     ] as Array<MessageType>,
 };
 export type InitialStateType = typeof initialState;
-const dialogsReducer = (state = initialState, action: any): InitialStateType => {
+const dialogsReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         case ADD_DIALOG:
             const newDialog = {

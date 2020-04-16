@@ -1,11 +1,15 @@
 import { authAPI, securityAPI } from '../../api/api';
 import { stopSubmit } from 'redux-form';
+import { AppStateType } from '../reduxStore';
+import { Dispatch } from 'redux';
+import { ThunkAction } from 'redux-thunk';
 
 const SET_USER_DATA = 'auth/SET-USER-DATA';
 const CLEAR_USER_DATA = 'auth/CLEAR_USER_DATA';
 const SET_CAPTCHA = 'auth/SET_CAPTCHA';
 // eslint-disable-next-line @typescript-eslint/no-use-before-define
 export type InitialStateType = typeof initialState;
+type ActionsTypes = SetAuthUserDataActionType | GetCaptchaUrlSuccessType | ClearUserDataType;
 const initialState = {
     userId: null as number | null,
     email: null as string | null,
@@ -13,7 +17,7 @@ const initialState = {
     isAuth: false as boolean | null,
     captchaUrl: null as string | null, // If null, then captcha is not required
 };
-const authReducer = (state = initialState, action: any): InitialStateType => {
+const authReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         case SET_USER_DATA:
         case SET_CAPTCHA:
@@ -32,6 +36,17 @@ type GetCaptchaUrlSuccessType = {
         captchaImg: string;
     };
 };
+type ClearUserDataType = {
+    type: typeof CLEAR_USER_DATA;
+    payload: SetAuthUserDataActionPayloadType | null;
+};
+type SetAuthUserDataActionType = {
+    type: typeof SET_USER_DATA;
+    payload: SetAuthUserDataActionPayloadType;
+};
+type GetStateType = () => AppStateType;
+type DispatchType = Dispatch<ActionsTypes>;
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>;
 export const setCaptcha = (captchaImg: string): GetCaptchaUrlSuccessType => {
     return {
         type: SET_CAPTCHA,
@@ -46,10 +61,7 @@ type SetAuthUserDataActionPayloadType = {
     login: string | null;
     isAuth: boolean | null;
 };
-type SetAuthUserDataActionType = {
-    type: typeof SET_USER_DATA;
-    payload: SetAuthUserDataActionPayloadType;
-};
+
 export const setAuthUserDataAC = (
     userId: number | null,
     email: string | null,
@@ -66,12 +78,13 @@ export const setAuthUserDataAC = (
         },
     };
 };
-export const clearLoginDataAC = () => {
+export const clearLoginDataAC = (): ClearUserDataType => {
     return {
         type: CLEAR_USER_DATA,
+        payload: null,
     };
 };
-export const authMeThunkCreator = () => async (dispatch: any) => {
+export const authMeThunkCreator = (): ThunkType => async (dispatch): Promise<void> => {
     try {
         const authData = await authAPI.getAuthMe();
         if (!authData || Object.keys(authData).length === 0) throw new Error('You loggin is not pass');
@@ -81,24 +94,28 @@ export const authMeThunkCreator = () => async (dispatch: any) => {
         console.log(e);
     }
 };
-export const loginMeThunkCreator = (email: string, password: string, rememberMe = false, captcha: string) => async (
-    dispatch: any,
-) => {
+export const loginMeThunkCreator = (
+    email: string,
+    password: string,
+    rememberMe = false,
+    captcha: string,
+): ThunkType => async (dispatch): Promise<void> => {
     try {
         const res = await authAPI.login(email, password, rememberMe, captcha);
-        if (res.data.resultCode === 0) dispatch(authMeThunkCreator());
+        if (res.data.resultCode === 0) await dispatch(authMeThunkCreator());
         // success, get auth data
         else {
             // eslint-disable-next-line @typescript-eslint/no-use-before-define
-            if (res.data.resultCode === 10) dispatch(getAndSetCaptchaImage()); // error need captcha
+            if (res.data.resultCode === 10) await dispatch(getAndSetCaptchaImage()); // error need captcha
             const message = res.data.messages.length > 0 ? res.data.messages[0] : 'Some error';
+            // @ts-ignore
             dispatch(stopSubmit('login', { _error: message }));
         }
     } catch (e) {
         console.log(e);
     }
 };
-export const getAndSetCaptchaImage = () => async (dispatch: any) => {
+export const getAndSetCaptchaImage = (): ThunkType => async (dispatch): Promise<void> => {
     try {
         const response = await securityAPI.getCaptcha();
         dispatch(setCaptcha(response.data.url));
@@ -106,7 +123,7 @@ export const getAndSetCaptchaImage = () => async (dispatch: any) => {
         console.log(e);
     }
 };
-export const logoutMeThunkCreator = () => async (dispatch: any) => {
+export const logoutMeThunkCreator = (): ThunkType => async (dispatch): Promise<void> => {
     try {
         const resCode = await authAPI.logOut();
         if (resCode === 0) dispatch(clearLoginDataAC());

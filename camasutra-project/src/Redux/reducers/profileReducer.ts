@@ -1,13 +1,16 @@
 import { profileAPI } from '../../api/api';
 import { stopSubmit } from 'redux-form';
 import { PhotosProfileType, PostType, ProfileType } from '../../types/types';
+import { ThunkAction } from 'redux-thunk';
+import { AppStateType } from '../reduxStore';
 
 const ADD_POST = 'profile/ADD_POST';
 const SET_USER_PROFILE = 'profile/SET_USER_PROFILE';
 const SET_USER_STATUS = 'profile/SET_USER_STATUS';
 const DELETE_POST = 'profile/DELETE_POST';
 const SAVE_PHOTO_SUCCESS = 'profile/SAVE_PHOTO_SUCCESS';
-
+type ActionsTypes = AddPostACType | SetProfileACType | SetUserStatusACType | SavePhotoSuccessType | DeletePostACType;
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>;
 const initialState = {
     posts: [
         {
@@ -37,7 +40,7 @@ const initialState = {
 };
 export type InitialStateType = typeof initialState;
 
-const profileReducer = (state = initialState, action: any): InitialStateType => {
+const profileReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         case ADD_POST:
             const newProfile = {
@@ -104,7 +107,7 @@ export const savePhotoSuccess = (photos: PhotosProfileType): SavePhotoSuccessTyp
 });
 export const deletePostAC = (id: number): DeletePostACType => ({ type: DELETE_POST, id });
 
-export const getUserProfileThunkCreator = (userId: number) => async (dispatch: any) => {
+export const getUserProfileThunkCreator = (userId: number): ThunkType => async (dispatch): Promise<void> => {
     try {
         const profile = await profileAPI.getUserProfile(userId);
         dispatch(setProfileAC(profile));
@@ -112,7 +115,7 @@ export const getUserProfileThunkCreator = (userId: number) => async (dispatch: a
         console.log(e);
     }
 };
-export const getUserStatusThunkCreator = (userId: number) => async (dispatch: any) => {
+export const getUserStatusThunkCreator = (userId: number): ThunkType => async (dispatch): Promise<void> => {
     try {
         const status = await profileAPI.getStatus(userId);
         dispatch(setUserStatusAC(status));
@@ -120,7 +123,7 @@ export const getUserStatusThunkCreator = (userId: number) => async (dispatch: an
         console.log(e);
     }
 };
-export const updateStatusThunkCreator = (status: string) => async (dispatch: any) => {
+export const updateStatusThunkCreator = (status: string): ThunkType => async (dispatch): Promise<void> => {
     try {
         const serverStatus = await profileAPI.updateStatus(status);
         if (serverStatus.data.resultCode === 0) dispatch(setUserStatusAC(status));
@@ -128,7 +131,7 @@ export const updateStatusThunkCreator = (status: string) => async (dispatch: any
         console.log(e);
     }
 };
-export const savePhotoThunkCreator = (file: any) => async (dispatch: any) => {
+export const savePhotoThunkCreator = (file: File): ThunkType => async (dispatch): Promise<void> => {
     try {
         const response = await profileAPI.savePhoto(file);
         if (response.data.resultCode === 0) dispatch(savePhotoSuccess(response.data.data.photos));
@@ -136,14 +139,18 @@ export const savePhotoThunkCreator = (file: any) => async (dispatch: any) => {
         console.log(e);
     }
 };
-export const saveProfileDataThunkCreator = (profileData: ProfileType) => async (dispatch: any, getState: any) => {
+export const saveProfileDataThunkCreator = (profileData: ProfileType): ThunkType => async (
+    dispatch,
+    getState,
+): Promise<void> => {
     try {
         const userId = getState().auth.userId;
         const response = await profileAPI.saveProfileData(profileData);
         if (response.data.resultCode === 0) {
-            dispatch(getUserProfileThunkCreator(userId));
+            if (userId) await dispatch(getUserProfileThunkCreator(userId));
         } else {
             const message = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error';
+            // @ts-ignore
             dispatch(stopSubmit('edit-profile', { _error: message }));
             return Promise.reject(response.data.messages[0]);
         }
