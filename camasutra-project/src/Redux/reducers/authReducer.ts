@@ -1,4 +1,4 @@
-import { authAPI, securityAPI } from '../../api/api';
+import { authAPI, ResultCodeForCaptcha, ResultCodesEnum, securityAPI } from '../../api/api';
 import { stopSubmit } from 'redux-form';
 import { AppStateType } from '../reduxStore';
 import { Dispatch } from 'redux';
@@ -87,8 +87,9 @@ export const clearLoginDataAC = (): ClearUserDataType => {
 export const authMeThunkCreator = (): ThunkType => async (dispatch): Promise<void> => {
     try {
         const authData = await authAPI.getAuthMe();
-        if (!authData || Object.keys(authData).length === 0) throw new Error('You loggin is not pass');
-        const { id, email, login } = authData;
+        if (!authData || Object.keys(authData).length === ResultCodesEnum.Success)
+            throw new Error('You loggin is not pass');
+        const { id, email, login } = authData.data;
         dispatch(setAuthUserDataAC(id, email, login, true));
     } catch (e) {
         console.log(e);
@@ -102,14 +103,16 @@ export const loginMeThunkCreator = (
 ): ThunkType => async (dispatch): Promise<void> => {
     try {
         const res = await authAPI.login(email, password, rememberMe, captcha);
-        if (res.data.resultCode === 0) await dispatch(authMeThunkCreator());
-        // success, get auth data
-        else {
-            // eslint-disable-next-line @typescript-eslint/no-use-before-define
-            if (res.data.resultCode === 10) await dispatch(getAndSetCaptchaImage()); // error need captcha
-            const message = res.data.messages.length > 0 ? res.data.messages[0] : 'Some error';
-            // @ts-ignore
-            dispatch(stopSubmit('login', { _error: message }));
+        if (res) {
+            if (res.resultCode === ResultCodesEnum.Success) await dispatch(authMeThunkCreator());
+            // success, get auth data
+            else {
+                // eslint-disable-next-line @typescript-eslint/no-use-before-define
+                if (res.resultCode === ResultCodeForCaptcha.CaptchaIsRequired) await dispatch(getAndSetCaptchaImage()); // error need captcha
+                const message = res.messages.length > 0 ? res.messages[0] : 'Some error';
+                // @ts-ignore
+                dispatch(stopSubmit('login', { _error: message }));
+            }
         }
     } catch (e) {
         console.log(e);
@@ -118,7 +121,7 @@ export const loginMeThunkCreator = (
 export const getAndSetCaptchaImage = (): ThunkType => async (dispatch): Promise<void> => {
     try {
         const response = await securityAPI.getCaptcha();
-        dispatch(setCaptcha(response.data.url));
+        if (response) dispatch(setCaptcha(response.data.url));
     } catch (e) {
         console.log(e);
     }
