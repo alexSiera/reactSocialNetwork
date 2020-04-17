@@ -118,9 +118,11 @@ export const requestUsersThunkCreator = (page = 1, pageSize = 4) => async (
     dispatch(toggleFetchingAC(true));
     try {
         const users = await usersAPI.getUsers(page, pageSize);
-        dispatch(toggleFetchingAC(false));
-        dispatch(setUsersAC(users.items));
-        dispatch(setTotalUsersCountAC(users.totalCount));
+        if (users) {
+            dispatch(toggleFetchingAC(false));
+            dispatch(setUsersAC(users.items));
+            dispatch(setTotalUsersCountAC(users.totalCount));
+        }
     } catch (e) {
         console.log(e);
     }
@@ -134,7 +136,7 @@ const _followUnfollowFlow = async (
     try {
         dispatch(toggleFollowingProgressAC(userId, true));
         const statusCode = await apiMethod(userId);
-        if (statusCode === 0) dispatch(actionCreator(userId));
+        if (statusCode?.resultCode === 0) dispatch(actionCreator(userId));
         dispatch(toggleFollowingProgressAC(userId, false));
     } catch (e) {
         console.log(e);

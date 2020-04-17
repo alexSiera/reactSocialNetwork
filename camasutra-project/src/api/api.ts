@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { PhotosProfileType, ProfileType } from '../types/types';
+import { PhotosProfileType, ProfileType, UserType } from '../types/types';
 export enum ResultCodesEnum {
     Success = 0,
     Error = 1,
@@ -14,8 +14,12 @@ const instance = axios.create({
         'API-KEY': 'abed2ab8-bf99-446c-a8e5-087db1f9035f',
     },
 });
+type GetUsersType = {
+    items: Array<UserType>;
+    totalCount: number;
+};
 export const usersAPI = {
-    getUsers: async (pageNumber = 1, pageSize = 10): Promise<void> => {
+    getUsers: async (pageNumber = 1, pageSize = 10): Promise<GetUsersType | undefined> => {
         try {
             const res = await instance.get(`users?page=${pageNumber}&count=${pageSize}`);
             return res.data;
@@ -24,7 +28,7 @@ export const usersAPI = {
         }
     },
 
-    subscribe: async (userId: number): Promise<void> => {
+    subscribe: async (userId: number): Promise<UpdateStatusType | undefined> => {
         try {
             const subscribeStatus = await instance.post(`follow/${userId}`);
             return subscribeStatus.data.resultCode;
@@ -32,7 +36,7 @@ export const usersAPI = {
             console.log(e);
         }
     },
-    unSubscribe: async (userId: number): Promise<void> => {
+    unSubscribe: async (userId: number): Promise<UpdateStatusType | undefined> => {
         try {
             const subscribeStatus = await instance.delete(`follow/${userId}`);
             return subscribeStatus.data.resultCode;
