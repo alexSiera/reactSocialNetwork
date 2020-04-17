@@ -121,7 +121,7 @@ export const loginMeThunkCreator = (
 export const getAndSetCaptchaImage = (): ThunkType => async (dispatch): Promise<void> => {
     try {
         const response = await securityAPI.getCaptcha();
-        if (response) dispatch(setCaptcha(response.data.url));
+        if (response) dispatch(setCaptcha(response.url));
     } catch (e) {
         console.log(e);
     }

@@ -1,30 +1,18 @@
 import React from 'react';
 import s from './FormControls.module.scss';
-import { Field } from 'redux-form';
-type MetaObject = {
-    touched: boolean;
-    error: string;
-};
+import { Field, WrappedFieldInputProps, WrappedFieldMetaProps } from 'redux-form';
+import { FieldValidatorType } from '../../../utils/validators/valiadators';
 type FormControlPropsType = {
-    meta: MetaObject;
+    meta: WrappedFieldMetaProps;
 };
 type TextAreaPropsType = {
-    input: string;
-    meta: MetaObject;
+    input: WrappedFieldInputProps;
+    meta: WrappedFieldMetaProps;
 };
-type InputPropsType = {
-    input: string;
-    meta: MetaObject;
+export type InputPropsType = {
+    input: WrappedFieldMetaProps;
+    meta: WrappedFieldMetaProps;
 };
-// type CreateFieldType = {
-//     placeholder: string;
-//     name: string;
-//     validators: string[];
-//     component: React.FC;
-//     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-//     props?: any;
-//     text?: string;
-// };
 const FormControl: React.FC<FormControlPropsType> = ({ meta: { touched, error }, children }) => {
     const isError = touched && error;
     return (
@@ -34,6 +22,7 @@ const FormControl: React.FC<FormControlPropsType> = ({ meta: { touched, error },
         </div>
     );
 };
+
 export const Textarea: React.FC<TextAreaPropsType> = (props) => {
     const { input, meta, ...restProps } = props;
     return (
@@ -50,14 +39,14 @@ export const Input: React.FC<InputPropsType> = (props) => {
         </FormControl>
     );
 };
-export const СreateField = (
-    placeholder: string,
+export const createField = (
+    placeholder: string | undefined,
     name: string,
-    validators: string[],
-    component: React.FC,
+    validators: Array<FieldValidatorType>,
+    component: React.FC<InputPropsType> | React.Component | string,
     props = {},
     text = '',
-) => {
+): React.ReactNode => {
     return (
         <div>
             <Field placeholder={placeholder} name={name} component={component} validate={validators} {...props} />

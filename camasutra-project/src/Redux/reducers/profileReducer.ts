@@ -40,7 +40,15 @@ const initialState = {
 };
 export type InitialStateType = typeof initialState;
 
-const profileReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
+const profileReducer = (
+    state = initialState,
+    action: ActionsTypes,
+): {
+    profileUpdateStatusSuccess: null;
+    profileData: ProfileType | undefined | null;
+    posts: Array<PostType>;
+    status: string | undefined;
+} => {
     switch (action.type) {
         case ADD_POST:
             const newProfile = {
@@ -84,11 +92,11 @@ type AddPostACType = {
 };
 type SetProfileACType = {
     type: typeof SET_USER_PROFILE;
-    profileData: ProfileType;
+    profileData: ProfileType | undefined | null;
 };
 type SetUserStatusACType = {
     type: typeof SET_USER_STATUS;
-    status: string;
+    status: string | undefined;
 };
 type SavePhotoSuccessType = {
     type: typeof SAVE_PHOTO_SUCCESS;
@@ -99,8 +107,11 @@ type DeletePostACType = {
     id: number;
 };
 export const addPostAC = (newPost: string): AddPostACType => ({ type: ADD_POST, newPost });
-export const setProfileAC = (profileData: ProfileType): SetProfileACType => ({ type: SET_USER_PROFILE, profileData });
-export const setUserStatusAC = (status: string): SetUserStatusACType => ({ type: SET_USER_STATUS, status });
+export const setProfileAC = (profileData: ProfileType | undefined | null): SetProfileACType => ({
+    type: SET_USER_PROFILE,
+    profileData,
+});
+export const setUserStatusAC = (status: string | undefined): SetUserStatusACType => ({ type: SET_USER_STATUS, status });
 export const savePhotoSuccess = (photos: PhotosProfileType): SavePhotoSuccessType => ({
     type: SAVE_PHOTO_SUCCESS,
     photos,
@@ -126,7 +137,9 @@ export const getUserStatusThunkCreator = (userId: number): ThunkType => async (d
 export const updateStatusThunkCreator = (status: string): ThunkType => async (dispatch): Promise<void> => {
     try {
         const serverStatus = await profileAPI.updateStatus(status);
-        if (serverStatus.data.resultCode === 0) dispatch(setUserStatusAC(status));
+        if (serverStatus) {
+            if (serverStatus.resultCode === 0) dispatch(setUserStatusAC(status));
+        }
     } catch (e) {
         console.log(e);
     }
@@ -134,7 +147,7 @@ export const updateStatusThunkCreator = (status: string): ThunkType => async (di
 export const savePhotoThunkCreator = (file: File): ThunkType => async (dispatch): Promise<void> => {
     try {
         const response = await profileAPI.savePhoto(file);
-        if (response.data.resultCode === 0) dispatch(savePhotoSuccess(response.data.data.photos));
+        if (response) dispatch(savePhotoSuccess(response));
     } catch (e) {
         console.log(e);
     }
@@ -146,13 +159,15 @@ export const saveProfileDataThunkCreator = (profileData: ProfileType): ThunkType
     try {
         const userId = getState().auth.userId;
         const response = await profileAPI.saveProfileData(profileData);
-        if (response.data.resultCode === 0) {
+        if (response?.resultCode === 0) {
             if (userId) await dispatch(getUserProfileThunkCreator(userId));
         } else {
-            const message = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error';
-            // @ts-ignore
-            dispatch(stopSubmit('edit-profile', { _error: message }));
-            return Promise.reject(response.data.messages[0]);
+            if (response?.data) {
+                const message = response?.data !== {} ? response.messages[0] : 'Some error';
+                // @ts-ignore
+                dispatch(stopSubmit('edit-profile', { _error: message }));
+                return Promise.reject(response.messages[0]);
+            }
         }
     } catch (e) {
         console.log(e);

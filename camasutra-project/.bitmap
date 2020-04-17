@@ -75,9 +75,9 @@
     "login": {
         "files": [
             {
-                "relativePath": "src/components/Login/Login.jsx",
+                "relativePath": "src/components/Login/Login.tsx",
                 "test": false,
-                "name": "Login.jsx"
+                "name": "Login.tsx"
             },
             {
                 "relativePath": "src/components/Login/Login.module.scss",
@@ -85,14 +85,14 @@
                 "name": "Login.module.scss"
             },
             {
-                "relativePath": "src/components/Login/LoginContainer.jsx",
+                "relativePath": "src/components/Login/LoginContainer.tsx",
                 "test": false,
-                "name": "LoginContainer.jsx"
+                "name": "LoginContainer.tsx"
             },
             {
-                "relativePath": "src/components/Login/LoginForm/LoginForm.jsx",
+                "relativePath": "src/components/Login/LoginForm/LoginForm.tsx",
                 "test": false,
-                "name": "LoginForm.jsx"
+                "name": "LoginForm.tsx"
             },
             {
                 "relativePath": "src/components/Login/LoginForm/LoginForm.module.scss",
@@ -100,7 +100,7 @@
                 "name": "LoginForm.module.scss"
             }
         ],
-        "mainFile": "src/components/Login/Login.jsx",
+        "mainFile": "src/components/Login/Login.tsx",
         "trackDir": "src/components/Login",
         "origin": "AUTHORED",
         "exported": false

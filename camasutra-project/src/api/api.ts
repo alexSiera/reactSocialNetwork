@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ProfileType } from '../types/types';
+import { PhotosProfileType, ProfileType } from '../types/types';
 export enum ResultCodesEnum {
     Success = 0,
     Error = 1,
@@ -41,8 +41,13 @@ export const usersAPI = {
         }
     },
 };
+type UpdateStatusType = {
+    resultCode: number;
+    messages: string[];
+    data: object;
+};
 export const profileAPI = {
-    getUserProfile: async (userId = 2): Promise<void> => {
+    getUserProfile: async (userId = 2): Promise<ProfileType | undefined> => {
         try {
             const profile = await instance.get(`profile/${userId}`);
             return profile.data;
@@ -50,7 +55,7 @@ export const profileAPI = {
             console.log(e);
         }
     },
-    getStatus: async (userId = 2): Promise<void> => {
+    getStatus: async (userId = 2): Promise<string | undefined> => {
         try {
             const userStatus = await instance.get(`profile/status/${userId}`);
             return userStatus.data;
@@ -58,7 +63,7 @@ export const profileAPI = {
             console.log(e);
         }
     },
-    updateStatus: async (newStatus: string): Promise<void> => {
+    updateStatus: async (newStatus: string): Promise<UpdateStatusType | undefined> => {
         try {
             return await instance.put(`profile/status`, {
                 status: newStatus,
@@ -67,7 +72,7 @@ export const profileAPI = {
             console.log(e);
         }
     },
-    savePhoto: async (photoFile: File): Promise<void> => {
+    savePhoto: async (photoFile: File): Promise<PhotosProfileType | undefined> => {
         try {
             const formData = new FormData();
             formData.append('image', photoFile);
@@ -80,7 +85,7 @@ export const profileAPI = {
             console.log(e);
         }
     },
-    saveProfileData: async (profileData: ProfileType): Promise<void> => {
+    saveProfileData: async (profileData: ProfileType): Promise<UpdateStatusType | undefined> => {
         try {
             return await instance.put(`profile`, {
                 ...profileData,
@@ -104,6 +109,9 @@ type LoginResponseType = {
     data: { userId: number };
     resultCode: ResultCodesEnum | ResultCodeForCaptcha;
     messages: Array<string>;
+};
+type GetCaptchaUrlType = {
+    url: string;
 };
 export const authAPI = {
     getAuthMe: async (): Promise<MeResponseType | undefined> => {
@@ -142,7 +150,7 @@ export const authAPI = {
     },
 };
 export const securityAPI = {
-    getCaptcha: async (): Promise<string | undefined> => {
+    getCaptcha: async (): Promise<GetCaptchaUrlType | undefined> => {
         try {
             return await instance.get(`security/get-captcha-url`);
         } catch (e) {

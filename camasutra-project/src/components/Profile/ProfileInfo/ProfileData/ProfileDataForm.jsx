@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './ProfileData.module.scss';
-import { СreateField, Input, Textarea } from '../../../Common/FormsControls/FormsControls';
+import { createField, Input, Textarea } from '../../../Common/FormsControls/FormsControls';
 import { reduxForm } from 'redux-form';
 import style from '../../../Common/FormsControls/FormControls.module.scss';
 
@@ -16,7 +16,7 @@ const ProfileDataForm = ({ handleSubmit, error, profileData }) => {
                     <b>Full name:</b>{' '}
                 </label>
                 <div className={s.formDataItemsInput}>
-                    {СreateField('Enter full name', 'fullName', [], Input, { type: 'text' })}
+                    {createField('Enter full name', 'fullName', [], Input, { type: 'text' })}
                 </div>
             </div>
             <div className={s.formDataItems}>
@@ -24,7 +24,7 @@ const ProfileDataForm = ({ handleSubmit, error, profileData }) => {
                     <b>About me:</b>{' '}
                 </label>
                 <div className={s.formDataItemsInput}>
-                    {СreateField('Enter about me info', 'aboutMe', [], Input, { type: 'text' })}
+                    {createField('Enter about me info', 'aboutMe', [], Input, { type: 'text' })}
                 </div>
             </div>
             <div className={s.formDataItems}>
@@ -32,7 +32,7 @@ const ProfileDataForm = ({ handleSubmit, error, profileData }) => {
                     <b>Skills:</b>{' '}
                 </label>
                 <div className={s.formDataItemsInput}>
-                    {СreateField('Enter you skills', 'lookingForAJobDescription', [], Textarea, { type: 'text' })}
+                    {createField('Enter you skills', 'lookingForAJobDescription', [], Textarea, { type: 'text' })}
                 </div>
             </div>
             <div className={s.formDataItems}>
@@ -40,7 +40,7 @@ const ProfileDataForm = ({ handleSubmit, error, profileData }) => {
                     <b>Are you looking for a job ?</b>{' '}
                 </label>
                 <div className={s.formDataItemsInput}>
-                    {СreateField('Enter job status', 'lookingForAJob', [], Input, { type: 'checkbox' })}
+                    {createField('Enter job status', 'lookingForAJob', [], Input, { type: 'checkbox' })}
                 </div>
             </div>
             <div>
@@ -49,7 +49,7 @@ const ProfileDataForm = ({ handleSubmit, error, profileData }) => {
                     {Object.keys(profileData.contacts).map((key) => {
                         return (
                             <div key={key} className={s.contact}>
-                                <b>{key}:</b> <span>{СreateField(key, `contacts[${key}]`, [], Input)}</span>
+                                <b>{key}:</b> <span>{createField(key, `contacts[${key}]`, [], Input)}</span>
                             </div>
                         );
                     })}
