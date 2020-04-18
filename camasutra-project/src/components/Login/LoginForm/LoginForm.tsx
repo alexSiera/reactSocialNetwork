@@ -12,6 +12,7 @@ export type LoginFormValuesType = {
     rememberMe: boolean;
     captcha: string;
 };
+export type LoginFormValuesTypeKeys = Extract<keyof LoginFormValuesType, string>;
 const LoginForm: React.FC<InjectedFormProps<LoginFormValuesType, PropsType> & PropsType> = ({
     handleSubmit,
     error,
@@ -20,12 +21,21 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormValuesType, PropsType> & Pr
     return (
         <form onSubmit={handleSubmit}>
             <div className={s.formContainer}>
-                {createField('Login', 'login', [required], Input)}
-                {createField('Password', 'password', [required], Input, { type: 'password' })}
-                {createField(undefined, 'rememberMe', [], Input, { type: 'checkbox' }, 'remember me')}
+                {createField<LoginFormValuesTypeKeys>('Login', 'login', [required], Input)}
+                {createField<LoginFormValuesTypeKeys>('Password', 'password', [required], Input, { type: 'password' })}
+                {createField<LoginFormValuesTypeKeys>(
+                    undefined,
+                    'rememberMe',
+                    [],
+                    Input,
+                    { type: 'checkbox' },
+                    'remember me',
+                )}
                 {captchaUrl && (
                     <div>
-                        {createField('Enter captcha', 'captcha', [required], Input, { type: 'text' })}
+                        {createField<LoginFormValuesTypeKeys>('Enter captcha', 'captcha', [required], Input, {
+                            type: 'text',
+                        })}
                         <p>Please enter captcha</p>
                         <img src={captchaUrl} alt="captcha" />
                     </div>

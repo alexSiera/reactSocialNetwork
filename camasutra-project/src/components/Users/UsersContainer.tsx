@@ -3,8 +3,9 @@ import {
     followThunkCreator,
     unFollowThunkCreator,
     requestUsersThunkCreator,
-    selectPageAC as selectPage,
+    actions,
 } from '../../Redux/reducers/usersReducer';
+
 import { connect } from 'react-redux';
 import Users from './Users';
 import Preloader from '../Common/Preloader/Preloader';
@@ -79,7 +80,7 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     };
 };
 const usersContainers = connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, AppStateType>(mapStateToProps, {
-    onPageChanged: selectPage,
+    onPageChanged: actions.selectPageAC,
     getUsers: requestUsersThunkCreator,
     follow: followThunkCreator,
     unfollow: unFollowThunkCreator,

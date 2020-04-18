@@ -39,18 +39,19 @@ export const Input: React.FC<InputPropsType> = (props) => {
         </FormControl>
     );
 };
-export const createField = (
+
+export function createField<FormKeysType extends string>(
     placeholder: string | undefined,
-    name: string,
+    name: FormKeysType,
     validators: Array<FieldValidatorType>,
     component: React.FC<InputPropsType> | React.Component | string,
     props = {},
     text = '',
-): React.ReactNode => {
+): React.ReactNode {
     return (
         <div>
             <Field placeholder={placeholder} name={name} component={component} validate={validators} {...props} />
             {text}
         </div>
     );
-};
+}
