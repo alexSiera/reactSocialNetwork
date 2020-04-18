@@ -1,5 +1,5 @@
 import React from 'react';
-import { addDialogAC as dialogTextAreaSubmit, InitialStateType } from '../../Redux/reducers/dialogsReducer';
+import { actions, InitialStateType } from '../../Redux/reducers/dialogsReducer';
 import Dialogs from './Dialogs';
 import { connect } from 'react-redux';
 import { withAuthRedirect } from '../../HOC/withAuthRedirect';
@@ -25,7 +25,7 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
 export default compose(
     // @ts-ignore
     connect<MapStatePropsType, MapDispatchPropsType, OwnType, PropsType>(mapStateToProps, {
-        dialogTextAreaSubmit,
+        dialogTextAreaSubmit: actions.addDialogAC,
     }),
     withAuthRedirect,
     // @ts-ignore

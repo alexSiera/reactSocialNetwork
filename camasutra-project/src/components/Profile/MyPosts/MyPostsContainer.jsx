@@ -1,10 +1,9 @@
-import React from 'react';
-import {addPostAC as addPost} from "../../../Redux/reducers/profileReducer";
-import MyPosts from "./MyPosts";
-import {connect} from "react-redux";
+import { actions } from '../../../Redux/reducers/profileReducer';
+import MyPosts from './MyPosts';
+import { connect } from 'react-redux';
 
-const mapStateToProps = state => state.profilePage;
+const mapStateToProps = (state) => state.profilePage;
 
 export default connect(mapStateToProps, {
-    addPost,
+    addPost: actions.addPostAC,
 })(MyPosts);

@@ -4,14 +4,6 @@ import { UserType } from '../../types/types';
 import { AppStateType, InferActionsTypes } from '../reduxStore';
 import { Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
-// const FOLLOW = 'users/FOLLOW';
-// const UNFOLLOW = 'users/UNFOLLOW';
-// const SET_USERS = 'users/SET_USERS';
-// const SELECT_PAGE = 'users/SELECT_PAGE';
-// const SET_TOTAL_USERS_COUNT = 'users/SET_TOTAL-USERS_COUNT';
-// const TOGGLE_IS_FETCHING = 'users/TOGGLE_IS_FETCHING';
-// const TOGGLE_IS_FOLLOWING_IN_PROGRESS = 'users/TOGGLE_IS_FOLLOWING_IN_PROGRESS';
-
 const initialState = {
     users: [] as Array<UserType>,
     pageSize: 5,

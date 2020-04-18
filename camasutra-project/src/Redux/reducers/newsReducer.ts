@@ -1,4 +1,5 @@
-const ADD_NEWS = 'news/ADD_NEWS';
+import { InferActionsTypes } from '../reduxStore';
+
 const initialState = {
     newsData: [
         {
@@ -34,9 +35,9 @@ type NewsData = {
     message: string;
 };
 export type InitialStateType = typeof initialState;
-const newsReducer = (state = initialState, action: any): InitialStateType => {
+const newsReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
-        case ADD_NEWS:
+        case 'ADD_NEWS':
             const newNews = {
                 id: Math.floor(Math.random() * 100),
                 img: 'http://ldfl.ru/wp-content/uploads/2017/09/news.jpg',
@@ -51,14 +52,14 @@ const newsReducer = (state = initialState, action: any): InitialStateType => {
             return state;
     }
 };
-type addNewsACType = {
-    type: typeof ADD_NEWS;
-    newNewsText: string;
+export const actions = {
+    addNewsAC: (newNewsText: string) => {
+        return {
+            type: 'ADD_NEWS',
+            newNewsText,
+        };
+    },
 };
-export const addNewsAC = (newNewsText: string): addNewsACType => {
-    return {
-        type: ADD_NEWS,
-        newNewsText,
-    };
-};
+type ActionsTypes = InferActionsTypes<typeof actions>;
+
 export default newsReducer;

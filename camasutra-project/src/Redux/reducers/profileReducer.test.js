@@ -1,4 +1,4 @@
-import profileReducer, { addPostAC, deletePostAC } from './profileReducer';
+import profileReducer, { actions } from './profileReducer';
 // 1. Test data
 const initialState = {
     posts: [
@@ -27,21 +27,21 @@ const initialState = {
 
 it('length of post should be incremented', () => {
     // 2. Action
-    const action = addPostAC('It-kamasutra');
+    const action = actions.addPostAC('It-kamasutra');
     const newState = profileReducer(initialState, action);
     // 3. Expectation
     expect(newState.posts.length).toBe(5);
 });
 it('message of new post should be It-kamasutra', () => {
     // 2. Action
-    const action = addPostAC('It-kamasutra');
+    const action = actions.addPostAC('It-kamasutra');
     const newState = profileReducer(initialState, action);
     // 3. Expectation
     expect(newState.posts[4].message).toBe('It-kamasutra');
 });
 it('after deleting length of messages should be decrement', () => {
     // 2. Action
-    const action = deletePostAC(1);
+    const action = actions.deletePostAC(1);
     const newState = profileReducer(initialState, action);
     // 3. Expectation
     expect(newState.posts.length).toBe(3);
@@ -49,7 +49,7 @@ it('after deleting length of messages should be decrement', () => {
 
 it(`after deleting length of messages massive should't be decrement if id is incorrect`, () => {
     // 2. Action
-    const action = deletePostAC(1000);
+    const action = actions.deletePostAC(1000);
     const newState = profileReducer(initialState, action);
     // 3. Expectation
     expect(newState.posts.length).toBe(4);

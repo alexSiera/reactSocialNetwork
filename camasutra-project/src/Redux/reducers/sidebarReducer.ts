@@ -23,6 +23,7 @@ type SidebarDataType = {
     img: string;
     name: string;
 };
+
 export type InitialStateType = typeof initialState;
 const sidebarReducer = (state = initialState, action: any): InitialStateType => {
     return state;
