@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import s from './ProfileInfo.module.scss';
 import Preloader from '../../Common/Preloader/Preloader';
 import ProfileStatus from './ProfileStatus/ProfileStatus';
@@ -11,8 +11,8 @@ type PropsType = {
     updateUserStatus: (newStatus: string) => Promise<any>;
     status: string;
     isOwner: boolean;
-    savePhoto: (file: any) => void;
-    saveProfileData: (profileData: any) => any;
+    savePhoto: (file: File) => void;
+    saveProfileData: (profileData: ProfileType) => any;
 };
 const ProfileInfo: React.FC<PropsType> = ({
     profileData,
@@ -24,12 +24,13 @@ const ProfileInfo: React.FC<PropsType> = ({
 }) => {
     const [editMode, setEditMode] = useState(false);
     if (!profileData) return <Preloader />;
-    const onMainPhotoSelected = (e: Event): void => {
-        // @ts-ignore
-        if (e.target.files.length) {
-            // @ts-ignore
-            const file = e.target.files[0];
-            savePhoto(file);
+
+    const onMainPhotoSelected = (event: ChangeEvent<HTMLInputElement>): void => {
+        if (event.target) {
+            if (event.target.files) {
+                const file: File = event.target.files[0];
+                savePhoto(file);
+            }
         }
     };
     const onProfileDataFormSubmit = (profileFormData: any): void => {
@@ -39,7 +40,6 @@ const ProfileInfo: React.FC<PropsType> = ({
             })
             .catch((e: Error) => console.log(e));
     };
-    // @ts-ignore
     return (
         <div>
             <div className={s.profileAvatar}>
@@ -50,7 +50,6 @@ const ProfileInfo: React.FC<PropsType> = ({
                 />
                 {isOwner && (
                     <span className={s.photosInputContainer}>
-                        // @ts-ignore
                         <input className={s.photosInput} type="file" onChange={onMainPhotoSelected} accept="image/*" />
                         <label htmlFor="file">Update photo</label>
                     </span>

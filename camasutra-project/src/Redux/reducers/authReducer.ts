@@ -48,7 +48,7 @@ export const actions = {
             payload: null,
         } as const;
     },
-    setCaptcha: (captchaImg: string) => {
+    setCaptcha: (captchaImg: string | null) => {
         return {
             type: 'SET_CAPTCHA',
             payload: {
@@ -74,7 +74,7 @@ export const loginMeThunkCreator = (
     email: string,
     password: string,
     rememberMe = false,
-    captcha: string,
+    captcha: string | null,
 ): ThunkType => async (dispatch): Promise<void> => {
     try {
         const res = await authAPI.login(email, password, rememberMe, captcha);
@@ -85,8 +85,7 @@ export const loginMeThunkCreator = (
                 // eslint-disable-next-line @typescript-eslint/no-use-before-define
                 if (res.resultCode === ResultCodeForCaptcha.CaptchaIsRequired) await dispatch(getAndSetCaptchaImage()); // error need captcha
                 const message = res.messages.length > 0 ? res.messages[0] : 'Some error';
-                // @ts-ignore
-                dispatch(stopSubmit('login', { _error: message }));
+                dispatch(stopSubmit('login', { _error: message }) as any);
             }
         }
     } catch (e) {

@@ -4,34 +4,31 @@ import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
 import { Redirect } from 'react-router-dom';
 import DialogsForm from './DialogsForm/DialogsForm';
+import { AppStateType } from '../../Redux/reduxStore';
 type PropsType = {
     isAuth: boolean;
     dialogTextAreaSubmit: (messageText: string) => void;
+    dialogsPage: any;
 };
 const Dialogs: React.FC<PropsType> = (props) => {
-    // @ts-ignore
-    const onDialogTextAreaSubmit = ({ messageText }): void => {
-        props.dialogTextAreaSubmit(messageText);
+    const onDialogTextAreaSubmit = (d: { messageText: string }): void => {
+        props.dialogTextAreaSubmit(d.messageText);
     };
     if (!props.isAuth) return <Redirect to={'/login'} />;
     return (
         <div className={s.dialogs}>
             <div>
-                // @ts-ignore
-                {props.dialogsPage.dialogsData.map((el) => {
+                {props.dialogsPage.dialogsData.map((el: any) => {
                     return <DialogItem id={el.id} key={el.id} linkText={el.name} />;
                 })}
             </div>
             <div>
-                // @ts-ignore
-                {props.dialogsPage.messagesData.map((el) => {
-                    // @ts-ignore
+                {props.dialogsPage.messagesData.map((el: any) => {
                     return <Message key={el.id} message={el.message} likesCount={el.likesCount} />;
                 })}
             </div>
             <div className={s.textAreaInput}>
-                // @ts-ignore
-                <DialogsForm onSubmit={onDialogTextAreaSubmit} />
+                <DialogsForm onSubmit={onDialogTextAreaSubmit as any} handleSubmit={() => null} />
             </div>
         </div>
     );

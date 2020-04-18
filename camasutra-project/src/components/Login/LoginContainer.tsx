@@ -5,14 +5,14 @@ import { connect } from 'react-redux';
 import { getCaptchaUrl, getIsAuth } from '../../Redux/selectors/authSelectors';
 import { AppStateType } from '../../Redux/reduxStore';
 type MapStateToProps = {
-    captchaUrl: string;
+    captchaUrl: string | null;
     isAuth: boolean;
 };
 type MapDispatchPropsType = {
     loginMe: (email: string, password: string, rememberMe: boolean, captcha: string | null) => void;
 };
 const LoginContainer: React.FC<MapStateToProps & MapDispatchPropsType> = (props) => {
-    return <Login loginMe={props.loginMe} captchaUrl={props.captchaUrl} isAuth={props.isAuth} />;
+    return <Login loginMe={props.loginMe} captchaUrl={props.captchaUrl as string} isAuth={props.isAuth} />;
 };
 
 const mapStateToProps = (state: AppStateType): MapStateToProps => ({
@@ -20,5 +20,6 @@ const mapStateToProps = (state: AppStateType): MapStateToProps => ({
     captchaUrl: getCaptchaUrl(state.auth),
 });
 
-// @ts-ignore
-export default connect(mapStateToProps, { loginMe: loginMeThunkCreator })(LoginContainer);
+export default connect<MapStateToProps, MapDispatchPropsType, {}, AppStateType>(mapStateToProps, {
+    loginMe: loginMeThunkCreator,
+})(LoginContainer);

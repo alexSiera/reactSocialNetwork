@@ -134,8 +134,7 @@ export const saveProfileDataThunkCreator = (profileData: ProfileType): ThunkType
         } else {
             if (response?.data) {
                 const message = response?.data !== {} ? response.messages[0] : 'Some error';
-                // @ts-ignore
-                dispatch(stopSubmit('edit-profile', { _error: message }));
+                dispatch(stopSubmit('edit-profile', { _error: message }) as any);
                 return Promise.reject(response.messages[0]);
             }
         }
@@ -143,5 +142,4 @@ export const saveProfileDataThunkCreator = (profileData: ProfileType): ThunkType
         console.log(e);
     }
 };
-// @ts-ignore
 export default profileReducer;

@@ -10,7 +10,7 @@ type MapStateToPropsType = {
 };
 type MapDispatchPropsType = {
     logOut: () => void;
-    login: (email: string, password: string, rememberMe: boolean, captcha: string) => void;
+    login: (email: string, password: string, rememberMe: boolean, captcha: string | null) => void;
 };
 const HeaderContainer: React.FC<PropsType> = (props) => {
     return <Header {...props} />;

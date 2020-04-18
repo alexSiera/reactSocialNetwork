@@ -10,23 +10,28 @@ type MapStatePropsType = {
     dialogsPage: InitialStateType;
 };
 type MapDispatchPropsType = {
-    dialogTextAreaSubmit: () => void;
+    dialogTextAreaSubmit: (newMessage: string) => void;
 };
 type OwnType = {
     isAuth: boolean;
 };
 type PropsType = MapStatePropsType & MapDispatchPropsType & OwnType;
 const DialogsContainer: React.FC<PropsType> = (props) => {
-    return <Dialogs {...props} />;
+    return (
+        <Dialogs
+            {...props}
+            isAuth={props.isAuth}
+            dialogTextAreaSubmit={props.dialogTextAreaSubmit}
+            dialogsPage={props.dialogsPage}
+        />
+    );
 };
 const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
     dialogsPage: getDialogsPage(state.dialogsPage),
 });
 export default compose(
-    // @ts-ignore
-    connect<MapStatePropsType, MapDispatchPropsType, OwnType, PropsType>(mapStateToProps, {
+    connect<MapStatePropsType, MapDispatchPropsType, OwnType, AppStateType>(mapStateToProps, {
         dialogTextAreaSubmit: actions.addDialogAC,
     }),
     withAuthRedirect,
-    // @ts-ignore
-)(DialogsContainer);
+)(DialogsContainer) as React.FC;
