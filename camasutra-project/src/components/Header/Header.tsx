@@ -3,7 +3,7 @@ import s from './Header.module.scss';
 import { Link } from 'react-router-dom';
 export type PropsType = {
     isAuth: boolean;
-    login: () => void;
+    login: (email: string, password: string, rememberMe: boolean, captcha: string) => void;
     logOut: () => void;
 };
 const Header: React.FC<PropsType> = (props) => {

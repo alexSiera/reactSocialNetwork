@@ -44,37 +44,35 @@ const App: FC<PropsType> = ({ initializeApp, initialized }) => {
     if (!initialized) return <Preloader />;
     return (
         <div className="app-wrapper">
-            // @ts-ignore
             <HeaderContainer />
             <Navbar />
             <div className="app-wrapper-content">
                 <Switch>
                     <Route path="/dialogs" render={WithSuspense(DialogsContainer)} />
                     <Route path="/profile/:userId?" render={WithSuspense(ProfileContainer)} />
-                    <Route path="/users" render={() => <UsersContainer pageTitle={'Samurai'} />} />
+                    <Route path="/users" render={(): React.ReactNode => <UsersContainer pageTitle={'Samurai'} />} />
                     <Route path="/music" render={WithSuspense(Music)} />
                     <Route path="/news" render={WithSuspense(NewsContainer)} />
                     <Route path="/settings" render={WithSuspense(Settings)} />
-                    <Route path="/login" render={() => <LoginContainer />} />
+                    <Route path="/login" render={(): React.ReactNode => <LoginContainer />} />
                     <Redirect from="/" exact to="/profile/" />
-                    <Route path="*" render={() => <NotFound />} />
+                    <Route path="*" render={(): React.ReactNode => <NotFound />} />
                 </Switch>
             </div>
         </div>
     );
 };
 const mapStateToProps = (state: AppStateType): MapStatePropsType => ({ initialized: getInitialized(state.app) });
-const AppContainer = compose(
+const AppContainer: React.FC = compose(
     withRouter,
     connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, AppStateType>(mapStateToProps, {
         initializeApp,
     }),
-)(App);
+)(App) as React.FC;
 const SamuraiJSApp: React.FC = () => {
     return (
         <HashRouter>
             <Provider store={store}>
-                // @ts-ignore
                 <AppContainer />
             </Provider>
         </HashRouter>

@@ -222,9 +222,9 @@
                 "name": "MyPosts.module.scss"
             },
             {
-                "relativePath": "src/components/Profile/MyPosts/MyPostsContainer.jsx",
+                "relativePath": "src/components/Profile/MyPosts/MyPostsContainer.tsx",
                 "test": false,
-                "name": "MyPostsContainer.jsx"
+                "name": "MyPostsContainer.tsx"
             },
             {
                 "relativePath": "src/components/Profile/MyPosts/MyPostsForm/MyPostsForm.jsx",
