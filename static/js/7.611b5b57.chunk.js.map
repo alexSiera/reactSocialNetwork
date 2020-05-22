@@ -1,1 +1,0 @@
-{"version":3,"sources":["components/Settings/Settings.tsx"],"names":["Settings"],"mappings":"8HAAA,2BAKeA,UAHY,WACvB,OAAO","file":"static/js/7.611b5b57.chunk.js","sourcesContent":["import React from 'react';\n\nconst Settings: React.FC = () => {\n    return <div>Settings!!!</div>;\n};\nexport default Settings;\n"],"sourceRoot":""}
