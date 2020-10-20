@@ -1,3 +1,3 @@
 export const getSidebarData = (sidebarData) => {
-    return  sidebarData;
+  return sidebarData;
 };

@@ -1,3 +1,3 @@
 export const getDialogsPage = (dialogsPage) => {
-    return dialogsPage;
+  return dialogsPage;
 };

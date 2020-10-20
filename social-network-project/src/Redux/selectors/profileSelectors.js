@@ -1,9 +1,9 @@
 export const getProfileData = (profilePage) => {
-    return profilePage.profileData;
+  return profilePage.profileData;
 };
 export const getStatus = (profilePage) => {
-    return profilePage.status;
+  return profilePage.status;
 };
-export const getProfileUpdateStatus= (profilePage) => {
-    return profilePage.profileUpdateStatusSuccess;
-}
+export const getProfileUpdateStatus = (profilePage) => {
+  return profilePage.profileUpdateStatusSuccess;
+};

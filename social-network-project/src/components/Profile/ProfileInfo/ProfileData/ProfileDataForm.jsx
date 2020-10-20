@@ -5,7 +5,6 @@ import { reduxForm } from 'redux-form';
 import style from '../../../Common/FormsControls/FormControls.module.scss';
 
 const ProfileDataForm = ({ handleSubmit, error, profileData }) => {
-    console.log(error);
     return (
         <form className={s.profileDataForm} onSubmit={handleSubmit}>
             {error}
