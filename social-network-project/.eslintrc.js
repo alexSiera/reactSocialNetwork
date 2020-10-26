@@ -18,6 +18,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
     'prettier/@typescript-eslint',
+    'plugin:css-modules/recommended',
   ],
   plugins: [
     'babel',
@@ -28,6 +29,7 @@ module.exports = {
     'prettier',
     '@typescript-eslint',
     'pretty-imports',
+    'css-modules',
   ],
   rules: {
     // Place to specify ESLint rules. Can be used to overwrite rules specified from the extended configs
